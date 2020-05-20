@@ -35,6 +35,7 @@
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_Jbeijing}" Selected="Item_JBeijing_Selected"/>
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_KingsoftFAIT}" Selected="Item_KingsoftFAIT_Selected"/>
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_Dreye}" Selected="Item_Dreye_Selected"/>
+                <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_LocalTranslation}" Selected="Item_LocalTranslation_Selected"/>
 
             </hc:SideMenuItem>
             <hc:SideMenuItem Header="{StaticResource SettingsMenu_DictSettings}" FontSize="15">

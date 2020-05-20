@@ -171,6 +171,7 @@ namespace TextHookLibrary
         {
             string DllPath = "";
             string ModulePath = "";
+            Console.WriteLine("Init()");
             if (x86 == true)
             {
                 //复制x86的dll
@@ -183,12 +184,13 @@ namespace TextHookLibrary
                 ModulePath = Environment.CurrentDirectory + "\\lib\\TextHook\\x64\\texthost.dll";
                 DllPath = Environment.CurrentDirectory + "\\lib\\TextHook\\x64\\texthook.dll";
             }
+            Console.WriteLine(ModulePath);
 
             if (File.Exists(DllPath) && File.Exists(ModulePath))//判断要复制的文件是否存在
             {
                 try {
                     File.Copy(DllPath, Environment.CurrentDirectory + "\\texthook.dll", true);
-                    File.Copy(ModulePath, Environment.CurrentDirectory + "\\texthost.dll", true);
+                    File.Copy(ModulePath, Environment.CurrentDirectory + "\\texthost.dll", true); 
                 }
                 catch (System.IO.IOException) {
                     throw new Exception("无法复制texthook.dll或texthost.dll，请重启游戏和翻译器后再试！");
@@ -203,6 +205,7 @@ namespace TextHookLibrary
             output = OutputHandle;
             removethread = RemoveThreadHandle;
             callback = CallBackHandle;
+            Console.WriteLine("TextHostInit()");
 
             TextHostLib.TextHostInit(callback, callback, createthread, removethread, output);
             return true;

@@ -55,6 +55,7 @@
     <sys:String x:Key="SettingsMenu_TranslatorSettings_KingsoftFAIT">Kingsoft FastAIT</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Dreye">Dr.eye</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Caiyun">Lingocloud</sys:String>
+    <sys:String x:Key="SettingsMenu_TranslatorSettings_LocalTranslation">LocalTranslation</sys:String>
     <sys:String x:Key="SettingsMenu_DictSettings">Dictionary Settings</sys:String>
     <sys:String x:Key="SettingsMenu_DictSettings_xxgrz">Shogakukan ja-zh dictionary</sys:String>
 

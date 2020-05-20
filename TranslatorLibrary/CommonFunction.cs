@@ -28,7 +28,8 @@ namespace TranslatorLibrary
             { "ALAPI免费接口" , "AlapiTranslator"},
             { "JBeijing" , "JBeijingTranslator" },
             { "金山快译" , "KingsoftFastAITTranslator" },
-            { "译典通", "Dreye"}
+            { "译典通", "Dreye"},
+            { "本地汉化补丁", "LocalTranslator" }
         };
 
         /// <summary>

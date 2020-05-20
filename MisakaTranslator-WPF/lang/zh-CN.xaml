@@ -53,6 +53,7 @@
     <sys:String x:Key="SettingsMenu_TranslatorSettings_KingsoftFAIT">金山快译</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Dreye">译典通</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Caiyun">彩云小译</sys:String>
+    <sys:String x:Key="SettingsMenu_TranslatorSettings_LocalTranslation">本地汉化补丁</sys:String>
     <sys:String x:Key="SettingsMenu_DictSettings">词典相关设置</sys:String>
     <sys:String x:Key="SettingsMenu_DictSettings_xxgrz">小学馆日中</sys:String>
 

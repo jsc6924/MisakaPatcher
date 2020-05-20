@@ -190,6 +190,10 @@ namespace MisakaTranslator_WPF
                     DreyeTranslator drt = new DreyeTranslator();
                     drt.TranslatorInit(Common.appSettings.DreyePath);
                     return drt;
+                case "LocalTranslator":
+                    LocalTranslator ltr = new LocalTranslator();
+                    ltr.TranslatorInit();
+                    return ltr;
                 default:
                     return null;
             }
