@@ -1,0 +1,43 @@
+﻿<Page
+	x:Class="MisakaTranslator_WPF.SettingsPages.TranslatorPages.LocalTransSettingsPage"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:hc="https://handyorg.github.io/handycontrol"
+	xmlns:local="clr-namespace:MisakaTranslator_WPF.SettingsPages.TranslatorPages"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	Title="LocalTransSettingsPage"
+	d:DesignHeight="450"
+	d:DesignWidth="594"
+	mc:Ignorable="d">
+
+	<Grid>
+		<hc:ScrollViewer HorizontalScrollBarVisibility="Disabled">
+			<StackPanel Background="White">
+				<TextBlock
+					Margin="10"
+					FontSize="16"
+					Text="{StaticResource LocalTransSettingsPage_Introduce}"
+					TextWrapping="WrapWithOverflow" />
+				<StackPanel Margin="20,20,20,0">
+					<hc:TextBox
+						Name="PathBox"
+						hc:InfoElement.Title="{StaticResource LocalTransSettingsPage_Path}"
+						hc:InfoElement.TitleAlignment="Top"
+						ShowClearButton="True" />
+					<Button
+						Width="122"
+						Margin="0,10,0,0"
+						HorizontalAlignment="Right"
+						Click="ChoosePathBtn_Click"
+						Content="{StaticResource LocalTransSettingsPage_ChoosePath}" />
+					<hc:Divider />
+				</StackPanel>
+			</StackPanel>
+		</hc:ScrollViewer>
+		<StackPanel
+			Margin="15"
+			HorizontalAlignment="Right"
+			hc:Growl.GrowlParent="True" />
+	</Grid>
+</Page>

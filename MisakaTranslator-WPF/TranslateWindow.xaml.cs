@@ -192,7 +192,7 @@ namespace MisakaTranslator_WPF
                     return drt;
                 case "LocalTranslator":
                     LocalTranslator ltr = new LocalTranslator();
-                    ltr.TranslatorInit();
+                    ltr.TranslatorInit(Common.appSettings.LocalTranslationPath);
                     return ltr;
                 default:
                     return null;

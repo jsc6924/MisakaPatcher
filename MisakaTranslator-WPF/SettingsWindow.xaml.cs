@@ -62,7 +62,7 @@ namespace MisakaTranslator_WPF
 
         private void Item_LocalTranslation_Selected(object sender, RoutedEventArgs e)
         {
-            this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorPages/TranslatorGeneralSettingsPage.xaml", UriKind.Relative));
+            this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorPages/LocalTransSettingsPage.xaml", UriKind.Relative));
         }
 
         private void Item_BaiduOCR_Selected(object sender, RoutedEventArgs e)

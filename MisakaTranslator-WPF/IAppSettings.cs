@@ -19,6 +19,9 @@ namespace MisakaTranslator_WPF
 
         [Option(Alias = "JBeijing.JBJCTDllPath", DefaultValue = "")]
         string JBJCTDllPath { get; set; }
+
+        [Option(Alias = "LocalTranslation.PatchPath", DefaultValue = "patch_path")]
+        string LocalTranslationPath { get; set; }
         [Option(Alias = "KingsoftFastAIT.KingsoftFastAITPath", DefaultValue = "")]
         string KingsoftFastAITPath { get; set; }
         [Option(Alias = "Dreye.DreyePath", DefaultValue = "")]
