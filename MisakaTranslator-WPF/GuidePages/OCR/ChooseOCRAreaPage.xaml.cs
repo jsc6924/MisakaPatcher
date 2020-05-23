@@ -40,7 +40,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
             else if (Common.appSettings.OCRsource == "BaiduOCR")
             {
                 Common.ocr = new BaiduGeneralOCR();
-            }
+            } 
 
             //初始化钩子对象
             if (hook == null)

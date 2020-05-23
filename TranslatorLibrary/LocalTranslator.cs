@@ -2,10 +2,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Runtime.InteropServices;
+using System.Web.UI.WebControls;
+using System.Collections.Specialized;
+using System.ComponentModel;
+
 namespace TranslatorLibrary
 {
-    public class LocalTranslator :ITranslator
-{
+    public class LocalTranslator : ITranslator
+    {
+        private class CursorPriorityQueue
+        {
+            SortedSet<Tuple<int, double>> nextCursorsSet = new SortedSet<Tuple<int, double>>(Comparer<Tuple<int, double>>.Create((a, b) => a.Item2.CompareTo(b.Item2)));
+            int maxSize;
+            public CursorPriorityQueue(int maxSize)
+            {
+                this.maxSize = maxSize;
+            }
+            public bool Add(int i, double p)
+            {
+                if (nextCursorsSet.Count < maxSize || p > nextCursorsSet.Min().Item2)
+                {
+                    if (nextCursorsSet.Count >= MAX_CURSOR)
+                        nextCursorsSet.Remove(nextCursorsSet.Min());
+                    return nextCursorsSet.Add(new Tuple<int, double>(i, p));
+                }
+                return false;
+            }
+            public IEnumerable<int> Indices()
+            {
+                return nextCursorsSet.Select(i => i.Item1);
+            }
+            public IEnumerable<double> Values()
+            {
+                return nextCursorsSet.Select(i => i.Item2);
+            }
+        }
+
         /// <summary>
         /// 翻译API初始化
         /// </summary>
@@ -15,23 +50,27 @@ namespace TranslatorLibrary
         {
             string[] lines = System.IO.File.ReadAllLines(patchPath);
             string temp = "";
-            bool jp = true;
+            bool jp = true, first = true;
             void add()
             {
-                if (temp != "")
+                if (!first)
                 {
                     if (jp) jp_text.Add(temp);
                     else cn_text.Add(temp);
                 }
+                else
+                {
+                    first = false;
+                }
                 temp = "";
             }
 
-            foreach(string line in lines)
+            foreach (string line in lines)
             {
-                if(line == "\n" || line == "\r\n")
+                if (line == "\n" || line == "\r\n")
                 {
-                    add();
-                } 
+                    //pass
+                }
                 else if (line.StartsWith("<j>"))
                 {
                     add();
@@ -59,26 +98,148 @@ namespace TranslatorLibrary
         /// <param name="desLang">目标语言</param>
         /// <param name="srcLang">源语言</param>
         /// <returns>翻译后的语句,如果翻译有错误会返回空，可以通过GetLastError来获取错误</returns>
+        #region Explanation
+        /*
+         * An Approximated Viterbi Algorithm for sparse model
+         * 
+         * Author: Sicheng Jiang
+         * 
+         * Our problem can be modeled as an HMM and apply Viterbi algorithm to decode best 
+         * match for each timestep. 
+         * Let T[i, t] store the probability at time t that the most likely sequence so far ends at i. (i.e. most likely seq at t = (x_1, x_2, ... , x_t=i)
+         * Assume there are K possible sentences (states).
+         * 
+         * We use the following transition model:
+         *     P(transition from state i to j) = 0.9 * v if j == i + 1
+         *                                     = 0.1 * v otherwise
+         *                                     where 0.9*v + (K-1)*0.1*v = 1
+         *     (Assume K >= 2)
+         *     Simply use 0.9 and 0.1 due to normalization
+         *     
+         *     
+         * Initial probabilities P(i) = 1.0 / K
+         *     same for all states, so use 1.0 due to normalization
+         * 
+         * P(state = i | observation at t) = ComputeSimilarity(jp_text[i], sourceText)
+         *     see the implementation below for details
+         * 
+         * A forward step in Viterbi algorithm at time t can be described as 
+         * for each state i = {1, 2, ..., K} do
+         *     T[i, t] <- max(k)(T[i, t-1] * P(transition from state k to i) * P(state = i | observation at t)
+         *     
+         * This requires O(K^2), but our K > 30000, so it will be too slow for our case.
+         * So we need to approximate:
+         *     We only consider the case when two of {T[i, t-1], P(transition from state k to i), P(state = i | observation at t)} are large.
+         *     Let possibleCursors be a list of large T[i, t-1], and sum(possibleCursors) == 1.0
+         *     For each T[i, t-1] in possibleCursors , we consider 
+         *          t[i, t-1]*P(i to i+1)*P(i+1 | o_t)  [Case 1]
+         *              and 
+         *          (
+         *              for all k that P(k | o_t) is large: t[i, t-1]*P(i to not i+1)*P(k | o_t)
+         *              covered in the next case more efficiently, so skiped
+         *          )
+         *     For all k that P(k | o_t) is large: 
+         *          max(t[*, t-1])*P(i to not i+1)*P(i+1 | o_t)  [Case 2]
+         *              and
+         *          (
+         *              t[k-1, t-1]*P(k-1 to k)*P(k | o_t)
+         *              where t[k-1, t-1] == 0.2 / (K - possibleCursors.Count) if k-1 not in possibleCursors
+         *                                == possibleCursors[k-1] if k-1 in possibleCursors
+         *              However, in this case, if k-1 is not in possibleCursor, t[k-1, t-1] is extremely small, and if 
+         *              k-1 is in possibleCursor, it is already covered in the previous case. Therefore we can simply skip this case.
+         *           )
+         *           
+         * The runtime is O(MK) where M is the maximum size of possibleCursors and is a constant.
+         *     
+         */
+        #endregion
         public string Translate(string sourceText, string desLang, string srcLang)
         {
-            double maxSim = 0.0;
-            int maxI = 0;
+            //sourceText = addNoise(addNoise2(sourceText));
+            Console.WriteLine(String.Format("Input:{0}", sourceText));
             if (jp_text.Count == 0)
-                return "No translation available";
-            for(int i = 0; i < jp_text.Count; i++)
             {
-                double s = ComputeSimilarity(sourceText, jp_text[i]);
-                Console.WriteLine(jp_text[i]);
-                Console.WriteLine(s);
-                if(s > maxSim)
-                {
-                    maxSim = s;
-                    maxI = i;
-                }
+                return "No translation available";
             }
 
+            if (sourceText.Length >= R_MAX_LEN)
+            {
+                sourceText = sourceText.Substring(0, R_MAX_LEN - 1);
+            }
+
+            double pMostLikelyPrevCursor = possibleCursors.Count == 0 ? 1.0 / pTransitionNext : possibleCursors.Max(i => i.Value);
+            CursorPriorityQueue nextCursorsPQ = new CursorPriorityQueue(MAX_CURSOR);
+
+            for (int i = 0; i < jp_text.Count; i++)
+            {
+                double s = ComputeSimilarity(sourceText, jp_text[i]);
+                if (possibleCursors.ContainsKey(i - 1)) // [Case 1]
+                {
+                    double pSequantial = possibleCursors[i - 1] * pTransitionNext * s;
+                    nextCursorsPQ.Add(i, pSequantial);
+                }
+                double pSkip = pMostLikelyPrevCursor * pTransitionSkip * s; //[Case 2]
+                nextCursorsPQ.Add(i, pSkip);
+            }
+            List<int> nextCursorsIdx = nextCursorsPQ.Indices().ToList();
+            var z = nextCursorsPQ.Values();
+            double z_sum = z.Sum();
+            var z_norm = z.Select(i => i / z_sum);
+            var z_exp = z_norm.Select(i => Math.Exp(SoftmaxCoeff * i));
+            double sum_z_exp = z_exp.Sum();
+            List<double> z_softmax = z_exp.Select(i => i / sum_z_exp).ToList();
+
+            possibleCursors.Clear();
+
+            for (int i = 0; i < z_softmax.Count; i++)
+            {
+                int j = nextCursorsIdx[i];
+                if (possibleCursors.ContainsKey(j))
+                {
+                    possibleCursors[j] = Math.Max(possibleCursors[j], z_softmax[i]);
+                }
+                else
+                {
+                    possibleCursors[j] = z_softmax[i];
+                }
+            }
+            int maxI = 0;
+            double maxP = 0.0;
+            foreach (int k in possibleCursors.Keys)
+            {
+                if (maxP < possibleCursors[k])
+                {
+                    maxP = possibleCursors[k];
+                    maxI = k;
+                }
+                Console.WriteLine(String.Format("{0}:{1}", k, jp_text[k]));
+                Console.WriteLine(possibleCursors[k]);
+            }
+            if (possibleCursors.Count == 0)
+                return "无匹配文本";
+            Console.WriteLine(String.Format("[{0}:{1}]", maxI, jp_text[maxI]));
+            Console.WriteLine("------");
             return cn_text[maxI];
         }
+
+        int addNoiseState = 0;
+        private string addNoise(string input)
+        {
+            if (addNoiseState++ % 2 == 0)
+                return input;
+            return "";
+        }
+        private string addNoise2(string input)
+        {
+            StringBuilder result = new StringBuilder(input);
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (random.NextDouble() < 0.5)
+                    result[i] = 'A';
+            }
+            return result.ToString();
+        }
+
 
         /// <summary>
         /// 返回最后一次错误的ID或原因
@@ -89,13 +250,35 @@ namespace TranslatorLibrary
             return "last error";
         }
 
-        private static double ComputeSimilarity(string first, string second)
+        /// <summary>
+        /// 返回两个string的相似度
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <returns></returns>
+        private double ComputeSimilarity(string first, string second)
         {
+            if (first.Length >= R_MAX_LEN)
+            {
+                first = first.Substring(0, R_MAX_LEN - 1);
+            }
+
+            if (second.Length >= R_MAX_LEN)
+            {
+                second = second.Substring(0, R_MAX_LEN - 1);
+            }
             int d = ComputeDistance(first, second);
-            return 1.0 - (double)d / (first.Length + second.Length);
+
+            return Sigmoid(1.0 - (double)d / (first.Length + second.Length));
         }
 
-        private static int ComputeDistance(string first, string second)
+        /// <summary>
+        /// 返回两个string的edit distance, string的长度需小于R_MAX_LEN
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <returns></returns>
+        private int ComputeDistance(string first, string second)
         {
             if (first.Length == 0)
             {
@@ -107,9 +290,11 @@ namespace TranslatorLibrary
                 return first.Length;
             }
 
+
+
             var current = 1;
             var previous = 0;
-            var r = new int[2, second.Length + 1];
+
             for (var i = 0; i <= second.Length; i++)
             {
                 r[previous, i] = i;
@@ -136,9 +321,26 @@ namespace TranslatorLibrary
         private static int Min(int e1, int e2, int e3) =>
             Math.Min(Math.Min(e1, e2), e3);
 
+        public static double Sigmoid(double x)
+        {
+            //Boost x > 0.7, suppress x < 0.7, please plot the curve to visualize
+            double k = System.Math.Exp(-15.0 * (x - 0.7));
+            return 1.0 / (1.0 + k);
+        }
+
 
         private List<String> jp_text = new List<string>();
         private List<String> cn_text = new List<string>();
+        Random random = new Random();
+        private int[,] r = new int[2, R_MAX_LEN];
+        private const int R_MAX_LEN = 64;
+        private const double Threshold = 0.5;
+        private const int MAX_CURSOR = 4;
+        private const double SoftmaxCoeff = 10;
+        private const double pTransitionNext = 0.8;
+        private const double pTransitionSkip = 1.0 - pTransitionNext;
+        private const double possibleCursorsThresh = 0.001;
+        private Dictionary<int, double> possibleCursors = new Dictionary<int, double>();
     }
 }
 
