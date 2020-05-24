@@ -1,19 +1,17 @@
 <h1 align="center">
-  使用MisakaTranslatorEX制作/使用游戏外挂汉化补丁
+  MisakaPatcher · 文字游戏外挂汉化补丁运行平台
   <br>
 </h1>
 
-<p align="center">
-  <a href="/README_ORIGINAL.md">原版MisakaTranslator 2.0介绍</a>
-</p>
 
-MisakaTranslatorEX在原版MisakaTranslator 2.0的基础上添加了对外挂汉化补丁的支持。本文介绍了与之相关的功能。
+MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有机器翻译功能，转而添加了对外挂汉化补丁的支持，因此本工具更适合喜欢人工翻译的玩家，也为解包封包遇到困难的汉化人员提供了另一种发布汉化的途径。本文介绍了补丁的格式以及加载的方法。
 
 ## 相关功能及特点
-* 智能模糊匹配：在hook/ocr提取到的文本与补丁中的句子不完全一致时，也能匹配到正确的文本（`经测试，在提取到的文本仅保留原句约25%的信息时依然可以做到95%以上的正确匹配`）
-* 增加了对Tesseract 5的支持
-* 增加了一种图像预处理方法（`空心字转实心字`）
-* 修复了原版预处理没有效果的问题
+* 智能模糊匹配：在hook/ocr提取到的文本与补丁中的原句不完全一致时，也能快速正确地匹配到对应的文本（`经测试，在提取到的文本仅保留原句约25%的信息时依然可以做到95%以上的正确匹配`）
+* 为了与MisakaTranslator功能区分，本工具去除了所有机翻功能
+* 保留所有OCR功能，并增加了对Tesseract 5的支持
+* 增加了一种图像预处理方法（`提取白色文本，能将空心字转成实心字`）
+* 修复了2.0版本图像预处理没有效果的问题
 
 ## 补丁格式
 补丁是一个文本文件（UTF-8无签名，仅支持单个文件，如有多个请先合并），格式如下：
@@ -57,10 +55,7 @@ MisakaTranslatorEX在原版MisakaTranslator 2.0的基础上添加了对外挂汉
 
 感谢原作者[hanmin0822](https://github.com/hanmin0822/MisakaTranslator)及项目团队提供这个良好的平台
 
-考虑到MisakaTranslatorEX所做的改动可能与MisakaTranslator初衷不符，我暂时不考虑PullRequest
+使用本工具制作、加载使用汉化补丁，产生的一切责任均由使用者自行承担。
 
-使用本软件制作、加载使用汉化补丁，产生的一切责任均由使用者自行承担。
-
-软件开发过程中使用到部分网络素材，如果侵犯到您的权益，请第一时间联系作者删除，谢谢！
 
 

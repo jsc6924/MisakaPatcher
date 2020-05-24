@@ -1,20 +1,47 @@
-﻿<Page x:Class="MisakaTranslator_WPF.SettingsPages.AboutPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:MisakaTranslator_WPF.SettingsPages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="594"
-      Title="AboutPage">
+﻿<Page
+    x:Class="MisakaTranslator_WPF.SettingsPages.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MisakaTranslator_WPF.SettingsPages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="AboutPage"
+    d:DesignHeight="450"
+    d:DesignWidth="594"
+    mc:Ignorable="d">
 
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="5*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <Image Grid.Row="0" Source="AboutV2.jpg" Margin="20"></Image>
-        <Button Grid.Row="1" Content="{StaticResource AboutPage_BtnHelp}" HorizontalAlignment="Left" Margin="20" Click="BtnHelp_Click"></Button>
-        <Button Grid.Row="1" Content="{StaticResource AboutPage_BtnGithub}" HorizontalAlignment="Right" Margin="20" Click="BtnGithub_Click"></Button>
+        <Button
+            Grid.Row="1"
+            Margin="20"
+            HorizontalAlignment="Left"
+            Click="BtnHelp_Click"
+            Content="{StaticResource AboutPage_BtnHelp}" />
+        <Button
+            Grid.Row="1"
+            Margin="20"
+            HorizontalAlignment="Right"
+            Click="BtnGithub_Click"
+            Content="{StaticResource AboutPage_BtnGithub}" />
+        <Button
+            Grid.Row="1"
+            Margin="0,22.8,175,22.4"
+            HorizontalAlignment="Right"
+            Click="BtnGithubEX_Click"
+            Content="{StaticResource AboutPage_BtnGithubEX}" />
+        <TextBlock
+            x:Name="textBlock"
+            Width="574"
+            Height="311"
+            Margin="10,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontSize="16"
+            Text="{StaticResource AboutPage_About}"
+            TextWrapping="Wrap" />
     </Grid>
 </Page>

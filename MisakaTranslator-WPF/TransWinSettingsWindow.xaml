@@ -1,65 +1,111 @@
-﻿<Window x:Class="MisakaTranslator_WPF.TransWinSettingsWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:hc="https://handyorg.github.io/handycontrol"
-        xmlns:local="clr-namespace:MisakaTranslator_WPF"
-        mc:Ignorable="d"
-        Title="{StaticResource TransWinSettingsWin_Title}" Height="500" Width="300">
+﻿<Window
+    x:Class="MisakaTranslator_WPF.TransWinSettingsWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:MisakaTranslator_WPF"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="{StaticResource TransWinSettingsWin_Title}"
+    Width="300"
+    Height="500"
+    mc:Ignorable="d">
     <Grid>
 
         <TabControl Style="{StaticResource TabControlInLine}">
             <TabItem Header="{StaticResource TransWinSettingsWin_Tab_Window}">
 
                 <StackPanel>
-                    <TextBlock Text="{StaticResource TransWinSettingsWin_Opacity}" HorizontalAlignment="Center" Margin="10" FontSize="15"/>
-                    <Slider Name="OpacityBar" Margin="10" Maximum="100" Minimum="0" Value="0"/>
+                    <TextBlock
+                        Margin="10"
+                        HorizontalAlignment="Center"
+                        FontSize="15"
+                        Text="{StaticResource TransWinSettingsWin_Opacity}" />
+                    <Slider
+                        Name="OpacityBar"
+                        Margin="10"
+                        Maximum="100"
+                        Minimum="0"
+                        Value="0" />
 
-                    <TextBlock Text="{StaticResource TransWinSettingsWin_BgColor}" HorizontalAlignment="Center" Margin="10" FontSize="15"/>
-                    <Button Name="BgColorBtn" Content="{StaticResource TransWinSettingsWin_BtnChooseColor}" Margin="10" Width="200" Style="{StaticResource ButtonPrimary}" Click="ChooseColorBtn_Click"/>
-                    <Border Name="BgColorBlock" Margin="10" Width="200" Height="25"/>
+                    <TextBlock
+                        Margin="10"
+                        HorizontalAlignment="Center"
+                        FontSize="15"
+                        Text="{StaticResource TransWinSettingsWin_BgColor}" />
+                    <Button
+                        Name="BgColorBtn"
+                        Width="200"
+                        Margin="10"
+                        Click="ChooseColorBtn_Click"
+                        Content="{StaticResource TransWinSettingsWin_BtnChooseColor}"
+                        Style="{StaticResource ButtonPrimary}" />
+                    <Border
+                        Name="BgColorBlock"
+                        Width="200"
+                        Height="25"
+                        Margin="10" />
                 </StackPanel>
 
             </TabItem>
             <TabItem Header="{StaticResource TransWinSettingsWin_Tab_source}">
 
                 <StackPanel>
-                    <hc:ComboBox Name="sourceFont" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontName}" Margin="10" />
+                    <hc:ComboBox
+                        Name="sourceFont"
+                        Margin="10"
+                        hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontName}"
+                        hc:InfoElement.TitleAlignment="Top"
+                        hc:InfoElement.TitleWidth="140" />
 
-                    <hc:NumericUpDown Name="sourceFontSize" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontSize}" Margin="10" Style="{StaticResource NumericUpDownExtend}"/>
+                    <hc:NumericUpDown
+                        Name="sourceFontSize"
+                        Margin="10"
+                        hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontSize}"
+                        Style="{StaticResource NumericUpDownExtend}" />
 
-                    <TextBlock Text="{StaticResource TransWinSettingsWin_srcSetNotice}" Margin="10" HorizontalAlignment="Center"/>
+                    <TextBlock
+                        Margin="10"
+                        HorizontalAlignment="Center"
+                        Text="{StaticResource TransWinSettingsWin_srcSetNotice}" />
                 </StackPanel>
 
             </TabItem>
             <TabItem Header="{StaticResource TransWinSettingsWin_Tab_first}">
-                
+
                 <StackPanel>
-                    <hc:ComboBox Name="firstFont" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontName}" Margin="10" />
+                    <hc:ComboBox
+                        Name="firstFont"
+                        Margin="10"
+                        hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontName}"
+                        hc:InfoElement.TitleAlignment="Top"
+                        hc:InfoElement.TitleWidth="140" />
 
-                    <hc:NumericUpDown Name="firstFontSize" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontSize}" Margin="10" Style="{StaticResource NumericUpDownExtend}"/>
+                    <hc:NumericUpDown
+                        Name="firstFontSize"
+                        Margin="10"
+                        hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontSize}"
+                        Style="{StaticResource NumericUpDownExtend}" />
 
-                    <TextBlock Text="{StaticResource TransWinSettingsWin_BgColor}" HorizontalAlignment="Center" Margin="15"/>
-                    <Button Name="firstColorBtn" Content="{StaticResource TransWinSettingsWin_BtnChooseColor}" Margin="0" Width="200" Style="{StaticResource ButtonPrimary}" Click="ChooseColorBtn_Click"/>
-                    <Border Name="firstColorBlock" Margin="10" Width="200" Height="25"/>
+                    <TextBlock
+                        Margin="15"
+                        HorizontalAlignment="Center"
+                        Text="{StaticResource TransWinSettingsWin_BgColor}" />
+                    <Button
+                        Name="firstColorBtn"
+                        Width="200"
+                        Margin="0"
+                        Click="ChooseColorBtn_Click"
+                        Content="{StaticResource TransWinSettingsWin_BtnChooseColor}"
+                        Style="{StaticResource ButtonPrimary}" />
+                    <Border
+                        Name="firstColorBlock"
+                        Width="200"
+                        Height="25"
+                        Margin="10" />
 
                 </StackPanel>
-                
-            </TabItem>
-            <TabItem Header="{StaticResource TransWinSettingsWin_Tab_second}">
-                
-                <StackPanel>
-                    <hc:ComboBox Name="secondFont" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontName}" Margin="10" />
 
-                    <hc:NumericUpDown Name="secondFontSize" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontSize}" Margin="10" Style="{StaticResource NumericUpDownExtend}"/>
-
-                    <TextBlock Text="{StaticResource TransWinSettingsWin_BgColor}" HorizontalAlignment="Center" Margin="15"/>
-                    <Button Name="secondColorBtn" Content="{StaticResource TransWinSettingsWin_BtnChooseColor}" Margin="0" Width="200" Style="{StaticResource ButtonPrimary}" Click="ChooseColorBtn_Click"/>
-                    <Border Name="secondColorBlock" Margin="10" Width="200" Height="25"/>
-
-                </StackPanel>
-                
             </TabItem>
 
         </TabControl>

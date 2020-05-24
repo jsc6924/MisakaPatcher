@@ -1,7 +1,8 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:MisakaTranslator_WPF.lang"
-                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:MisakaTranslator_WPF.lang"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <sys:String x:Key="Language_Changed">语言配置已修改！重启软件后生效！</sys:String>
 
@@ -35,7 +36,7 @@
     <sys:String x:Key="MainWindow_AutoStartError_Hint">未在当前进程列表中找到可以自动开始翻译的游戏！</sys:String>
     <sys:String x:Key="MainWindow_GlobalOCRError_Hint">全局OCR热键注册失败！</sys:String>
     <sys:String x:Key="MainWindow_StartError_Hint">未找到游戏进程！</sys:String>
-    
+
 
     <sys:String x:Key="SettingsMenu_WinName">MisakaTranslator本体设置</sys:String>
     <sys:String x:Key="SettingsMenu_About">MisakaTranslator</sys:String>
@@ -54,7 +55,7 @@
     <sys:String x:Key="SettingsMenu_TranslatorSettings_KingsoftFAIT">金山快译</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Dreye">译典通</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Caiyun">彩云小译</sys:String>
-	<sys:String x:Key="SettingsMenu_TranslatorSettings_LocalTranslation">本地汉化补丁</sys:String>
+    <sys:String x:Key="SettingsMenu_TranslatorSettings_LocalTranslation">本地汉化补丁</sys:String>
     <sys:String x:Key="SettingsMenu_DictSettings">词典相关设置</sys:String>
     <sys:String x:Key="SettingsMenu_DictSettings_xxgrz">小学馆日中</sys:String>
 
@@ -102,10 +103,10 @@
     <sys:String x:Key="DreyeTransSettingsPage_Path">译典通翻译本体路径</sys:String>
     <sys:String x:Key="DreyeTransSettingsPage_ChoosePathHint">请选择译典通本体所在文件夹</sys:String>
 
-	<sys:String x:Key="LocalTransSettingsPage_Introduce">请选择汉化补丁的路径</sys:String>
-	<sys:String x:Key="LocalTransSettingsPage_Path">选择路径</sys:String>
-	<sys:String x:Key="LocalTransSettingsPage_ChoosePath">选择路径</sys:String>
-	<sys:String x:Key="LocalTransSettingsPage_ChoosePathHint">请选择汉化补丁</sys:String>
+    <sys:String x:Key="LocalTransSettingsPage_Introduce">请选择汉化补丁的路径</sys:String>
+    <sys:String x:Key="LocalTransSettingsPage_Path">选择路径</sys:String>
+    <sys:String x:Key="LocalTransSettingsPage_ChoosePath">选择路径</sys:String>
+    <sys:String x:Key="LocalTransSettingsPage_ChoosePathHint">请选择汉化补丁</sys:String>
 
     <sys:String x:Key="OCRGeneralSettingsPage_Introduce">在这里进行所有OCR选项的通用设置，一个实时翻译窗口只能设置一种OCR方式，您可以指定OCR过程中用到的API；注：离线OCR功能使用Tesseract实现，目前可支持英语、日语的来源识别，如果识别效果不理想，可以考虑自行训练相关OCR字库或使用百度在线OCR识别，更多有关OCR预处理的设置选项见OCR设置窗口。</sys:String>
     <sys:String x:Key="OCRGeneralSettingsPage_OCRSource">OCR来源</sys:String>
@@ -131,9 +132,11 @@
     <sys:String x:Key="LESettingsPage_Introduce">LE转区工具可以解决一些游戏出现乱码的问题，您需要获取Locale Emulator软件本体并在下方设置其目录，保证文件夹下有LEProc.exe文件。</sys:String>
     <sys:String x:Key="LESettingsPage_LEbox">Locale Emulator本体路径</sys:String>
     <sys:String x:Key="LESettingsPage_ChooseFilePathHint">请选择Locale Emulator本体所在文件夹</sys:String>
-    
+
     <sys:String x:Key="AboutPage_BtnHelp">使用说明和反馈</sys:String>
-    <sys:String x:Key="AboutPage_BtnGithub">本项目GitHub主页</sys:String>
+    <sys:String x:Key="AboutPage_BtnGithub">原项目GitHub主页</sys:String>
+    <sys:String x:Key="AboutPage_BtnGithubEX">EX版Github主页</sys:String>
+    <sys:String x:Key="AboutPage_About">MisakaPatcher是在官方MisakaTranslator2.0版本基础上改动的非官方的版本，主要增加了对外挂汉化补丁的支持。如果想使用最新的机翻功能，请使用官方版。当官方版本更新时，EX版也不会同步更新。为了与原版本区分用途，我之后可能会去除一部分原版本支持的机翻功能，并且重命名该项目。</sys:String>
 
     <sys:String x:Key="GameGuideWin_WinName">游戏翻译向导</sys:String>
     <sys:String x:Key="GameGuideWin_AlwaysTop">本窗口总在最前</sys:String>
@@ -150,7 +153,7 @@
     <sys:String x:Key="GameGuideWin_FuncHint_ReHook">重新选择Hook方法以适配上次的设置</sys:String>
     <sys:String x:Key="GameGuideWin_FuncHint_OCR">使用OCR方式提取文本</sys:String>
 
-    <sys:String x:Key="ChooseGamePage_Introduce">说明：请先运行游戏，之后通过下拉列表选择游戏进程名。部分游戏可能存在多进程，请根据需要开启"智能注入"功能。</sys:String>
+    <sys:String x:Key="ChooseGamePage_Introduce">说明：请先运行游戏，之后通过下拉列表选择游戏进程名。部分游戏可能存在多进程，请根据需要开启&quot;智能注入&quot;功能。</sys:String>
     <sys:String x:Key="ChooseGamePage_BtnChooseWin">选择窗口</sys:String>
     <sys:String x:Key="ChooseGamePage_BtnConfirm">确认进程</sys:String>
     <sys:String x:Key="ChooseGamePage_CBoxX64">使用x64版本注入方式</sys:String>
@@ -158,9 +161,9 @@
     <sys:String x:Key="ChooseGamePage_AutoHookTag_Begin">【智能处理】共找到</sys:String>
     <sys:String x:Key="ChooseGamePage_AutoHookTag_End">个同名进程</sys:String>
     <sys:String x:Key="ChooseGamePage_NextErrorHint">请先选择一个进程再进行下一步操作！</sys:String>
-    
+
     <sys:String x:Key="Drawer_BtnExit">关闭</sys:String>
-    
+
     <sys:String x:Key="ChooseHookFuncPage_Introduce">进行游戏并使游戏中文本发生变化，在下方找到完全包含游戏文本内容的对应项并确定。卡顿时可在本页面获取焦点情况下按Esc进行强制暂停。</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_BtnAddHook">添加指定特殊码Hook</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_BtnConfirm">确认方法</sys:String>
@@ -273,5 +276,5 @@
 
     <sys:String x:Key="App_Global_ErrorHint_left">MisakaTranslator发现了全局无法解决的异常，即将强制退出。关于本次异常的详细信息已经存储在logs目录下的</sys:String>
     <sys:String x:Key="App_Global_ErrorHint_right">文件中，为了更好地维护本软件，我们希望您能将此文件发送给作者以修复这个问题。</sys:String>
-    
+
 </ResourceDictionary>

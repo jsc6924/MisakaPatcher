@@ -469,7 +469,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="logo.ico" />
-    <Resource Include="SettingsPages\AboutV2.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

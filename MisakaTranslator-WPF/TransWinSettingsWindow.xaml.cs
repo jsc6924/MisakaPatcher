@@ -40,7 +40,6 @@ namespace MisakaTranslator_WPF
 
             sourceFont.ItemsSource = FontList;
             firstFont.ItemsSource = FontList;
-            secondFont.ItemsSource = FontList;
 
             EventInit();
 
@@ -64,11 +63,6 @@ namespace MisakaTranslator_WPF
                 Common.appSettings.TF_firstTransTextFont = FontList[firstFont.SelectedIndex];
             };
 
-            secondFont.SelectionChanged += delegate
-            {
-                translateWin.SecondTransText.FontFamily = new FontFamily(FontList[secondFont.SelectedIndex]);
-                Common.appSettings.TF_secondTransTextFont = FontList[secondFont.SelectedIndex];
-            };
 
             sourceFontSize.ValueChanged += delegate {
                 translateWin.SourceTextFontSize = (int)sourceFontSize.Value;
@@ -80,10 +74,6 @@ namespace MisakaTranslator_WPF
                 Common.appSettings.TF_firstTransTextSize = Convert.ToString(firstFontSize.Value);
             };
 
-            secondFontSize.ValueChanged += delegate {
-                translateWin.SecondTransText.FontSize = secondFontSize.Value;
-                Common.appSettings.TF_secondTransTextSize = Convert.ToString(secondFontSize.Value);
-            };
 
             OpacityBar.ValueChanged += delegate {
                 translateWin.BackWinChrome.Opacity = OpacityBar.Value / 100;
@@ -98,7 +88,6 @@ namespace MisakaTranslator_WPF
             BrushConverter brushConverter = new BrushConverter();
             BgColorBlock.Background = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_BackColor);
             firstColorBlock.Background = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_firstTransTextColor);
-            secondColorBlock.Background = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_secondTransTextColor);
 
             for (int i = 0;i < FontList.Count;i++) {
                 if (Common.appSettings.TF_srcTextFont == FontList[i]) {
@@ -109,16 +98,10 @@ namespace MisakaTranslator_WPF
                 {
                     firstFont.SelectedIndex = i;
                 }
-
-                if (Common.appSettings.TF_secondTransTextFont == FontList[i])
-                {
-                    secondFont.SelectedIndex = i;
-                }
             }
 
             sourceFontSize.Value = int.Parse(Common.appSettings.TF_srcTextSize);
             firstFontSize.Value = int.Parse(Common.appSettings.TF_firstTransTextSize);
-            secondFontSize.Value = int.Parse(Common.appSettings.TF_secondTransTextSize);
 
             OpacityBar.Value = double.Parse(Common.appSettings.TF_Opacity);
         }
@@ -146,10 +129,6 @@ namespace MisakaTranslator_WPF
                     firstColorBlock.Background = picker.SelectedBrush;
                     translateWin.FirstTransText.Foreground = picker.SelectedBrush;
                     Common.appSettings.TF_firstTransTextColor = picker.SelectedBrush.ToString();
-                } else if (sender == secondColorBtn) {
-                    secondColorBlock.Background = picker.SelectedBrush;
-                    translateWin.SecondTransText.Foreground = picker.SelectedBrush;
-                    Common.appSettings.TF_secondTransTextColor = picker.SelectedBrush.ToString();
                 }
                 window.Close();
             };

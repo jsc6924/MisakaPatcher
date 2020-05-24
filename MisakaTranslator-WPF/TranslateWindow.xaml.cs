@@ -127,15 +127,12 @@ namespace MisakaTranslator_WPF
         {
             SourceTextFontSize = int.Parse(Common.appSettings.TF_srcTextSize);
             FirstTransText.FontSize = int.Parse(Common.appSettings.TF_firstTransTextSize);
-            SecondTransText.FontSize = int.Parse(Common.appSettings.TF_secondTransTextSize);
 
             SourceTextFont = Common.appSettings.TF_srcTextFont;
             FirstTransText.FontFamily = new FontFamily(Common.appSettings.TF_firstTransTextFont);
-            SecondTransText.FontFamily = new FontFamily(Common.appSettings.TF_secondTransTextFont);
 
             BrushConverter brushConverter = new BrushConverter();
             FirstTransText.Foreground = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_firstTransTextColor);
-            SecondTransText.Foreground = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_secondTransTextColor);
 
             BackWinChrome.Background = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_BackColor);
             BackWinChrome.Opacity = double.Parse(Common.appSettings.TF_Opacity) / 100;
@@ -339,7 +336,6 @@ namespace MisakaTranslator_WPF
 
                                 //7.翻译结果显示到窗口上
                                 FirstTransText.Text = afterString1;
-                                SecondTransText.Text = afterString2;
 
                                 //8.翻译结果记录到队列
                                 if (_gameTextHistory.Count > 5)
@@ -508,7 +504,6 @@ namespace MisakaTranslator_WPF
 
                 //7.翻译结果显示到窗口上
                 FirstTransText.Text = afterString1;
-                SecondTransText.Text = afterString2;
 
                 //8.翻译结果记录到队列
                 if (_gameTextHistory.Count > 5)
@@ -677,7 +672,6 @@ namespace MisakaTranslator_WPF
 
                 //7.翻译结果显示到窗口上
                 FirstTransText.Text = afterString1;
-                SecondTransText.Text = afterString2;
             }
         }
 

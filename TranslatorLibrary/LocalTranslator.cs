@@ -390,7 +390,7 @@ namespace TranslatorLibrary
         private const int R_MAX_LEN = 64;
         private const int MAX_CURSOR = 8;
         private const double SoftmaxCoeff = 10;
-        private const double pTransitionSkip = 0.05;
+        private const double pTransitionSkip = 0.075;
         private const double pTransitionNext = 1.0 - pTransitionSkip;
         private const double possibleCursorsThresh = 0.001;
         private Dictionary<int, double> possibleCursors = new Dictionary<int, double>();

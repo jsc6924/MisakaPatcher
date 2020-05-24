@@ -1,8 +1,9 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:MisakaTranslator_WPF.lang"
-                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
-    
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:MisakaTranslator_WPF.lang"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
     <sys:String x:Key="MessageBox_Error">Error</sys:String>
     <sys:String x:Key="MessageBox_Result">Result</sys:String>
     <sys:String x:Key="MessageBox_Ask">Ask</sys:String>
@@ -42,11 +43,11 @@
     <sys:String x:Key="SettingsMenu_OCRSettings">OCR Settings</sys:String>
     <sys:String x:Key="SettingsMenu_OCRSettings_General">General</sys:String>
     <sys:String x:Key="SettingsMenu_OCRSettings_Baidu">Baidu OCR API</sys:String>
-    
-    
+
+
     <sys:String x:Key="Language_Changed">Language is set. Restart translator to take effect.</sys:String>
 
-    
+
     <sys:String x:Key="SettingsMenu_TranslatorSettings">Translation Settings</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_General">General</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Baidu">百度翻译 Baidu Translate</sys:String>
@@ -105,9 +106,9 @@
     <sys:String x:Key="DreyeTransSettingsPage_ChoosePathHint">Please select the folder where Dr.eye is located</sys:String>
 
     <sys:String x:Key="LocalTransSettingsPage_Introduce">Please select your translation patch</sys:String>
-	<sys:String x:Key="LocalTransSettingsPage_Path">select path</sys:String>
-	<sys:String x:Key="LocalTransSettingsPage_ChoosePath">select path</sys:String>
-	<sys:String x:Key="LocalTransSettingsPage_ChoosePathHint">Please select your translation patch</sys:String>
+    <sys:String x:Key="LocalTransSettingsPage_Path">select path</sys:String>
+    <sys:String x:Key="LocalTransSettingsPage_ChoosePath">select path</sys:String>
+    <sys:String x:Key="LocalTransSettingsPage_ChoosePathHint">Please select your translation patch</sys:String>
 
     <sys:String x:Key="OCRGeneralSettingsPage_Introduce">This is the OCR (Optical Character Recognition) setting page. The translation window supports only one OCR source. Offline OCR uses Tesseract. It currently supports English and Japanese recognition. If the recognition performance is low, you can train related OCR word library or use Baidu online OCR instead.</sys:String>
     <sys:String x:Key="OCRGeneralSettingsPage_OCRSource">OCR source</sys:String>
@@ -136,6 +137,8 @@
 
     <sys:String x:Key="AboutPage_BtnHelp">Guide and Feedback</sys:String>
     <sys:String x:Key="AboutPage_BtnGithub">GitHub Project Page</sys:String>
+    <sys:String x:Key="AboutPage_BtnGithubEX">Github Page for EX version</sys:String>
+    <sys:String x:Key="AboutPage_About">MisakaPatcher is an unofficial version built on top of MisakaTranslator2.0. It adds the feature to load a translation patch from the local machine. This version will not update with the official version, and I may remove some of the machine translation features supported by the original 2.0 and rename the project in the future.</sys:String>
 
     <sys:String x:Key="GameGuideWin_WinName">Game Translation Wizard</sys:String>
     <sys:String x:Key="GameGuideWin_AlwaysTop">Always on top</sys:String>
@@ -152,13 +155,13 @@
     <sys:String x:Key="GameGuideWin_FuncHint_ReHook">Re-select the hook method to match the previous settings</sys:String>
     <sys:String x:Key="GameGuideWin_FuncHint_OCR">Extract Texts with OCR</sys:String>
 
-    <sys:String x:Key="ChooseGamePage_Introduce">Note: Run the game first, then come back and select the game process from the drop-down list. If the game has multiple processes, choose "Enable smart hook" in the Hook Settings.</sys:String>
+    <sys:String x:Key="ChooseGamePage_Introduce">Note: Run the game first, then come back and select the game process from the drop-down list. If the game has multiple processes, choose &quot;Enable smart hook&quot; in the Hook Settings.</sys:String>
     <sys:String x:Key="ChooseGamePage_BtnChooseWin">Select a window</sys:String>
     <sys:String x:Key="ChooseGamePage_BtnConfirm">Confirm process</sys:String>
     <sys:String x:Key="ChooseGamePage_CBoxX64">Hook with x64 version</sys:String>
     <sys:String x:Key="ChooseGamePage_CBoxX64Hint">Once enabled, the x64 version of Textractor is used to hook the 64-bit game.</sys:String>
-    <sys:String x:Key="ChooseGamePage_AutoHookTag_Begin">Auto: Found </sys:String>
-    <sys:String x:Key="ChooseGamePage_AutoHookTag_End">  process(es).</sys:String>
+    <sys:String x:Key="ChooseGamePage_AutoHookTag_Begin">Auto: Found</sys:String>
+    <sys:String x:Key="ChooseGamePage_AutoHookTag_End">process(es).</sys:String>
     <sys:String x:Key="ChooseGamePage_NextErrorHint">Please select a process before proceeding!</sys:String>
 
     <sys:String x:Key="Drawer_BtnExit">Close</sys:String>
@@ -269,10 +272,10 @@
     <sys:String x:Key="XxgJpZhDictPage_ChoosePathHint">Select the Shogakukan dictionary database file.</sys:String>
 
     <sys:String x:Key="ChooseHookFuncPage_MBOX_hookcodeConfirm_left">MisakaTranslator has detected that you have input custom H-code behavior. The last H-code recorded is</sys:String>
-    <sys:String x:Key="ChooseHookFuncPage_MBOX_hookcodeConfirm_right">If you confirm that this H-code can get text, please select "Yes"; if it can't, select "No" to re-inject a custom H-code; if you do not need a custom H-code, please select "Cancel" to enter the next interface.</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_MBOX_hookcodeConfirm_right">If you confirm that this H-code can get text, please select &quot;Yes&quot;; if it can't, select &quot;No&quot; to re-inject a custom H-code; if you do not need a custom H-code, please select &quot;Cancel&quot; to enter the next interface.</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_BtnAddClipboardFunc">Add clipboard monitoring method</sys:String>
 
-    <sys:String x:Key="App_Global_ErrorHint_left">MisakaTranslator encountered an exception that cannot be resolved. It is about to exit. Details about this exception have been stored in the "</sys:String>
-    <sys:String x:Key="App_Global_ErrorHint_right">" file in the "logs" Directory. To better the Translator, sending these files to the developer on GitHub to troubleshoot is appreciated.</sys:String>
+    <sys:String x:Key="App_Global_ErrorHint_left">MisakaTranslator encountered an exception that cannot be resolved. It is about to exit. Details about this exception have been stored in the &quot;</sys:String>
+    <sys:String x:Key="App_Global_ErrorHint_right">&quot; file in the &quot;logs&quot; Directory. To better the Translator, sending these files to the developer on GitHub to troubleshoot is appreciated.</sys:String>
 
 </ResourceDictionary>
