@@ -58,6 +58,7 @@ namespace OCRLibrary
         {
             try
             {
+                Directory.CreateDirectory(Environment.CurrentDirectory + "\\temp");
                 return true;
             }
             catch (Exception ex)
