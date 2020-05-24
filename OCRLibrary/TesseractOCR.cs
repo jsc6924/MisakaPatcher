@@ -18,10 +18,13 @@ namespace OCRLibrary
         private Rectangle OCRArea;
         private bool isAllWin;
 
+        private string imgFunc = "";
+
         public string OCRProcess(Bitmap img)
         {
             try {
-                var page = TessOCR.Process(img);
+                Bitmap processedImg = ImageProcFunc.Auto_Thresholding(img, imgFunc);
+                var page = TessOCR.Process(processedImg);
                 string res = page.GetText();
                 page.Dispose();
                 return res;
@@ -80,6 +83,11 @@ namespace OCRLibrary
         public void SetOCRSourceLang(string lang)
         {
             srcLangCode = lang;
+        }
+
+        public void SetImgFunc(string imgFunc)
+        {
+            this.imgFunc = imgFunc;
         }
     }
 }

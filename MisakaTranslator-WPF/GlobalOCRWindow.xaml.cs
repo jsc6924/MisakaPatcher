@@ -38,6 +38,7 @@ namespace MisakaTranslator_WPF
                 if (ocr.OCR_Init("", "") != false)
                 {
                     ocr.SetOCRSourceLang(Common.appSettings.GlobalOCRLang);
+                    ocr.SetImgFunc(Common.appSettings.OCR_PreprocessMethod);
                     res = ocr.OCRProcess(new System.Drawing.Bitmap(img));
 
                     if (res != null)
@@ -54,12 +55,36 @@ namespace MisakaTranslator_WPF
                     HandyControl.Controls.Growl.ErrorGlobal($"TesseractOCR {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
                 }
             }
+            else if (Common.appSettings.OCRsource == "TesseractOCR5")
+            {
+                ocr = new TesseractOCR5();
+                if (ocr.OCR_Init("", "") != false)
+                {
+                    ocr.SetOCRSourceLang(Common.appSettings.GlobalOCRLang);
+                    ocr.SetImgFunc(Common.appSettings.OCR_PreprocessMethod);
+                    res = ocr.OCRProcess(new System.Drawing.Bitmap(img));
+
+                    if (res != null)
+                    {
+                        sourceText.Text = res;
+                    }
+                    else
+                    {
+                        HandyControl.Controls.Growl.ErrorGlobal($"TesseractOCR5 {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
+                    }
+                }
+                else
+                {
+                    HandyControl.Controls.Growl.ErrorGlobal($"TesseractOCR5 {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
+                }
+            }
             else if (Common.appSettings.OCRsource == "BaiduOCR")
             {
                 ocr = new BaiduGeneralOCR();
                 if (ocr.OCR_Init(Common.appSettings.BDOCR_APIKEY, Common.appSettings.BDOCR_SecretKey))
                 {
                     ocr.SetOCRSourceLang(Common.appSettings.GlobalOCRLang);
+                    ocr.SetImgFunc(Common.appSettings.OCR_PreprocessMethod);
                     res = ocr.OCRProcess(new System.Drawing.Bitmap(img));
 
                     if (res != null)

@@ -37,6 +37,10 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
             {
                 Common.ocr = new TesseractOCR();
             }
+            else if (Common.appSettings.OCRsource == "TesseractOCR5")
+            {
+                Common.ocr = new TesseractOCR5();
+            }
             else if (Common.appSettings.OCRsource == "BaiduOCR")
             {
                 Common.ocr = new BaiduGeneralOCR();

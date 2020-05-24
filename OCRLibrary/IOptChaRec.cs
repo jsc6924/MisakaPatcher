@@ -42,6 +42,8 @@ namespace OCRLibrary
         /// <param name="lang">指定目标语言 OCR识别语言 jpn=日语 eng=英语</param>
         void SetOCRSourceLang(string lang);
 
+        void SetImgFunc(string imgFunc);
+
         /// <summary>
         /// OCR初始化，对于在线API，参数1和参数2有效
         /// </summary>

@@ -27,7 +27,8 @@ namespace MisakaTranslator_WPF.SettingsPages
 
         private List<string> lstOCR = new List<string>() {
             "BaiduOCR",
-            "TesseractOCR"
+            "TesseractOCR",
+            "TesseractOCR5"
         };
 
         public OCRGeneralSettingsPage()

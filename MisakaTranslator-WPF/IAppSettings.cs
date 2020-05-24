@@ -55,6 +55,8 @@ namespace MisakaTranslator_WPF
         string GlobalOCRHotkey { get; set; }
         [Option(Alias = "OCR_All.GlobalOCRLang", DefaultValue = "jpn")]
         string GlobalOCRLang { get; set; }
+        [Option(Alias = "OCR_All.PreprocessMethod", DefaultValue = "ImgFunc_NoDeal")]
+        string OCR_PreprocessMethod { get; set; }
 
         [Option(Alias = "BaiduOCR.APIKEY", DefaultValue = "")]
         string BDOCR_APIKEY { get; set; }
@@ -99,6 +101,7 @@ namespace MisakaTranslator_WPF
         string TF_secondTransTextSize { get; set; }
         [Option(Alias = "TranslateFormSettings.secondTransTextColor", DefaultValue = "#ff000000")]
         string TF_secondTransTextColor { get; set; }
+        
         
         #region 界面设置
         #region 前景色设置

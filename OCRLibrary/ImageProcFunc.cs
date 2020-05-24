@@ -40,7 +40,9 @@ namespace OCRLibrary
         public static Dictionary<string, string> lstHandleFun = new Dictionary<string, string>() {
             { "不进行处理" , "ImgFunc_NoDeal" },
             { "OTSU二值化处理" , "ImgFunc_OTSU" },
-            { "提取纯白色文本175" , "ImgFunc_WhiteText" }
+            { "提取纯白色文本200" , "ImgFunc_WhiteText200" },
+            { "提取纯白色文本175" , "ImgFunc_WhiteText175" },
+            { "提取纯白色文本150" , "ImgFunc_WhiteText150" }
         };
 
         public static Dictionary<string, string> lstOCRLang = new Dictionary<string, string>() {
@@ -54,14 +56,20 @@ namespace OCRLibrary
         /// <param name="b"></param>
         /// <param name="func"></param>
         /// <returns></returns>
-        public static Bitmap Auto_Thresholding(Bitmap b, string func) {
+        public static Bitmap Auto_Thresholding(Bitmap b, string func = "") {
             switch (func) {
                 case "ImgFunc_NoDeal":
                     return b;
                 case "ImgFunc_OTSU":
                     return OtsuThreshold(b);
-                case "ImgFunc_WhiteText":
+                case "ImgFunc_WhiteText200":
+                    return ImgFuncWhiteText(b, 3 * 200);
+                case "ImgFunc_WhiteText175":
                     return ImgFuncWhiteText(b, 3 * 175);
+                case "ImgFunc_WhiteText150":
+                    return ImgFuncWhiteText(b, 3 * 150);
+                default:
+                    return b;
             }
             return b;
         }

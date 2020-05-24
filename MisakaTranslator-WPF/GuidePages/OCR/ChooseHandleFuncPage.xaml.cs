@@ -34,7 +34,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
 
             Langlist = ImageProcFunc.lstOCRLang.Keys.ToList();
             OCRLangCombox.ItemsSource = Langlist;
-            OCRLangCombox.SelectedIndex = 1;
+            OCRLangCombox.SelectedIndex = Langlist.IndexOf(Common.appSettings.OCR_PreprocessMethod);
 
         }
 
@@ -70,6 +70,26 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
                 else
                 {
                     HandyControl.Controls.Growl.Error($"TesseractOCR {Application.Current.Resources["APITest_Error_Hint"]}\n{Common.ocr.GetLastError()}");
+                }
+            }
+            if (Common.appSettings.OCRsource == "TesseractOCR5")
+            {
+                if (Common.ocr.OCR_Init("", "") != false)
+                {
+                    string res = Common.ocr.OCRProcess();
+
+                    if (res != null)
+                    {
+                        HandyControl.Controls.MessageBox.Show(res, Application.Current.Resources["MessageBox_Result"].ToString());
+                    }
+                    else
+                    {
+                        HandyControl.Controls.Growl.Error($"TesseractOCR5 {Application.Current.Resources["APITest_Error_Hint"]}\n{Common.ocr.GetLastError()}");
+                    }
+                }
+                else
+                {
+                    HandyControl.Controls.Growl.Error($"TesseractOCR5 {Application.Current.Resources["APITest_Error_Hint"]}\n{Common.ocr.GetLastError()}");
                 }
             }
             else if (Common.appSettings.OCRsource == "BaiduOCR")
@@ -115,8 +135,14 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
 
             SrcImg.Source = ImageProcFunc.ImageToBitmapImage(img);
 
-            DstImg.Source = ImageProcFunc.ImageToBitmapImage(ImageProcFunc.Auto_Thresholding(new System.Drawing.Bitmap(img),
-                ImageProcFunc.lstHandleFun[ImageProcFunclist[HandleFuncCombox.SelectedIndex]]));
+            string imgFunc = ImageProcFunc.lstHandleFun[ImageProcFunclist[HandleFuncCombox.SelectedIndex]];
+
+            DstImg.Source = ImageProcFunc.ImageToBitmapImage(
+                ImageProcFunc.Auto_Thresholding(new System.Drawing.Bitmap(img),imgFunc)
+            );
+
+            Common.appSettings.OCR_PreprocessMethod = imgFunc;
+            Common.ocr.SetImgFunc(imgFunc);
 
             GC.Collect();
         }

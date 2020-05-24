@@ -15,7 +15,23 @@ namespace TranslatorLibrary
     {
         private class CursorPriorityQueue
         {
-            SortedSet<Tuple<int, double>> nextCursorsSet = new SortedSet<Tuple<int, double>>(Comparer<Tuple<int, double>>.Create((a, b) => a.Item2.CompareTo(b.Item2)));
+            public class CPQComparator : IComparer<Tuple<int, double>>
+            {
+                // Call CaseInsensitiveComparer.Compare with the parameters reversed.
+                int IComparer<Tuple<int, double>>.Compare(Tuple<int, double> x, Tuple<int, double> y)
+                {
+                    int r1 = x.Item2.CompareTo(y.Item2);
+                    if (r1 != 0)
+                    {
+                        return r1;
+                    }
+                    else
+                    {
+                        return y.Item1.CompareTo(x.Item1);
+                    }
+                }
+            }
+            SortedSet<Tuple<int, double>> nextCursorsSet = new SortedSet<Tuple<int, double>>(new CPQComparator());
             int maxSize;
             public CursorPriorityQueue(int maxSize)
             {
@@ -23,10 +39,15 @@ namespace TranslatorLibrary
             }
             public bool Add(int i, double p)
             {
-                if (nextCursorsSet.Count < maxSize || p > nextCursorsSet.Min().Item2)
+                if (nextCursorsSet.Count < maxSize)
                 {
-                    if (nextCursorsSet.Count >= MAX_CURSOR)
-                        nextCursorsSet.Remove(nextCursorsSet.Min());
+                    bool result = nextCursorsSet.Add(new Tuple<int, double>(i, p));
+                    return result;
+                }
+                var m = nextCursorsSet.Min;
+                if (p > m.Item2)
+                {
+                    nextCursorsSet.Remove(m);
                     return nextCursorsSet.Add(new Tuple<int, double>(i, p));
                 }
                 return false;
@@ -268,8 +289,9 @@ namespace TranslatorLibrary
                 second = second.Substring(0, R_MAX_LEN - 1);
             }
             int d = ComputeDistance(first, second);
+            double m = first.Length + second.Length + 1e-9; 
 
-            return Sigmoid(1.0 - (double)d / (first.Length + second.Length));
+            return Sigmoid(1.0 - (double)d / m) * LengthAdjust(m);
         }
 
         /// <summary>
@@ -321,11 +343,18 @@ namespace TranslatorLibrary
         private static int Min(int e1, int e2, int e3) =>
             Math.Min(Math.Min(e1, e2), e3);
 
-        public static double Sigmoid(double x)
+        private static double Sigmoid(double x)
         {
             //Boost x > 0.7, suppress x < 0.7, please plot the curve to visualize
             double k = System.Math.Exp(-15.0 * (x - 0.7));
             return 1.0 / (1.0 + k);
+        }
+
+        private static double LengthAdjust(double x)
+        {
+            const double offset = 0.00055277; //k(0)
+            double k = System.Math.Exp(-0.5 * (x - 15));
+            return (1.0 / (1.0 + k) - offset) / (1.0 - offset);
         }
 
 
@@ -334,11 +363,10 @@ namespace TranslatorLibrary
         Random random = new Random();
         private int[,] r = new int[2, R_MAX_LEN];
         private const int R_MAX_LEN = 64;
-        private const double Threshold = 0.5;
-        private const int MAX_CURSOR = 4;
+        private const int MAX_CURSOR = 8;
         private const double SoftmaxCoeff = 10;
-        private const double pTransitionNext = 0.8;
-        private const double pTransitionSkip = 1.0 - pTransitionNext;
+        private const double pTransitionSkip = 0.05;
+        private const double pTransitionNext = 1.0 - pTransitionSkip;
         private const double possibleCursorsThresh = 0.001;
         private Dictionary<int, double> possibleCursors = new Dictionary<int, double>();
     }

@@ -63,6 +63,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenCapture.cs" />
     <Compile Include="TesseractOCR.cs" />
+    <Compile Include="TesseractOCR5.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

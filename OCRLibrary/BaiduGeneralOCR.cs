@@ -22,6 +22,8 @@ namespace OCRLibrary
         private Rectangle OCRArea;
         private bool isAllWin;
 
+        private string imgFunc = "";
+
 
         public string GetLastError()
         {
@@ -34,6 +36,7 @@ namespace OCRLibrary
                 errorInfo = "Param Missing";
                 return null;
             }
+            Bitmap processedImg = ImageProcFunc.Auto_Thresholding(img, imgFunc);
 
             string host = "https://aip.baidubce.com/rest/2.0/ocr/v1/general_basic?access_token=" + accessToken;
             Encoding encoding = Encoding.Default;
@@ -41,7 +44,7 @@ namespace OCRLibrary
             request.Method = "post";
             request.KeepAlive = true;
             // 图片的base64编码
-            string base64 = ImageProcFunc.GetFileBase64(img);
+            string base64 = ImageProcFunc.GetFileBase64(processedImg);
             String str = "language_type=" + langCode + "&image=" + HttpUtility.UrlEncode(base64);
             byte[] buffer = encoding.GetBytes(str);
             request.ContentLength = buffer.Length;
@@ -158,6 +161,11 @@ namespace OCRLibrary
             }
 
             langCode = lang.ToUpper();
+        }
+
+        public void SetImgFunc(string imgFunc)
+        {
+            this.imgFunc = imgFunc;
         }
     }
 

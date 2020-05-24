@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MisakaTranslator-WPF", "Mis
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DictionaryHelperLibrary", "DictionaryHelperLibrary\DictionaryHelperLibrary.csproj", "{EBE31ABB-EFB0-4A46-A8E0-655F614F88D9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{0C6E7DC3-F2AE-441A-9F11-427D1FB70264}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +155,18 @@ Global
 		{EBE31ABB-EFB0-4A46-A8E0-655F614F88D9}.Release|x64.Build.0 = Release|Any CPU
 		{EBE31ABB-EFB0-4A46-A8E0-655F614F88D9}.Release|x86.ActiveCfg = Release|Any CPU
 		{EBE31ABB-EFB0-4A46-A8E0-655F614F88D9}.Release|x86.Build.0 = Release|Any CPU
+		{0C6E7DC3-F2AE-441A-9F11-427D1FB70264}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C6E7DC3-F2AE-441A-9F11-427D1FB70264}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C6E7DC3-F2AE-441A-9F11-427D1FB70264}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0C6E7DC3-F2AE-441A-9F11-427D1FB70264}.Debug|x64.Build.0 = Debug|Any CPU
+		{0C6E7DC3-F2AE-441A-9F11-427D1FB70264}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0C6E7DC3-F2AE-441A-9F11-427D1FB70264}.Debug|x86.Build.0 = Debug|Any CPU
+		{0C6E7DC3-F2AE-441A-9F11-427D1FB70264}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C6E7DC3-F2AE-441A-9F11-427D1FB70264}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C6E7DC3-F2AE-441A-9F11-427D1FB70264}.Release|x64.ActiveCfg = Release|Any CPU
+		{0C6E7DC3-F2AE-441A-9F11-427D1FB70264}.Release|x64.Build.0 = Release|Any CPU
+		{0C6E7DC3-F2AE-441A-9F11-427D1FB70264}.Release|x86.ActiveCfg = Release|Any CPU
+		{0C6E7DC3-F2AE-441A-9F11-427D1FB70264}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
