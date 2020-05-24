@@ -12,8 +12,8 @@
 </p>
 
 <p align="center">
-  <a href="/README.md">中文</a> •
-  <a href="/README_EN.md">English</a>
+  <a href="/README_ORIGINAL.md">中文</a> •
+  <a href="/README_ORIGINAL_EN.md">English</a>
 </p>
 
 ~~MisakaTranslator的名字由来是因为本软件连接到了一万多名御坂妹妹所组成的『御坂网络』，利用其强大的计算能力来提供实时可靠的翻译（误）~~

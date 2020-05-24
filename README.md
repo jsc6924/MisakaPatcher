@@ -1,5 +1,5 @@
 <h1 align="center">
-  MisakaPatcher · 文字游戏外挂汉化补丁运行平台
+  MisakaPatcher · 文字游戏外挂汉化补丁工具
   <br>
 </h1>
 

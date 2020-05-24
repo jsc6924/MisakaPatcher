@@ -36,7 +36,7 @@
     <sys:String x:Key="MainWindow_StartError_Hint">Game process not found!</sys:String>
 
     <sys:String x:Key="SettingsMenu_WinName">Preferences</sys:String>
-    <sys:String x:Key="SettingsMenu_About">MisakaTranslator</sys:String>
+    <sys:String x:Key="SettingsMenu_About">MisakaPatcher</sys:String>
     <sys:String x:Key="SettingsMenu_SoftwareSettings">Software Settings</sys:String>
     <sys:String x:Key="SettingsMenu_LESettings">Locale Emulator Settings</sys:String>
     <sys:String x:Key="SettingsMenu_HookSettings">Hook Settings</sys:String>
@@ -138,7 +138,7 @@
     <sys:String x:Key="AboutPage_BtnHelp">Guide and Feedback</sys:String>
     <sys:String x:Key="AboutPage_BtnGithub">GitHub Project Page</sys:String>
     <sys:String x:Key="AboutPage_BtnGithubEX">Github Page for EX version</sys:String>
-    <sys:String x:Key="AboutPage_About">MisakaPatcher is an unofficial version built on top of MisakaTranslator2.0. It adds the feature to load a translation patch from the local machine. This version will not update with the official version, and I may remove some of the machine translation features supported by the original 2.0 and rename the project in the future.</sys:String>
+    <sys:String x:Key="AboutPage_About">MisakaPatcher is built on top of MisakaTranslator2.0. It removes all the features about machine translation, while adds the support to load a translation patch from the local machine. Please use MisakaTranslator if you want machine translation.</sys:String>
 
     <sys:String x:Key="GameGuideWin_WinName">Game Translation Wizard</sys:String>
     <sys:String x:Key="GameGuideWin_AlwaysTop">Always on top</sys:String>
@@ -271,11 +271,11 @@
     <sys:String x:Key="XxgJpZhDictPage_BtnTest">Look up</sys:String>
     <sys:String x:Key="XxgJpZhDictPage_ChoosePathHint">Select the Shogakukan dictionary database file.</sys:String>
 
-    <sys:String x:Key="ChooseHookFuncPage_MBOX_hookcodeConfirm_left">MisakaTranslator has detected that you have input custom H-code behavior. The last H-code recorded is</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_MBOX_hookcodeConfirm_left">MisakaPatcher has detected that you have input custom H-code behavior. The last H-code recorded is</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_MBOX_hookcodeConfirm_right">If you confirm that this H-code can get text, please select &quot;Yes&quot;; if it can't, select &quot;No&quot; to re-inject a custom H-code; if you do not need a custom H-code, please select &quot;Cancel&quot; to enter the next interface.</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_BtnAddClipboardFunc">Add clipboard monitoring method</sys:String>
 
-    <sys:String x:Key="App_Global_ErrorHint_left">MisakaTranslator encountered an exception that cannot be resolved. It is about to exit. Details about this exception have been stored in the &quot;</sys:String>
+    <sys:String x:Key="App_Global_ErrorHint_left">MisakaPatcher encountered an exception that cannot be resolved. It is about to exit. Details about this exception have been stored in the &quot;</sys:String>
     <sys:String x:Key="App_Global_ErrorHint_right">&quot; file in the &quot;logs&quot; Directory. To better the Translator, sending these files to the developer on GitHub to troubleshoot is appreciated.</sys:String>
 
 </ResourceDictionary>

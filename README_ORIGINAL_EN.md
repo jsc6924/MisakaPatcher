@@ -14,8 +14,8 @@
 </p>
 
 <p align="center">
-  <a href="/README.md">中文</a> •
-  <a href="/README_EN.md">English</a>
+  <a href="/README_ORIGINAL.md">中文</a> •
+  <a href="/README_ORIGINAL_EN.md">English</a>
 </p>
 
 ~~MisakaTranslator's name comes from the animation "toaru Kagaku no railgun", The author hopes that this software can connect to 'MisakaNetwork' and obtain powerful functions~~

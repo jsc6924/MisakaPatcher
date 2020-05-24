@@ -1,20 +1,36 @@
-﻿<Page x:Class="MisakaTranslator_WPF.SettingsPages.SoftwareSettingsPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:MisakaTranslator_WPF.SettingsPages"
-      xmlns:hc="https://handyorg.github.io/handycontrol"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="SoftwareSettingsPage">
+﻿<Page
+    x:Class="MisakaTranslator_WPF.SettingsPages.SoftwareSettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:MisakaTranslator_WPF.SettingsPages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="SoftwareSettingsPage"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
 
     <Grid>
         <hc:ScrollViewer HorizontalScrollBarVisibility="Disabled">
-            <StackPanel Background="White" Margin="10">
-                <TextBlock Text="点击关闭按钮时" FontSize="16" FontWeight="Black" Foreground="#666666"/>
-                <RadioButton x:Name="MinimizationRadioButton" Content="最小化到系统托盘" HorizontalAlignment="Left" Margin="0,10,0,0" Click="RadioButtonBase_OnClick"/>
-                <RadioButton x:Name="ExitRadioButton" Content="退出 MisakaTranslator" HorizontalAlignment="Left" Margin="0,5,0,0" Click="RadioButtonBase_OnClick"/>
+            <StackPanel Margin="10" Background="White">
+                <TextBlock
+                    FontSize="16"
+                    FontWeight="Black"
+                    Foreground="#666666"
+                    Text="点击关闭按钮时" />
+                <RadioButton
+                    x:Name="MinimizationRadioButton"
+                    Margin="0,10,0,0"
+                    HorizontalAlignment="Left"
+                    Click="RadioButtonBase_OnClick"
+                    Content="最小化到系统托盘" />
+                <RadioButton
+                    x:Name="ExitRadioButton"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Left"
+                    Click="RadioButtonBase_OnClick"
+                    Content="退出 MisakaPatcher" />
             </StackPanel>
         </hc:ScrollViewer>
     </Grid>
