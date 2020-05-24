@@ -166,6 +166,9 @@
     <Compile Include="SettingsPages\TranslatorPages\LocalTransSettingsPage.xaml.cs">
       <DependentUpon>LocalTransSettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPages\SoftwareSettingsPage.xaml.cs">
+      <DependentUpon>SoftwareSettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\GameNameDialog.xaml.cs">
       <DependentUpon>GameNameDialog.xaml</DependentUpon>
     </Compile>
@@ -266,6 +269,10 @@
     <Page Include="SettingsPages\TranslatorPages\LocalTransSettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SettingsPages\SoftwareSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\GameNameDialog.xaml">
       <SubType>Designer</SubType>

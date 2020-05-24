@@ -9,6 +9,9 @@ namespace MisakaTranslator_WPF
 {
     public interface IAppSettings
     {
+        [Option(Alias = "Software.OnCloseMainWindow", DefaultValue = "Exit")]
+        string OnClickCloseButton { get; set; }
+
         [Option(Alias = "Globalization.Language", DefaultValue = "zh-CN")]
         string AppLanguage { get; set; }
 
@@ -53,6 +56,7 @@ namespace MisakaTranslator_WPF
 
         [Option(Alias = "OCR_All.GlobalOCRHotkey", DefaultValue = "Ctrl + Alt + Q")]
         string GlobalOCRHotkey { get; set; }
+
         [Option(Alias = "OCR_All.GlobalOCRLang", DefaultValue = "jpn")]
         string GlobalOCRLang { get; set; }
         [Option(Alias = "OCR_All.PreprocessMethod", DefaultValue = "ImgFunc_NoDeal")]
