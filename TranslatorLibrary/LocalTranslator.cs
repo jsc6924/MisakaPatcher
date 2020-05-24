@@ -69,6 +69,28 @@ namespace TranslatorLibrary
         /// <param name="param2">参数二 不使用</param>
         public void TranslatorInit(string patchPath, string param2 = "")
         {
+            /*
+             * 汉化补丁格式，只支持单个文本文件：
+             * 
+                <j>
+                原句1
+                <c>
+                翻译1
+                <j>    标签后面的内容不会被读取，可以写任何东西，如编号
+                原句2第一行
+                原句2第二行
+                <c>2
+                翻译2第一行
+                翻译2第二行（行数不一定要与原句匹配）
+                <j>3
+
+                原句3 (原句前后可以空行，不会被读取）
+
+                <c>3 
+                （句子可以为空，但是原句和翻译句总数必须一致）
+                
+                
+             */
             string[] lines = System.IO.File.ReadAllLines(patchPath);
             string temp = "";
             bool jp = true, first = true;
@@ -122,24 +144,23 @@ namespace TranslatorLibrary
         #region Explanation
         /*
          * An Approximated Viterbi Algorithm for sparse model
+         * Author: jsc723
          * 
-         * Author: Sicheng Jiang
-         * 
-         * Our problem can be modeled as an HMM and apply Viterbi algorithm to decode best 
+         * Our problem can be modeled as an HMM and we can apply Viterbi algorithm to decode the best 
          * match for each timestep. 
          * Let T[i, t] store the probability at time t that the most likely sequence so far ends at i. (i.e. most likely seq at t = (x_1, x_2, ... , x_t=i)
          * Assume there are K possible sentences (states).
          * 
          * We use the following transition model:
-         *     P(transition from state i to j) = 0.9 * v if j == i + 1
-         *                                     = 0.1 * v otherwise
-         *                                     where 0.9*v + (K-1)*0.1*v = 1
+         *     P(transition from state i to j) = 0.95 * v if j == i + 1
+         *                                     = 0.05 * v otherwise
+         *                                     where 0.95*v + (K-1)*0.05*v = 1
          *     (Assume K >= 2)
-         *     Simply use 0.9 and 0.1 due to normalization
+         *     So simply use 0.95 and 0.05 due to normalization
          *     
          *     
          * Initial probabilities P(i) = 1.0 / K
-         *     same for all states, so use 1.0 due to normalization
+         *     which is same for all states, so we can use 1.0 due to normalization
          * 
          * P(state = i | observation at t) = ComputeSimilarity(jp_text[i], sourceText)
          *     see the implementation below for details
@@ -151,7 +172,7 @@ namespace TranslatorLibrary
          * This requires O(K^2), but our K > 30000, so it will be too slow for our case.
          * So we need to approximate:
          *     We only consider the case when two of {T[i, t-1], P(transition from state k to i), P(state = i | observation at t)} are large.
-         *     Let possibleCursors be a list of large T[i, t-1], and sum(possibleCursors) == 1.0
+         *     Let possibleCursors be a list of large T[i, t-1], and sum(possibleCursors) == 0.8
          *     For each T[i, t-1] in possibleCursors , we consider 
          *          t[i, t-1]*P(i to i+1)*P(i+1 | o_t)  [Case 1]
          *              and 
@@ -166,17 +187,17 @@ namespace TranslatorLibrary
          *              t[k-1, t-1]*P(k-1 to k)*P(k | o_t)
          *              where t[k-1, t-1] == 0.2 / (K - possibleCursors.Count) if k-1 not in possibleCursors
          *                                == possibleCursors[k-1] if k-1 in possibleCursors
-         *              However, in this case, if k-1 is not in possibleCursor, t[k-1, t-1] is extremely small, and if 
+         *              However, in this case, if k-1 is not in possibleCursor, t[k-1, t-1] will be extremely small, and if 
          *              k-1 is in possibleCursor, it is already covered in the previous case. Therefore we can simply skip this case.
          *           )
          *           
-         * The runtime is O(MK) where M is the maximum size of possibleCursors and is a constant.
-         *     
+         * The runtime is now O(MK) where M is the maximum size of possibleCursors and is a constant.
+         * 
          */
         #endregion
         public string Translate(string sourceText, string desLang, string srcLang)
         {
-            //sourceText = addNoise(addNoise2(sourceText));
+            //sourceText = addNoise(addNoise2(sourceText)); //The translator is able to find the correct match on hook mode under a high noise
             Console.WriteLine(String.Format("Input:{0}", sourceText));
             if (jp_text.Count == 0)
             {
@@ -202,10 +223,11 @@ namespace TranslatorLibrary
                 double pSkip = pMostLikelyPrevCursor * pTransitionSkip * s; //[Case 2]
                 nextCursorsPQ.Add(i, pSkip);
             }
+            //Softmax on next cursors
             List<int> nextCursorsIdx = nextCursorsPQ.Indices().ToList();
             var z = nextCursorsPQ.Values();
             double z_sum = z.Sum();
-            var z_norm = z.Select(i => i / z_sum);
+            var z_norm = z.Select(i => i / z_sum);  //take an extra normalization
             var z_exp = z_norm.Select(i => Math.Exp(SoftmaxCoeff * i));
             double sum_z_exp = z_exp.Sum();
             List<double> z_softmax = z_exp.Select(i => i / sum_z_exp).ToList();
@@ -233,6 +255,7 @@ namespace TranslatorLibrary
                     maxP = possibleCursors[k];
                     maxI = k;
                 }
+                //For debug
                 Console.WriteLine(String.Format("{0}:{1}", k, jp_text[k]));
                 Console.WriteLine(possibleCursors[k]);
             }
@@ -244,12 +267,14 @@ namespace TranslatorLibrary
         }
 
         int addNoiseState = 0;
+        //for test
         private string addNoise(string input)
         {
             if (addNoiseState++ % 2 == 0)
                 return input;
             return "";
         }
+        //for test
         private string addNoise2(string input)
         {
             StringBuilder result = new StringBuilder(input);
@@ -272,7 +297,7 @@ namespace TranslatorLibrary
         }
 
         /// <summary>
-        /// 返回两个string的相似度
+        /// 返回两个string的相似度, 返回值在0到1之间
         /// </summary>
         /// <param name="first"></param>
         /// <param name="second"></param>
