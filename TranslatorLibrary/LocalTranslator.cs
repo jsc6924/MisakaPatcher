@@ -88,6 +88,7 @@ namespace TranslatorLibrary
 
                 <c>3 
                 （句子可以为空，但是原句和翻译句总数必须一致）
+                #如果一行第一个字符是‘#’，则这一行不会被读取
                 
                 
              */
@@ -110,7 +111,7 @@ namespace TranslatorLibrary
 
             foreach (string line in lines)
             {
-                if (line == "\n" || line == "\r\n")
+                if (line == "\n" || line == "\r\n" || line.StartsWith("#"))
                 {
                     //pass
                 }
@@ -152,11 +153,11 @@ namespace TranslatorLibrary
          * Assume there are K possible sentences (states).
          * 
          * We use the following transition model:
-         *     P(transition from state i to j) = 0.95 * v if j == i + 1
-         *                                     = 0.05 * v otherwise
-         *                                     where 0.95*v + (K-1)*0.05*v = 1
+         *     P(transition from state i to j) = （1-pTransitionSkip）* v if j == i + 1
+         *                                     = pTransitionSkip * v otherwise
+         *                                     where （1-pTransitionSkip*v + (K-1)*pTransitionSkip*v = 1
          *     (Assume K >= 2)
-         *     So simply use 0.95 and 0.05 due to normalization
+         *     So simply use pTransitionSkip and （1-pTransitionSkip） due to normalization
          *     
          *     
          * Initial probabilities P(i) = 1.0 / K
@@ -263,7 +264,7 @@ namespace TranslatorLibrary
                 return "无匹配文本";
             Console.WriteLine(String.Format("[{0}:{1}]", maxI, jp_text[maxI]));
             Console.WriteLine("------");
-            return cn_text[maxI];
+            return cn_text[maxI] == "" ? jp_text[maxI] : cn_text[maxI];
         }
 
         int addNoiseState = 0;

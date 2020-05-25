@@ -211,7 +211,6 @@
         </hc:Drawer>
         <hc:NotifyIcon
             x:Name="NotifyIconContextContent"
-            Icon="pack://application:,,,/MisakaTranslator-WPF;component/logo.ico"
             IsBlink="False"
             Text="HandyControl"
             Token="MisakaTranslator"
