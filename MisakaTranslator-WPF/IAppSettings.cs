@@ -88,22 +88,22 @@ namespace MisakaTranslator_WPF
 
         [Option(Alias = "TranslateFormSettings.srcTextFont", DefaultValue = "微软雅黑")]
         string TF_srcTextFont { get; set; }
-        [Option(Alias = "TranslateFormSettings.srcTextSize", DefaultValue = "15")]
+        [Option(Alias = "TranslateFormSettings.srcTextSize", DefaultValue = "24")]
         string TF_srcTextSize { get; set; }
 
         [Option(Alias = "TranslateFormSettings.firstTransTextFont", DefaultValue = "微软雅黑")]
         string TF_firstTransTextFont { get; set; }
-        [Option(Alias = "TranslateFormSettings.firstTransTextSize", DefaultValue = "15")]
+        [Option(Alias = "TranslateFormSettings.firstTransTextSize", DefaultValue = "24")]
         string TF_firstTransTextSize { get; set; }
-        [Option(Alias = "TranslateFormSettings.firstTransTextColor", DefaultValue = "#ff000000")]
+        [Option(Alias = "TranslateFormSettings.firstTransTextColor", DefaultValue = "#ffffffff")]
         string TF_firstTransTextColor { get; set; }
         
 
         [Option(Alias = "TranslateFormSettings.secondTransTextFont", DefaultValue = "微软雅黑")]
         string TF_secondTransTextFont { get; set; }
-        [Option(Alias = "TranslateFormSettings.secondTransTextSize", DefaultValue = "15")]
+        [Option(Alias = "TranslateFormSettings.secondTransTextSize", DefaultValue = "24")]
         string TF_secondTransTextSize { get; set; }
-        [Option(Alias = "TranslateFormSettings.secondTransTextColor", DefaultValue = "#ff000000")]
+        [Option(Alias = "TranslateFormSettings.secondTransTextColor", DefaultValue = "#ffffffff")]
         string TF_secondTransTextColor { get; set; }
         
         

@@ -38,7 +38,7 @@ namespace MisakaTranslator_WPF
 
         private IDict _dict;
 
-        private string _currentsrcText;//当前源文本内容
+        private string _currentsrcText = "";//当前源文本内容
 
         public string SourceTextFont;//源文本区域字体
         public int SourceTextFontSize;//源文本区域字体大小
@@ -127,12 +127,16 @@ namespace MisakaTranslator_WPF
         {
             SourceTextFontSize = int.Parse(Common.appSettings.TF_srcTextSize);
             FirstTransText.FontSize = int.Parse(Common.appSettings.TF_firstTransTextSize);
+            FirstTransTextShadow.FontSize = FirstTransText.FontSize;
 
             SourceTextFont = Common.appSettings.TF_srcTextFont;
             FirstTransText.FontFamily = new FontFamily(Common.appSettings.TF_firstTransTextFont);
+            FirstTransTextShadow.FontFamily = FirstTransText.FontFamily;
+
 
             BrushConverter brushConverter = new BrushConverter();
             FirstTransText.Foreground = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_firstTransTextColor);
+            
 
             BackWinChrome.Background = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_BackColor);
             BackWinChrome.Opacity = double.Parse(Common.appSettings.TF_Opacity) / 100;
@@ -336,6 +340,7 @@ namespace MisakaTranslator_WPF
 
                                 //7.翻译结果显示到窗口上
                                 FirstTransText.Text = afterString1;
+                                FirstTransTextShadow.Text = FirstTransText.Text;
 
                                 //8.翻译结果记录到队列
                                 if (_gameTextHistory.Count > 5)
@@ -504,6 +509,7 @@ namespace MisakaTranslator_WPF
 
                 //7.翻译结果显示到窗口上
                 FirstTransText.Text = afterString1;
+                FirstTransTextShadow.Text = FirstTransText.Text;
 
                 //8.翻译结果记录到队列
                 if (_gameTextHistory.Count > 5)
@@ -648,7 +654,11 @@ namespace MisakaTranslator_WPF
                     _currentsrcText = _currentsrcText.Replace("<br>", string.Empty).Replace("</br>", string.Empty).Replace("\n", string.Empty).Replace("\t", string.Empty).Replace("\r", string.Empty);
                 }
                 //去乱码
-                _currentsrcText = _currentsrcText.Replace("_", string.Empty).Replace("-", string.Empty).Replace("+", string.Empty);
+                if(_currentsrcText != null)
+                {
+                    _currentsrcText = _currentsrcText.Replace("_", string.Empty).Replace("-", string.Empty).Replace("+", string.Empty);
+                }
+                
 
 
                 //4.翻译前预处理
@@ -672,6 +682,7 @@ namespace MisakaTranslator_WPF
 
                 //7.翻译结果显示到窗口上
                 FirstTransText.Text = afterString1;
+                FirstTransTextShadow.Text = FirstTransText.Text;
             }
         }
 

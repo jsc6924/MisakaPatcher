@@ -73,9 +73,25 @@
                 Orientation="Horizontal" />
 
             <TextBlock
+                Name="FirstTransTextShadow"
+                Grid.Row="2"
+                Margin="10"
+                FontSize="24"
+                Foreground="Black"
+                Text="等待源文本"
+                TextWrapping="Wrap">
+                <TextBlock.Effect>
+                    <BlurEffect Radius="4.0" />
+                </TextBlock.Effect>
+                <TextBlock.RenderTransform>
+                    <TranslateTransform X="2" Y="2" />
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock
                 Name="FirstTransText"
                 Grid.Row="2"
                 Margin="10"
+                FontSize="24"
                 Foreground="White"
                 Text="等待源文本"
                 TextWrapping="Wrap" />

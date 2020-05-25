@@ -60,6 +60,7 @@ namespace MisakaTranslator_WPF
             firstFont.SelectionChanged += delegate
             {
                 translateWin.FirstTransText.FontFamily = new FontFamily(FontList[firstFont.SelectedIndex]);
+                translateWin.FirstTransTextShadow.FontFamily = translateWin.FirstTransText.FontFamily;
                 Common.appSettings.TF_firstTransTextFont = FontList[firstFont.SelectedIndex];
             };
 
@@ -71,6 +72,7 @@ namespace MisakaTranslator_WPF
 
             firstFontSize.ValueChanged += delegate {
                 translateWin.FirstTransText.FontSize = firstFontSize.Value;
+                translateWin.FirstTransTextShadow.FontSize = translateWin.FirstTransText.FontSize;
                 Common.appSettings.TF_firstTransTextSize = Convert.ToString(firstFontSize.Value);
             };
 
