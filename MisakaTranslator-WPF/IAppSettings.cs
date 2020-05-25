@@ -61,6 +61,9 @@ namespace MisakaTranslator_WPF
         string GlobalOCRLang { get; set; }
         [Option(Alias = "OCR_All.PreprocessMethod", DefaultValue = "ImgFunc_NoDeal")]
         string OCR_PreprocessMethod { get; set; }
+        
+        [Option(Alias = "OCR_All.PreprocessParam", DefaultValue = "200")]
+        string OCR_PreprocessParam { get; set; }
 
         [Option(Alias = "BaiduOCR.APIKEY", DefaultValue = "")]
         string BDOCR_APIKEY { get; set; }

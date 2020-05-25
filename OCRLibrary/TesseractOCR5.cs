@@ -21,10 +21,12 @@ namespace OCRLibrary
         private Rectangle OCRArea;
         private bool isAllWin;
         private string imgFunc = "";
+        private int imgFuncP1 = 0;
+        private int imgFuncP2 = 0;
 
         public string OCRProcess(Bitmap img)
         {
-            Bitmap processedImg = ImageProcFunc.Auto_Thresholding(img, imgFunc);
+            Bitmap processedImg = ImageProcFunc.Auto_Thresholding(img, imgFunc, imgFuncP1, imgFuncP2);
             try
             {
                 //img.Save(Environment.CurrentDirectory + "\\temp\\tmp.PNG");
@@ -104,9 +106,11 @@ namespace OCRLibrary
             srcLangCode = lang;
         }
 
-        public void SetImgFunc(string imgFunc)
+        public void SetImgFunc(string imgFunc, int p1, int p2)
         {
             this.imgFunc = imgFunc;
+            this.imgFuncP1 = p1;
+            this.imgFuncP2 = p2;
         }
     }
 }

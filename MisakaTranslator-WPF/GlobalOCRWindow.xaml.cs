@@ -38,7 +38,7 @@ namespace MisakaTranslator_WPF
                 if (ocr.OCR_Init("", "") != false)
                 {
                     ocr.SetOCRSourceLang(Common.appSettings.GlobalOCRLang);
-                    ocr.SetImgFunc(Common.appSettings.OCR_PreprocessMethod);
+                    ocr.SetImgFunc(Common.appSettings.OCR_PreprocessMethod, int.Parse(Common.appSettings.OCR_PreprocessParam), 0);
                     res = ocr.OCRProcess(new System.Drawing.Bitmap(img));
 
                     if (res != null)
@@ -61,7 +61,7 @@ namespace MisakaTranslator_WPF
                 if (ocr.OCR_Init("", "") != false)
                 {
                     ocr.SetOCRSourceLang(Common.appSettings.GlobalOCRLang);
-                    ocr.SetImgFunc(Common.appSettings.OCR_PreprocessMethod);
+                    ocr.SetImgFunc(Common.appSettings.OCR_PreprocessMethod, int.Parse(Common.appSettings.OCR_PreprocessParam), 0);
                     res = ocr.OCRProcess(new System.Drawing.Bitmap(img));
 
                     if (res != null)
@@ -84,7 +84,7 @@ namespace MisakaTranslator_WPF
                 if (ocr.OCR_Init(Common.appSettings.BDOCR_APIKEY, Common.appSettings.BDOCR_SecretKey))
                 {
                     ocr.SetOCRSourceLang(Common.appSettings.GlobalOCRLang);
-                    ocr.SetImgFunc(Common.appSettings.OCR_PreprocessMethod);
+                    ocr.SetImgFunc(Common.appSettings.OCR_PreprocessMethod, int.Parse(Common.appSettings.OCR_PreprocessParam), 0);
                     res = ocr.OCRProcess(new System.Drawing.Bitmap(img));
 
                     if (res != null)

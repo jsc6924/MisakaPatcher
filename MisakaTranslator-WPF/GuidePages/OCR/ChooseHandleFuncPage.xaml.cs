@@ -45,7 +45,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
             SrcImg.Source = ImageProcFunc.ImageToBitmapImage(img);
 
             DstImg.Source = ImageProcFunc.ImageToBitmapImage(ImageProcFunc.Auto_Thresholding(new System.Drawing.Bitmap(img), 
-                ImageProcFunc.lstHandleFun[ImageProcFunclist[HandleFuncCombox.SelectedIndex]]));
+                ImageProcFunc.lstHandleFun[ImageProcFunclist[HandleFuncCombox.SelectedIndex]], paramValue, 0));
 
             GC.Collect();
         }
@@ -135,16 +135,26 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
 
             SrcImg.Source = ImageProcFunc.ImageToBitmapImage(img);
 
-            string imgFunc = ImageProcFunc.lstHandleFun[ImageProcFunclist[HandleFuncCombox.SelectedIndex]];
+            string imgFunc = "";
+            if (ImageProcFunclist != null)
+                imgFunc = ImageProcFunc.lstHandleFun[ImageProcFunclist[HandleFuncCombox.SelectedIndex]];
 
             DstImg.Source = ImageProcFunc.ImageToBitmapImage(
-                ImageProcFunc.Auto_Thresholding(new System.Drawing.Bitmap(img),imgFunc)
+                ImageProcFunc.Auto_Thresholding(new System.Drawing.Bitmap(img), imgFunc, paramValue, 0)
             );
 
             Common.appSettings.OCR_PreprocessMethod = imgFunc;
-            Common.ocr.SetImgFunc(imgFunc);
+            Common.ocr.SetImgFunc(imgFunc, paramValue, 0);
 
             GC.Collect();
+        }
+        private int paramValue = int.Parse(Common.appSettings.OCR_PreprocessParam);
+        private void ParamSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            paramValue = (int)ParamSlider.Value;
+            Common.appSettings.OCR_PreprocessParam = paramValue.ToString();
+            if (ImageProcFunclist != null) 
+                Common.ocr.SetImgFunc(ImageProcFunc.lstHandleFun[ImageProcFunclist[HandleFuncCombox.SelectedIndex]], paramValue, 0);
         }
     }
 }
