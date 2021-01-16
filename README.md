@@ -47,13 +47,19 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
 然后再 翻译相关设置 ->本地汉化补丁 -> 选择汉化补丁的路径
 然后就可以开始游戏了。Hook和OCR相关设置请参考[原版说明](/README_ORIGINAL.md)。
 
+## 开发
+`git clone`后，代码可以编译，但是运行会报错，因为运行库不全
+#### 解决方法
+下载最新版的release，与`MisakaTranslator-WPF\bin\Debug`之下的内容比较，把`Debug`中缺少的文件和文件夹全都复制过去，并且替换 `MisakaGameLibrary.sqlite`文件。
+
 ## Tesseract OCR 5 （或其他版本）
 
-去官网下载安装包，安装到`"C:\\Program Files (x86)\\Tesseract-OCR"`，记得选jpn语言包，然后在OCR设置中勾选Tesseract5，就可以使用了。
+去[这里](https://github.com/UB-Mannheim/tesseract/wiki)下载32位安装包，安装到`"C:\\Program Files (x86)\\Tesseract-OCR"`，记得选jpn语言包，然后在OCR设置中勾选Tesseract5，就可以使用了。
 
 ## 备注
 
 感谢原作者[hanmin0822](https://github.com/hanmin0822/MisakaTranslator)及项目团队提供这个良好的平台
+[MisakaTranslator](https://github.com/hanmin0822/MisakaTranslator)
 
 使用本工具制作、加载使用汉化补丁，产生的一切责任均由使用者自行承担。
 
