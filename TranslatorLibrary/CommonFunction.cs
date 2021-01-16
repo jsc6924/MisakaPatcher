@@ -23,6 +23,12 @@ namespace TranslatorLibrary
             { "本地汉化补丁", "LocalTranslator" }
         };
 
+        public static Dictionary<string, string> lstWordSpliter = new Dictionary<string, string>() 
+        {
+            { "Mecab", "mecab" },
+            { "不使用分词", "nop" }
+        };
+
         /// <summary>
         /// 计算MD5值
         /// </summary>
@@ -62,6 +68,11 @@ namespace TranslatorLibrary
         /// <returns></returns>
         public static List<string> GetTranslatorList() {
             return lstTranslator.Keys.ToList();
+        }
+
+        public static List<string> GetWordSpliterList()
+        {
+            return lstWordSpliter.Keys.ToList();
         }
 
         /// <summary>

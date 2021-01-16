@@ -50,6 +50,8 @@ namespace MisakaTranslator_WPF
         string FirstTranslator { get; set; }
         [Option(Alias = "Translate_All.SecondTranslator", DefaultValue = "NoTranslate")]
         string SecondTranslator { get; set; }
+        [Option(Alias = "Translate_All.WordSpliter", DefaultValue = "mecab")]
+        string WordSpliter { get; set; }
 
         [Option(Alias = "OCR_All.OCRsource", DefaultValue = "BaiduOCR")]
         string OCRsource { get; set; }

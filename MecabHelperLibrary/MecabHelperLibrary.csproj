@@ -48,7 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MecabHelper.cs" />
+    <Compile Include="NoWordSplit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WordSpliter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dic\char.bin" />

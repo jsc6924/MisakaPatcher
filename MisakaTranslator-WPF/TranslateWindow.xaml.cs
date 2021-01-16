@@ -30,7 +30,7 @@ namespace MisakaTranslator_WPF
     /// </summary>
     public partial class TranslateWindow
     {
-        private MecabHelper _mecabHelper;
+        private WordSpliter _wordSpliter;
         private BeforeTransHandle _beforeTransHandle;
         private AfterTransHandle _afterTransHandle;
         private ITranslator _translator1;//第一翻译源
@@ -62,7 +62,7 @@ namespace MisakaTranslator_WPF
             UI_Init();
             IsOCRingFlag = false;
 
-            _mecabHelper = new MecabHelper();
+            _wordSpliter = WordSpliterAuto(Common.appSettings.WordSpliter);
 
             if (Common.appSettings.xxgPath != string.Empty)
             {
@@ -204,6 +204,19 @@ namespace MisakaTranslator_WPF
             }
         }
 
+        public static WordSpliter WordSpliterAuto(string spliter)
+        {
+            switch(spliter)
+            {
+                case "mecab":
+                    return new MecabHelper();
+                case "nop":
+                    return new NoWordSplit();
+                default:
+                    return null;
+            }
+        }
+
 
         /// <summary>
         /// 键盘点击事件
@@ -272,7 +285,7 @@ namespace MisakaTranslator_WPF
                                 if (_isShowSource)
                                 {
                                     //3.分词
-                                    List<MecabWordInfo> mwi = _mecabHelper.SentenceHandle(source);
+                                    List<WordInfo> mwi = _wordSpliter.SentenceHandle(source);
                                     //分词后结果显示
                                     for (int i = 0; i < mwi.Count; i++)
                                     {
@@ -442,7 +455,7 @@ namespace MisakaTranslator_WPF
                 if (_isShowSource)
                 {
                     //3.分词
-                    var mwi = _mecabHelper.SentenceHandle(repairedText);
+                    var mwi = _wordSpliter.SentenceHandle(repairedText);
                     //分词后结果显示
                     for (int i = 0; i < mwi.Count; i++)
                     {
@@ -582,7 +595,7 @@ namespace MisakaTranslator_WPF
             }
 
             //立即清一次，否则重复打开翻译窗口会造成异常：Mecab处理类库异常
-            _mecabHelper = null;
+            _wordSpliter = null;
             GC.Collect();
         }
 
