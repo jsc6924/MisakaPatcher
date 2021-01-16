@@ -56,6 +56,14 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
 
 去[这里](https://github.com/UB-Mannheim/tesseract/wiki)下载32位安装包，安装到`"C:\\Program Files (x86)\\Tesseract-OCR"`，记得选jpn语言包，然后在OCR设置中勾选Tesseract5，就可以使用了。
 
+## 已知问题
+
+有些游戏加载时Mecab分词库可能会初始化失败
+```
+ExceptionMessage:文件“D:\MisakaPatcher1.0.4\Release\dic\unk.dic”正由另一进程使用，因此该进程无法访问此文件。
+```
+遇到这种情况可以在`设置->翻译相关设置->通用设置->分词器中选择“不使用分词”再启动游戏
+
 ## 备注
 
 感谢原作者[hanmin0822](https://github.com/hanmin0822/MisakaTranslator)及项目团队提供这个良好的平台
