@@ -132,7 +132,10 @@ namespace TranslatorLibrary
             }
             add();
             if (jp_text.Count != cn_text.Count)
-                throw new Exception("Total sentence number not match, please check your patch.");
+            {
+                throw new Exception(String.Format("原文与译文行数不一致，原文{0}，译文{1}，请检查补丁",
+                    jp_text.Count, cn_text.Count));
+            }
         }
 
         /// <summary>
