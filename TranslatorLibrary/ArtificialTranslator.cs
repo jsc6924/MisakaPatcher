@@ -60,6 +60,67 @@ namespace TranslatorLibrary
             }
         }
 
+        private interface IDecrypt
+        {
+            string DecryptString(string cipherText);
+        }
+
+        private class AesDecrypt: IDecrypt
+        {
+            static byte[] iv = new byte[] { 6, 3, 2, 4, 4, 7, 2, 9, 0, 1, 0, 3, 6, 6, 8, 2 };
+            static string Key = "7y41ca4o)pa2ea233bU^[0q4315a*+16";
+            static Aes aes;
+            static AesDecrypt()
+            {
+                aes = Aes.Create();
+                aes.IV = iv;
+                aes.Key = Encoding.UTF8.GetBytes(Key);
+            }
+            public string DecryptString(string cipherText)
+            {
+                byte[] buffer = Convert.FromBase64String(cipherText);
+
+                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+
+                using (MemoryStream memoryStream = new MemoryStream(buffer))
+                {
+                    using (CryptoStream cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
+                    {
+                        using (StreamReader streamReader = new StreamReader(cryptoStream))
+                        {
+                            return streamReader.ReadToEnd();
+                        }
+                    }
+                }
+            }
+        }
+        private class XorDecrypt : IDecrypt
+        {
+            static byte[] key = new byte[] { 0x26, 0x3f, 0xa5, 0xbb, 0x4c, 0xf7, 0x9c, 0x19 };
+            public string DecryptString(string cipherText)
+            {
+                byte[] buffer = Convert.FromBase64String(cipherText);
+                Xor(buffer);
+                using (MemoryStream memoryStream = new MemoryStream(buffer))
+                {
+                    using (StreamReader streamReader = new StreamReader(memoryStream))
+                    {
+                        return streamReader.ReadToEnd();
+                    }
+                }
+            }
+
+            private static void Xor(byte[] array)
+            {
+                int i = 3;
+                for (int j = 0; j < array.Length; j++)
+                {
+                    array[j] ^= key[i];
+                    i = (i + 1) % key.Length;
+                }
+            }
+        }
+
         /// <summary>
         /// 翻译API初始化
         /// </summary>
@@ -88,11 +149,10 @@ namespace TranslatorLibrary
                 
                 
              */
-            if (System.IO.File.Exists(patchPath) == false) {
-                throw new Exception("Patch File is not Exists.");
-            }
-
             string[] lines = System.IO.File.ReadAllLines(patchPath);
+            bool enc = false;
+            IDecrypt decrypt = null;
+            var patch = new StreamReader(patchPath);
             string temp = "";
             bool jp = true, first = true;
             void add()
@@ -111,6 +171,29 @@ namespace TranslatorLibrary
 
             foreach (string line in lines)
             {
+                if(line.StartsWith("#!"))
+                {
+                    Regex r = new Regex(@"#!useEnc=(.*),enc=(.*)", RegexOptions.IgnoreCase);
+                    Match m = r.Match(line);
+                    if (m.Success)
+                    {
+                        enc = m.Groups[1].Value == "True";
+                        switch (m.Groups[2].Value)
+                        {
+                            case "xor":
+                                decrypt = new XorDecrypt();
+                                break;
+                            case "aes":
+                                decrypt = new AesDecrypt();
+                                break;
+                        }
+                    }
+                    continue;
+                }
+                if (enc)
+                {
+                    line = decrypt.DecryptString(line);
+                }
                 if (line == "\n" || line == "\r\n" || line.StartsWith("#"))
                 {
                     //pass
