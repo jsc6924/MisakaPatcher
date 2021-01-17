@@ -12,9 +12,11 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
 * 保留所有OCR功能，并增加了对Tesseract 5的支持
 * 增加了一种图像预处理方法（`提取白色文本，能将空心字转成实心字`）
 * 修复了2.0版本图像预处理没有效果的问题
+* 支持对汉化补丁的简单加密
 
-## 补丁格式
-补丁是一个文本文件（UTF-8无签名，仅支持单个文件，如有多个请先合并），格式如下：
+## 补丁
+#### 格式
+补丁是一个文本文件（UTF-8无签名，仅支持单个文件，如有多个可以使用下一节介绍的工具合并，或者自行合并），格式如下：
 ```
 <j>
 原句1
@@ -30,6 +32,7 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
 
 原句3 (原句前后可以空行，空行在读取时会被自动忽略）
 
+# 如果一行的第一个字符为#，则这行被当做注释忽略
 <c> 3 
 （句子可以为空，但是原句和翻译句总数必须一致）
 <j> 4
@@ -42,19 +45,33 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
 啊啊 （两句同样的原句可以有不同的翻译，程序会根据前一句匹配的位置自动识别）
 ```
 
+#### 打包和加密
+从1.2版开始在`tools/`目录下加入了打包工具`MisakaPatchPackager.exe`，可以对补丁进行打包和简单加密（加密很容易被破解，所以不保证任何安全性）
+使用方法：
+```
+./MisakaPatchPackager.exe [option]... output
+例：./MisakaPatchPackager.exe -f="input1.txt" -f="input2.txt" -e=xor -p output.msk
+选项：
+-f, --file      指定输入文件（可以指定多个，多个输入文件将被合并成一个文件输出）
+-e, --enc       指定加密方法（可选择xor或aes），默认不加密，推荐xor
+-p, --preview   预览前十行加密结果（只有在使用加密时才生效）
+-h, --help      帮助
+```
+加密过的补丁可以和未加密的补丁一样使用，不需要再进行别的设置。
+
 ## 使用
 打开软件，右下角设置 -> 翻译相关设置 -> 通用设置 -> 选择本地汉化补丁为翻译源
 然后再 翻译相关设置 ->本地汉化补丁 -> 选择汉化补丁的路径
 然后就可以开始游戏了。Hook和OCR相关设置请参考[原版说明](/README_ORIGINAL.md)。
 
+#### Tesseract OCR 5
+
+去[这里](https://github.com/UB-Mannheim/tesseract/wiki)下载32位安装包，安装到`"C:\\Program Files (x86)\\Tesseract-OCR"`，记得选jpn语言包，然后在OCR设置中勾选Tesseract5，就可以使用了。
+
 ## 开发
 `git clone`后，代码可以编译，但是运行会报错，因为运行库不全
 #### 解决方法
 下载最新版的release，与`MisakaTranslator-WPF\bin\Debug`之下的内容比较，把`Debug`中缺少的文件和文件夹全都复制过去，并且替换 `MisakaGameLibrary.sqlite`文件。
-
-## Tesseract OCR 5 （或其他版本）
-
-去[这里](https://github.com/UB-Mannheim/tesseract/wiki)下载32位安装包，安装到`"C:\\Program Files (x86)\\Tesseract-OCR"`，记得选jpn语言包，然后在OCR设置中勾选Tesseract5，就可以使用了。
 
 ## 备注
 

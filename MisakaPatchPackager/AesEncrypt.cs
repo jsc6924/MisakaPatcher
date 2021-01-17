@@ -5,18 +5,18 @@ using System.Security.Cryptography;
 
 namespace MisakaPatchPackager
 {
-    class Encrypt
+    class AesEncrypt : IEncrypter
     {
         static byte[] iv = new byte[] { 6, 3, 2, 4, 4, 7, 2, 9, 0, 1, 0, 3, 6, 6, 8, 2 };
         static string Key = "7y41ca4o)pa2ea233bU^[0q4315a*+16";
         static Aes aes;
-        static Encrypt()
+        static AesEncrypt()
         {
             aes = Aes.Create();
             aes.IV = iv;
             aes.Key = Encoding.UTF8.GetBytes(Key);
         }
-        public static string EncryptString(string plainText)
+        public string EncryptString(string plainText)
         {
             byte[] array;
 
@@ -38,7 +38,7 @@ namespace MisakaPatchPackager
             return Convert.ToBase64String(array);
         }
 
-        public static string DecryptString(string cipherText)
+        public string DecryptString(string cipherText)
         {
             byte[] buffer = Convert.FromBase64String(cipherText);
 
