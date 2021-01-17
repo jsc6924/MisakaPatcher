@@ -185,59 +185,60 @@ namespace MisakaTranslator_WPF
         /// <returns></returns>
         public static ITranslator TranslatorAuto(string translator)
         {
-            switch (translator)
+            try
             {
-                case "BaiduTranslator":
-                    BaiduTranslator bd = new BaiduTranslator();
-                    bd.TranslatorInit(Common.appSettings.BDappID, Common.appSettings.BDsecretKey);
-                    return bd;
-                case "TencentFYJTranslator":
-                    TencentFYJTranslator tx = new TencentFYJTranslator();
-                    tx.TranslatorInit(Common.appSettings.TXappID, Common.appSettings.TXappKey);
-                    return tx;
-                case "TencentOldTranslator":
-                    TencentOldTranslator txo = new TencentOldTranslator();
-                    txo.TranslatorInit(Common.appSettings.TXOSecretId, Common.appSettings.TXOSecretKey);
-                    return txo;
-                case "CaiyunTranslator":
-                    CaiyunTranslator cy = new CaiyunTranslator();
-                    cy.TranslatorInit(Common.appSettings.CaiyunToken);
-                    return cy;
-                case "XiaoniuTranslator":
-                    XiaoniuTranslator xt = new XiaoniuTranslator();
-                    xt.TranslatorInit(Common.appSettings.xiaoniuApiKey);
-                    return xt;
-                case "YoudaoTranslator":
-                    YoudaoTranslator yd = new YoudaoTranslator();
-                    yd.TranslatorInit();
-                    return yd;
-                case "AlapiTranslator":
-                    AlapiTranslator al = new AlapiTranslator();
-                    al.TranslatorInit();
-                    return al;
-                case "GoogleCNTranslator":
-                    GoogleCNTranslator gct = new GoogleCNTranslator();
-                    gct.TranslatorInit();
-                    return gct;
-                case "JBeijingTranslator":
-                    JBeijingTranslator bj = new JBeijingTranslator();
-                    bj.TranslatorInit(Common.appSettings.JBJCTDllPath);
-                    return bj;
-                case "KingsoftFastAITTranslator":
-                    KingsoftFastAITTranslator kfat = new KingsoftFastAITTranslator();
-                    kfat.TranslatorInit(Common.appSettings.KingsoftFastAITPath);
-                    return kfat;
-                case "Dreye":
-                    DreyeTranslator drt = new DreyeTranslator();
-                    drt.TranslatorInit(Common.appSettings.DreyePath);
-                    return drt;
-                case "ArtificialTranslator":
-                    ArtificialTranslator at = new ArtificialTranslator();
-                    at.TranslatorInit(Common.appSettings.ArtificialPatchPath);
-                    return at;
-                default:
-                    return null;
+                switch (translator)
+                {
+                    case "BaiduTranslator":
+                        BaiduTranslator bd = new BaiduTranslator();
+                        bd.TranslatorInit(Common.appSettings.BDappID, Common.appSettings.BDsecretKey);
+                        return bd;
+                    case "TencentFYJTranslator":
+                        TencentFYJTranslator tx = new TencentFYJTranslator();
+                        tx.TranslatorInit(Common.appSettings.TXappID, Common.appSettings.TXappKey);
+                        return tx;
+                    case "TencentOldTranslator":
+                        TencentOldTranslator txo = new TencentOldTranslator();
+                        txo.TranslatorInit(Common.appSettings.TXOSecretId, Common.appSettings.TXOSecretKey);
+                        return txo;
+                    case "CaiyunTranslator":
+                        CaiyunTranslator cy = new CaiyunTranslator();
+                        cy.TranslatorInit(Common.appSettings.CaiyunToken);
+                        return cy;
+                    case "YoudaoTranslator":
+                        YoudaoTranslator yd = new YoudaoTranslator();
+                        yd.TranslatorInit();
+                        return yd;
+                    case "AlapiTranslator":
+                        AlapiTranslator al = new AlapiTranslator();
+                        al.TranslatorInit();
+                        return al;
+                    case "JBeijingTranslator":
+                        JBeijingTranslator bj = new JBeijingTranslator();
+                        bj.TranslatorInit(Common.appSettings.JBJCTDllPath);
+                        return bj;
+                    case "KingsoftFastAITTranslator":
+                        KingsoftFastAITTranslator kfat = new KingsoftFastAITTranslator();
+                        kfat.TranslatorInit(Common.appSettings.KingsoftFastAITPath);
+                        return kfat;
+                    case "Dreye":
+                        DreyeTranslator drt = new DreyeTranslator();
+                        drt.TranslatorInit(Common.appSettings.DreyePath);
+                        return drt;
+                    case "LocalTranslator":
+                        ArtificialTranslator ltr = new ArtificialTranslator();
+                        ltr.TranslatorInit(Common.appSettings.ArtificialPatchPath);
+                        return ltr;
+                    default:
+                        return null;
+                }
+            } 
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(String.Format("翻译器{0}初始化失败：{1}", translator, e.ToString()));
+                throw e;
             }
+            
         }
 
         /// <summary>
