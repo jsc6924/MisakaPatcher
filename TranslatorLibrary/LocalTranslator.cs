@@ -2,12 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Runtime.InteropServices;
-using System.Web.UI.WebControls;
-using System.Collections.Specialized;
-using System.ComponentModel;
+using System.Security.Cryptography;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace TranslatorLibrary
 {
@@ -62,6 +60,36 @@ namespace TranslatorLibrary
             }
         }
 
+        private class Decrypt
+        {
+            static byte[] iv = new byte[] { 6, 3, 2, 4, 4, 7, 2, 9, 0, 1, 0, 3, 6, 6, 8, 2 };
+            static string Key = "7y41ca4o)pa2ea233bU^[0q4315a*+16";
+            static Aes aes;
+            static Decrypt()
+            {
+                aes = Aes.Create();
+                aes.IV = iv;
+                aes.Key = Encoding.UTF8.GetBytes(Key);
+            }
+            public static string DecryptString(string cipherText)
+            {
+                byte[] buffer = Convert.FromBase64String(cipherText);
+
+                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+
+                using (MemoryStream memoryStream = new MemoryStream(buffer))
+                {
+                    using (CryptoStream cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
+                    {
+                        using (StreamReader streamReader = new StreamReader(cryptoStream))
+                        {
+                            return streamReader.ReadToEnd();
+                        }
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// 翻译API初始化
         /// </summary>
@@ -92,7 +120,8 @@ namespace TranslatorLibrary
                 
                 
              */
-            string[] lines = System.IO.File.ReadAllLines(patchPath);
+            bool enc = patchPath.EndsWith(".msk");
+            var patch = new StreamReader(patchPath);
             string temp = "";
             bool jp = true, first = true;
             void add()
@@ -108,9 +137,13 @@ namespace TranslatorLibrary
                 }
                 temp = "";
             }
-
-            foreach (string line in lines)
+            string line;
+            while((line = patch.ReadLine()) != null)
             {
+                if (enc)
+                {
+                    line = Decrypt.DecryptString(line);
+                }
                 if (line == "\n" || line == "\r\n" || line.StartsWith("#"))
                 {
                     //pass
