@@ -24,6 +24,9 @@ namespace MisakaTranslator_WPF
         string JBJCTDllPath { get; set; }
         [Option(Alias = "LocalTrans.mode", DefaultValue = "medium")]
         string LocalTransMode { get; set; }
+        [Option(Alias = "LocalTrans.OCRPatch", DefaultValue = "")]
+        string LocalTransOCRPatch { get; set; }
+
 
         [Option(Alias = "KingsoftFastAIT.KingsoftFastAITPath", DefaultValue = "")]
         string KingsoftFastAITPath { get; set; }

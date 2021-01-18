@@ -193,12 +193,14 @@ namespace MisakaTranslator_WPF
         {
             var ggw = new GameGuideWindow(1);
             ggw.Show();
+            this.Hide();
         }
 
         private void OCRGuideBtn_Click(object sender, RoutedEventArgs e)
         {
             var ggw = new GameGuideWindow(2);
             ggw.Show();
+            this.Hide();
         }
 
         private static void Border_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -321,6 +323,7 @@ namespace MisakaTranslator_WPF
                 var tw = new TranslateWindow();
                 tw.Show();
             }
+            this.Hide();
         }
 
         private void CloseDrawerBtn_Click(object sender, RoutedEventArgs e)

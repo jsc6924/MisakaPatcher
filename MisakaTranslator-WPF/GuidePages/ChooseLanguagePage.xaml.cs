@@ -30,7 +30,15 @@ namespace MisakaTranslator_WPF.GuidePages
             InitializeComponent();
 
             _langList = CommonFunction.lstLanguage.Keys.ToList();
-            PathBox.Text = "请选择汉化补丁";
+            if (string.IsNullOrEmpty(Common.appSettings.LocalTransOCRPatch))
+            {
+                PathBox.Text = "请选择补丁";
+            } else
+            {
+                PathBox.Text = Common.appSettings.LocalTransOCRPatch;
+                path = PathBox.Text;
+            }
+            
         }
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
@@ -39,6 +47,10 @@ namespace MisakaTranslator_WPF.GuidePages
             {
                 HandyControl.Controls.Growl.Error(Application.Current.Resources["FilePath_Null_Hint"].ToString());
                 return;
+            }
+            if (Common.guideMode == 2)
+            {
+                Common.appSettings.LocalTransOCRPatch = path;
             }
             Common.UsingSrcLang = CommonFunction.lstLanguage["日本語"];
             Common.UsingDstLang = CommonFunction.lstLanguage["中文"];

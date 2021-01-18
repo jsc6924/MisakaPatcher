@@ -203,7 +203,7 @@ namespace MisakaTranslator_WPF
                         SQLHelper sql = new SQLHelper();
                         var _path = sql.ExecuteReader_OneLine(
                             $"SELECT patchPath FROM game_library WHERE gameid = '{Common.GameID}';", 1);
-                        var path = (_path == null || _path.Count < 1) ? "" : _path[0];
+                        var path = (_path == null || _path.Count < 1) ? Common.appSettings.LocalTransOCRPatch : _path[0];
                         ltr.TranslatorInit(path, Common.appSettings.LocalTransMode);
                         return ltr;
                     default:

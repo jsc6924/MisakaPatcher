@@ -28,6 +28,7 @@ namespace MisakaTranslator_WPF
             this.AddHandler(GuidePages.PageChange.PageChangeRoutedEvent,new RoutedEventHandler(Next_Click));
 
             GuideMode = Mode;
+            Common.guideMode = Mode;
             if (Mode == 1)
             {
                 //Hook模式

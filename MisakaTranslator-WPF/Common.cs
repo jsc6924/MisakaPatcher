@@ -23,6 +23,7 @@ namespace MisakaTranslator_WPF
         public static IRepeatRepairSettings repairSettings;//去重方法参数
 
         public static int transMode;//全局使用中的翻译模式 1=hook 2=ocr
+        public static int guideMode;//全局使用中的向导模式 1=hook 2=ocr
 
         public static int GameID;//全局使用中的游戏ID(数据库)
 
