@@ -15,7 +15,7 @@
         <hc:ScrollViewer HorizontalScrollBarVisibility="Disabled">
             <StackPanel Background="White">
                 <TextBlock x:Name="textBlock" Height="42" TextWrapping="Wrap" Text="文本匹配算法设置" VerticalAlignment="Bottom" Margin="10,20,10,32" Width="546"/>
-                <hc:ComboBox x:Name="modeComboBox" hc:InfoElement.Title="灵敏度" hc:InfoElement.TitleAlignment="Left" Width="400" SelectionChanged="ComboBox_SelectionChanged" ></hc:ComboBox>
+                <hc:ComboBox x:Name="modeComboBox" hc:InfoElement.Title="{StaticResource LocalTransSettingsPage_Level}" hc:ToolTip="{StaticResource LocalTransSettingsPage_LevelHint}" hc:InfoElement.TitleAlignment="Left" Width="400" SelectionChanged="ComboBox_SelectionChanged" ></hc:ComboBox>
             </StackPanel>
             
         </hc:ScrollViewer>
