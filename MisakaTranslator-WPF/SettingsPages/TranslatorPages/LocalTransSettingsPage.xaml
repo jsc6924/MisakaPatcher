@@ -11,33 +11,18 @@
 	d:DesignWidth="594"
 	mc:Ignorable="d">
 
-	<Grid>
-		<hc:ScrollViewer HorizontalScrollBarVisibility="Disabled">
-			<StackPanel Background="White">
-				<TextBlock
-					Margin="10"
-					FontSize="16"
-					Text="{StaticResource LocalTransSettingsPage_Introduce}"
-					TextWrapping="WrapWithOverflow" />
-				<StackPanel Margin="20,20,20,0">
-					<hc:TextBox
-						Name="PathBox"
-						hc:InfoElement.Title="{StaticResource LocalTransSettingsPage_Path}"
-						hc:InfoElement.TitleAlignment="Top"
-						ShowClearButton="True" />
-					<Button
-						Width="122"
-						Margin="0,10,0,0"
-						HorizontalAlignment="Right"
-						Click="ChoosePathBtn_Click"
-						Content="{StaticResource LocalTransSettingsPage_ChoosePath}" />
-					<hc:Divider />
-				</StackPanel>
-			</StackPanel>
-		</hc:ScrollViewer>
-		<StackPanel
+    <Grid>
+        <hc:ScrollViewer HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Background="White">
+                <TextBlock x:Name="textBlock" Height="42" TextWrapping="Wrap" Text="文本匹配算法设置" VerticalAlignment="Bottom" Margin="10,20,10,32" Width="546"/>
+                <hc:ComboBox x:Name="modeComboBox" hc:InfoElement.Title="灵敏度" hc:InfoElement.TitleAlignment="Left" Width="400" SelectionChanged="ComboBox_SelectionChanged" ></hc:ComboBox>
+            </StackPanel>
+            
+        </hc:ScrollViewer>
+        <StackPanel
 			Margin="15"
 			HorizontalAlignment="Right"
 			hc:Growl.GrowlParent="True" />
-	</Grid>
+    </Grid>
+
 </Page>

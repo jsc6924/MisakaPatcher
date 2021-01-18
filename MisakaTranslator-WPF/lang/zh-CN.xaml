@@ -193,9 +193,11 @@
     <sys:String x:Key="ChooseTextRepairFuncPage_Drawer_RegexReplace">请输入替换内容</sys:String>
 
     <sys:String x:Key="ChooseLanguagePage_Introduce">请选择游戏源语言和目标翻译语言，注意：某些翻译API可能仅支持一对一语言翻译哦！</sys:String>
+    <sys:String x:Key="ChooseLanguagePage_PatchPath">请选择游戏的汉化补丁路径</sys:String>
     <sys:String x:Key="ChooseLanguagePage_srcLang">游戏源语言</sys:String>
     <sys:String x:Key="ChooseLanguagePage_dstLang">目标翻译语言</sys:String>
     <sys:String x:Key="ChooseLanguagePage_BtnConfirm">确认语言</sys:String>
+    <sys:String x:Key="ChooseLanguagePage_BtnConfirmPath">确认补丁路径</sys:String>
     <sys:String x:Key="ChooseLanguagePage_NextErrorHint">两种语言不能相同！</sys:String>
 
     <sys:String x:Key="CompletationPage_BtnConfirm">完成设置</sys:String>

@@ -195,9 +195,11 @@
     <sys:String x:Key="ChooseTextRepairFuncPage_Drawer_RegexReplace">Enter the text to be replaced</sys:String>
 
     <sys:String x:Key="ChooseLanguagePage_Introduce">Choose the game's source language and target translation language. Note: Some translation APIs may only support one-to-one language translation.</sys:String>
+    <sys:String x:Key="ChooseLanguagePage_PatchPath">Choose path to the localization patch</sys:String>
     <sys:String x:Key="ChooseLanguagePage_srcLang">Source language</sys:String>
     <sys:String x:Key="ChooseLanguagePage_dstLang">Target translation language</sys:String>
     <sys:String x:Key="ChooseLanguagePage_BtnConfirm">Confirm</sys:String>
+    <sys:String x:Key="ChooseLanguagePage_BtnConfirmPath">Confirm</sys:String>
     <sys:String x:Key="ChooseLanguagePage_NextErrorHint">The two languages cannot be the same.</sys:String>
 
     <sys:String x:Key="CompletationPage_BtnConfirm">Finish setting</sys:String>

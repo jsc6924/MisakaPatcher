@@ -18,6 +18,7 @@ using HandyControl.Controls;
 using KeyboardMouseHookLibrary;
 using MecabHelperLibrary;
 using OCRLibrary;
+using SQLHelperLibrary;
 using TextHookLibrary;
 using TextRepairLibrary;
 using TranslatorLibrary;
@@ -199,7 +200,11 @@ namespace MisakaTranslator_WPF
                         return drt;
                     case "LocalTranslator":
                         LocalTranslator ltr = new LocalTranslator();
-                        ltr.TranslatorInit(Common.appSettings.LocalTranslationPath);
+                        SQLHelper sql = new SQLHelper();
+                        var _path = sql.ExecuteReader_OneLine(
+                            $"SELECT patchPath FROM game_library WHERE gameid = '{Common.GameID}';", 1);
+                        var path = (_path == null || _path.Count < 1) ? "" : _path[0];
+                        ltr.TranslatorInit(path, Common.appSettings.LocalTransMode);
                         return ltr;
                     default:
                         return null;
@@ -563,6 +568,7 @@ namespace MisakaTranslator_WPF
         private void Exit_Item_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            Application.Current.Shutdown();
         }
 
         private void Pause_Item_Click(object sender, RoutedEventArgs e)

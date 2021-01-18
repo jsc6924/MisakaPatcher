@@ -21,28 +21,23 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
     /// </summary>
     public partial class LocalTransSettingsPage : Page
     {
+        Dictionary<string, string> modeLst = new Dictionary<string, string>()
+        {
+            { "低", "low" },
+            { "中", "medium" },
+            { "高", "high" }
+        };
         public LocalTransSettingsPage()
         {
             InitializeComponent();
-            PathBox.Text = Common.appSettings.LocalTranslationPath;
+            modeComboBox.ItemsSource = modeLst.Keys;
+            var lst = modeLst.Values.ToList();
+            modeComboBox.SelectedIndex = lst.IndexOf(Common.appSettings.LocalTransMode);
         }
 
-        private void ChoosePathBtn_Click(object sender, RoutedEventArgs e)
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
-            dialog.Title = Application.Current.Resources["LocalTransSettingsPage_ChoosePathHint"].ToString();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                if (string.IsNullOrEmpty(dialog.FileName))
-                {
-                    HandyControl.Controls.Growl.Error(Application.Current.Resources["FilePath_Null_Hint"].ToString());
-                }
-                else
-                {
-                    PathBox.Text = dialog.FileName;
-                    Common.appSettings.LocalTranslationPath = PathBox.Text;
-                }
-            }
+            Common.appSettings.LocalTransMode = modeLst[(string)modeComboBox.SelectedValue];
         }
     }
 }

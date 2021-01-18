@@ -121,12 +121,31 @@ namespace TranslatorLibrary
             }
         }
 
+        private void initSettings(string mode)
+        {
+            switch(mode)
+            {
+                case "low":
+                    pTransitionSkip = 0.03;
+                    break;
+                case "high":
+                    pTransitionSkip = 0.15;
+                    break;
+                default:
+                case "medium":
+                    pTransitionSkip = 0.075;
+                    break;
+            }
+            pTransitionSkip = 0.075;
+            pTransitionNext = 1 - pTransitionSkip;
+        }
+
         /// <summary>
         /// 翻译API初始化
         /// </summary>
         /// <param name="param1">参数一 汉化补丁路径</param>
         /// <param name="param2">参数二 不使用</param>
-        public void TranslatorInit(string patchPath, string param2 = "")
+        public void TranslatorInit(string patchPath, string mode)
         {
             /*
              * 汉化补丁格式，只支持单个文本文件：
@@ -151,6 +170,7 @@ namespace TranslatorLibrary
                 
                 
              */
+            initSettings(mode);
             bool enc = false;
             IDecrypt decrypt = null;
             var patch = new StreamReader(patchPath);
@@ -289,7 +309,7 @@ namespace TranslatorLibrary
             Console.WriteLine(String.Format("Input:{0}", sourceText));
             if (jp_text.Count == 0)
             {
-                return "No translation available";
+                return "补丁为空";
             }
 
             if (sourceText.Length >= R_MAX_LEN)
@@ -432,14 +452,10 @@ namespace TranslatorLibrary
             {
                 return second.Length;
             }
-
             if (second.Length == 0)
             {
                 return first.Length;
             }
-
-
-
             var current = 1;
             var previous = 0;
 
@@ -491,9 +507,8 @@ namespace TranslatorLibrary
         private const int R_MAX_LEN = 64;
         private const int MAX_CURSOR = 8;
         private const double SoftmaxCoeff = 10;
-        private const double pTransitionSkip = 0.075;
-        private const double pTransitionNext = 1.0 - pTransitionSkip;
-        private const double possibleCursorsThresh = 0.001;
+        private double pTransitionSkip;
+        private double pTransitionNext;
         private const double pFullSearchThresh = 0.2;
         private Dictionary<int, double> possibleCursors = new Dictionary<int, double>();
     }
