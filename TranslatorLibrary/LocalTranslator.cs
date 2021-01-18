@@ -242,7 +242,7 @@ namespace TranslatorLibrary
          * We use the following transition model:
          *     P(transition from state i to j) = （1-pTransitionSkip）* v if j == i + 1
          *                                     = pTransitionSkip * v otherwise
-         *                                     where （1-pTransitionSkip*v + (K-1)*pTransitionSkip*v = 1
+         *                                     where （1-pTransitionSkip)*v + (K-1)*pTransitionSkip*v = 1
          *     (Assume K >= 2)
          *     So simply use pTransitionSkip and （1-pTransitionSkip） due to normalization
          *     
@@ -262,17 +262,17 @@ namespace TranslatorLibrary
          *     We only consider the case when two of {T[i, t-1], P(transition from state k to i), P(state = i | observation at t)} are large.
          *     Let possibleCursors be a list of large T[i, t-1], and sum(possibleCursors) == 0.8
          *     For each T[i, t-1] in possibleCursors , we consider 
-         *          t[i, t-1]*P(i to i+1)*P(i+1 | o_t)  [Case 1]
+         *          T[i, t-1]*P(i to i+1)*P(i+1 | o_t)  [Case 1] //transition to the next line
          *              and 
          *          (
-         *              for all k that P(k | o_t) is large: t[i, t-1]*P(i to not i+1)*P(k | o_t)
+         *              for all k that P(k | o_t) is large: t[i, t-1]*P(i to not i+1)*P(k | o_t) //a jump from possible cursor
          *              covered in the next case more efficiently, so skiped
          *          )
          *     For all k that P(k | o_t) is large: 
-         *          max(t[*, t-1])*P(i to not i+1)*P(i+1 | o_t)  [Case 2]
+         *          max(T[*, t-1])*P(i to not i+1)*P(i+1 | o_t)  [Case 2] // a jump from somewhere
          *              and
          *          (
-         *              t[k-1, t-1]*P(k-1 to k)*P(k | o_t)
+         *              t[k-1, t-1]*P(k-1 to k)*P(k | o_t) // transition from previous line
          *              where t[k-1, t-1] == 0.2 / (K - possibleCursors.Count) if k-1 not in possibleCursors
          *                                == possibleCursors[k-1] if k-1 in possibleCursors
          *              However, in this case, if k-1 is not in possibleCursor, t[k-1, t-1] will be extremely small, and if 
@@ -299,18 +299,31 @@ namespace TranslatorLibrary
 
             double pMostLikelyPrevCursor = possibleCursors.Count == 0 ? 1.0 / pTransitionNext : possibleCursors.Max(i => i.Value);
             CursorPriorityQueue nextCursorsPQ = new CursorPriorityQueue(MAX_CURSOR);
-
-            for (int i = 0; i < jp_text.Count; i++)
+            
+            var maxPSeq = 0.0;
+            var maxPSkip = 0.0;
+            if (possibleCursors.Count > 0)
             {
-                double s = ComputeSimilarity(sourceText, jp_text[i]);
-                if (possibleCursors.ContainsKey(i - 1)) // [Case 1]
+                foreach (int k in possibleCursors.Keys)
                 {
-                    double pSequantial = possibleCursors[i - 1] * pTransitionNext * s;
-                    nextCursorsPQ.Add(i, pSequantial);
+                    double s = ComputeSimilarity(sourceText, jp_text[k + 1]); //[Case 1]
+                    double pSequantial = possibleCursors[k] * pTransitionNext * s;
+                    maxPSeq = Math.Max(maxPSeq, pSequantial);
+                    nextCursorsPQ.Add(k + 1, pSequantial);
                 }
-                double pSkip = pMostLikelyPrevCursor * pTransitionSkip * s; //[Case 2]
-                nextCursorsPQ.Add(i, pSkip);
             }
+            if (maxPSeq < pFullSearchThresh)
+            {
+                for (int i = 0; i < jp_text.Count; i++)
+                {
+                    double s = ComputeSimilarity(sourceText, jp_text[i]);
+                    double pSkip = pMostLikelyPrevCursor * pTransitionSkip * s; //[Case 2]
+                    maxPSkip = Math.Max(maxPSkip, pSkip);
+                    nextCursorsPQ.Add(i, pSkip);
+                }
+            }
+            Console.WriteLine("maxPSeq = {0}", maxPSeq);
+            Console.WriteLine("maxPSkip = {0}", maxPSkip);
             //Softmax on next cursors
             List<int> nextCursorsIdx = nextCursorsPQ.Indices().ToList();
             var z = nextCursorsPQ.Values();
@@ -481,6 +494,7 @@ namespace TranslatorLibrary
         private const double pTransitionSkip = 0.075;
         private const double pTransitionNext = 1.0 - pTransitionSkip;
         private const double possibleCursorsThresh = 0.001;
+        private const double pFullSearchThresh = 0.2;
         private Dictionary<int, double> possibleCursors = new Dictionary<int, double>();
     }
 }
