@@ -71,7 +71,21 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
 ## 开发
 `git clone`后，代码可以编译，但是运行会报错，因为运行库不全
 #### 解决方法
-下载最新版的release，与`MisakaTranslator-WPF\bin\Debug`之下的内容比较，把`Debug`中缺少的文件和文件夹全都复制过去，并且替换 `MisakaGameLibrary.sqlite`文件。
+下载最新版的release，与`MisakaTranslator-WPF\bin\Debug`之下的内容比较，把`Debug`中缺少的文件和文件夹全都复制过去。
+
+## 版本更新
+#### 1.3
+- 支持每个游戏绑定一个补丁
+- 支持调节匹配算法的灵敏度
+
+#### 1.2 
+- 支持补丁打包和简单加密
+
+#### 1.1
+- 支持禁用分词器
+
+#### 1.0
+- 初始版本
 
 ## 备注
 
