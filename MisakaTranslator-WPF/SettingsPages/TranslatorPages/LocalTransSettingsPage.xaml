@@ -1,0 +1,28 @@
+﻿<Page
+	x:Class="MisakaTranslator_WPF.SettingsPages.TranslatorPages.LocalTransSettingsPage"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:hc="https://handyorg.github.io/handycontrol"
+	xmlns:local="clr-namespace:MisakaTranslator_WPF.SettingsPages.TranslatorPages"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	Title="LocalTransSettingsPage"
+	d:DesignHeight="450"
+	d:DesignWidth="594"
+	mc:Ignorable="d">
+
+    <Grid>
+        <hc:ScrollViewer HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Background="White">
+                <TextBlock x:Name="textBlock" Height="42" TextWrapping="Wrap" Text="文本匹配算法设置" VerticalAlignment="Bottom" Margin="10,20,10,32" Width="546"/>
+                <hc:ComboBox x:Name="modeComboBox" hc:InfoElement.Title="灵敏度" hc:InfoElement.TitleAlignment="Left" Width="400" SelectionChanged="ComboBox_SelectionChanged" ></hc:ComboBox>
+            </StackPanel>
+            
+        </hc:ScrollViewer>
+        <StackPanel
+			Margin="15"
+			HorizontalAlignment="Right"
+			hc:Growl.GrowlParent="True" />
+    </Grid>
+
+</Page>

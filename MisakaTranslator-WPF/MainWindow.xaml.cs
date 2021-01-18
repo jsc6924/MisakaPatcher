@@ -214,6 +214,7 @@ namespace MisakaTranslator_WPF
             var str = b.Name;
             var temp = str.Remove(0, 4);
             gid = int.Parse(temp);
+            Common.GameID = _gameInfoList[_gid].GameID;
 
             GameNameTag.Text = Application.Current.Resources["MainWindow_Drawer_Tag_GameName"].ToString() + gameInfoList[gid].GameName;
             if (gameInfoList[gid].TransMode == 1)

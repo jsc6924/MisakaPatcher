@@ -74,6 +74,13 @@ namespace SQLHelperLibrary
         /// 检查是否是64位应用程序
         /// </summary>
         public bool Isx64 { get; set; }
+
+        /// <summary>
+        /// 检查是否是64位应用程序
+        /// </summary>
+        public string PatchPath { get; set; }
+
+
     }
 
     public class GameLibraryHelper
@@ -85,7 +92,7 @@ namespace SQLHelperLibrary
         {
             SQLHelper.CreateNewDatabase(Environment.CurrentDirectory + "\\MisakaGameLibrary.sqlite");
             var sqlHelper = new SQLHelper();
-            var id = sqlHelper.ExecuteSql("CREATE TABLE game_library(gameid INTEGER PRIMARY KEY AUTOINCREMENT,gamename TEXT,gamefilepath TEXT,transmode INTEGER,src_lang TEXT,dst_lang TEXT,repair_func TEXT,repair_param_a TEXT,repair_param_b TEXT,hookcode TEXT,isMultiHook TEXT,isx64 TEXT,hookcode_custom TEXT);");
+            var id = sqlHelper.ExecuteSql("CREATE TABLE game_library(gameid INTEGER PRIMARY KEY AUTOINCREMENT,gamename TEXT,gamefilepath TEXT,transmode INTEGER,src_lang TEXT,dst_lang TEXT,repair_func TEXT,repair_param_a TEXT,repair_param_b TEXT,hookcode TEXT,isMultiHook TEXT,isx64 TEXT,hookcode_custom TEXT,patchPath TEXT);");
             if (id == -1)
             {
                 MessageBox.Show("新建游戏库时发生错误，错误代码:\n" + sqlHelper.GetLastError(), "数据库错误");
@@ -128,7 +135,7 @@ namespace SQLHelperLibrary
             if (ls.Count == 0)
             {
                 var sql =
-                    $"INSERT INTO game_library VALUES(NULL,'{Path.GetFileNameWithoutExtension(gamePath)}','{gamePath}',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);";
+                    $"INSERT INTO game_library VALUES(NULL,'{Path.GetFileNameWithoutExtension(gamePath)}','{gamePath}',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);";
                 sqliteH.ExecuteSql(sql);
                 ls = sqliteH.ExecuteReader_OneLine(
                     $"SELECT gameid FROM game_library WHERE gamefilepath = '{gamePath}';", 1);
@@ -151,7 +158,7 @@ namespace SQLHelperLibrary
             }
 
             var sqlHelper = new SQLHelper();
-            var ls = sqlHelper.ExecuteReader("SELECT * FROM game_library;", 13);
+            var ls = sqlHelper.ExecuteReader("SELECT * FROM game_library;", 14);
 
             if (ls == null)
             {
@@ -189,6 +196,7 @@ namespace SQLHelperLibrary
                 gameInfo.IsMultiHook = Convert.ToBoolean(gameI[10]);
                 gameInfo.Isx64 = Convert.ToBoolean(gameI[11]);
                 gameInfo.HookCodeCustom = gameI[12];
+                gameInfo.PatchPath = gameI[13];
 
                 ret.Add(gameInfo);
             }
@@ -238,7 +246,8 @@ namespace SQLHelperLibrary
                 Hookcode = ls[9],
                 IsMultiHook = Convert.ToBoolean(ls[10]),
                 Isx64 = Convert.ToBoolean(ls[11]),
-                HookCodeCustom = ls[12]
+                HookCodeCustom = ls[12],
+                PatchPath = ls[13]
             };
 
             return gameInfo;

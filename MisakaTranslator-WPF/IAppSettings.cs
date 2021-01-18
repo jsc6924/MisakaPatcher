@@ -43,6 +43,12 @@ namespace MisakaTranslator_WPF
             get;
             set;
         }
+        [Option(Alias = "LocalTrans.mode", DefaultValue = "medium")]
+        string LocalTransMode 
+        { 
+            get; 
+            set; 
+        }
 
         [Option(Alias = "KingsoftFastAIT.KingsoftFastAITPath", DefaultValue = "")]
         string KingsoftFastAITPath
