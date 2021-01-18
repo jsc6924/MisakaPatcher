@@ -44,11 +44,10 @@ namespace MisakaTranslator_WPF
             set;
         }
         [Option(Alias = "LocalTrans.mode", DefaultValue = "medium")]
-        string LocalTransMode 
-        { 
-            get; 
-            set; 
-        }
+        string LocalTransMode { get; set; }
+        [Option(Alias = "LocalTrans.OCRPatch", DefaultValue = "")]
+        string LocalTransOCRPatch { get; set; }
+
 
         [Option(Alias = "KingsoftFastAIT.KingsoftFastAITPath", DefaultValue = "")]
         string KingsoftFastAITPath

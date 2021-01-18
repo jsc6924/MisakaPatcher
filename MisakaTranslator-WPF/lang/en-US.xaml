@@ -141,7 +141,7 @@
     <sys:String x:Key="GameGuideWin_OCR_Step_2">OCR pretreatment</sys:String>
     <sys:String x:Key="GameGuideWin_OCR_Step_3">Set the trigger</sys:String>
     <sys:String x:Key="GameGuideWin_ReHook_Step_1">Re-select the hook method</sys:String>
-    <sys:String x:Key="GameGuideWin_Step_4">Select translation languages</sys:String>
+    <sys:String x:Key="GameGuideWin_Step_4">Select Patch</sys:String>
     <sys:String x:Key="GameGuideWin_Step_5">Finish</sys:String>
     <sys:String x:Key="GameGuideWin_FuncHint_Hook">Extract Texts with TextHook</sys:String>
     <sys:String x:Key="GameGuideWin_FuncHint_ReHook">Re-select the hook method to match the previous settings</sys:String>

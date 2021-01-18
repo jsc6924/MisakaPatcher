@@ -30,6 +30,7 @@ namespace MisakaTranslator_WPF
 
             isComplete = false;
             GuideMode = Mode;
+            Common.guideMode = Mode;
             if (Mode == 1)
             {
                 //Hook模式
