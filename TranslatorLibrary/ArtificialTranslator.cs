@@ -136,7 +136,6 @@ namespace TranslatorLibrary
                     pTransitionSkip = 0.075;
                     break;
             }
-            pTransitionSkip = 0.075;
             pTransitionNext = 1 - pTransitionSkip;
         }
 
@@ -165,8 +164,6 @@ namespace TranslatorLibrary
                 <c>3 
                 （句子可以为空，但是原句和翻译句总数必须一致）
                 #如果一行第一个字符是‘#’，则这一行不会被读取
-                
-                
              */
             string[] lines = System.IO.File.ReadAllLines(patchPath);
             initSettings(mode);
