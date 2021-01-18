@@ -61,8 +61,7 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
 
 ## 使用
 打开软件，右下角设置 -> 翻译相关设置 -> 通用设置 -> 选择本地汉化补丁为翻译源
-然后再 翻译相关设置 ->本地汉化补丁 -> 选择汉化补丁的路径
-然后就可以开始游戏了。Hook和OCR相关设置请参考[原版说明](/README_ORIGINAL.md)。
+然后就可以开始游戏了，添加游戏向导中会提示选择汉化补丁，Hook只有第一次需要选择。Hook和OCR相关设置请参考[原版说明](/README_ORIGINAL.md)。
 
 #### Tesseract OCR 5
 
