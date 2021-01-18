@@ -136,7 +136,6 @@ namespace TranslatorLibrary
                     pTransitionSkip = 0.075;
                     break;
             }
-            pTransitionSkip = 0.075;
             pTransitionNext = 1 - pTransitionSkip;
         }
 
@@ -147,29 +146,6 @@ namespace TranslatorLibrary
         /// <param name="param2">参数二 不使用</param>
         public void TranslatorInit(string patchPath, string mode)
         {
-            /*
-             * 汉化补丁格式，只支持单个文本文件：
-             * 
-                <j>
-                原句1
-                <c>
-                翻译1
-                <j>    标签后面的内容不会被读取，可以写任何东西，如编号
-                原句2第一行
-                原句2第二行
-                <c>2
-                翻译2第一行
-                翻译2第二行（行数不一定要与原句匹配）
-                <j>3
-
-                原句3 (原句前后可以空行，不会被读取）
-
-                <c>3 
-                （句子可以为空，但是原句和翻译句总数必须一致）
-                #如果一行第一个字符是‘#’，则这一行不会被读取
-                
-                
-             */
             initSettings(mode);
             bool enc = false;
             IDecrypt decrypt = null;
