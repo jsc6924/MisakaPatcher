@@ -190,7 +190,7 @@ namespace TranslatorLibrary
             {
                 if(line.StartsWith("#!"))
                 {
-                    Regex r = new Regex(@"#!useEnc=(.*),enc=(.*)", RegexOptions.IgnoreCase);
+                    Regex r = new Regex(@"#!useEnc=(True|False),enc=(aes|xor)");
                     Match m = r.Match(line);
                     if (m.Success)
                     {
