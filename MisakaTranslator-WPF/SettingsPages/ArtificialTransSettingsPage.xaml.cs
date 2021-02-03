@@ -55,7 +55,7 @@ namespace MisakaTranslator_WPF.SettingsPages
         {
             Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog()
             {
-                Filter = "MisakaTranslator人工翻译文件|*.txt",
+                Filter = "MisakaTranslator人工翻译文件|*.txt;*.msk",
                 InitialDirectory = @"D:\"
             };
 
