@@ -104,7 +104,6 @@
     <sys:String x:Key="DreyeTransSettingsPage_Path">Dr.eye Path</sys:String>
     <sys:String x:Key="DreyeTransSettingsPage_ChoosePathHint">Please select the folder where Dr.eye is located</sys:String>
 
-    <sys:String x:Key="OCRGeneralSettingsPage_Introduce">This is the OCR (Optical Character Recognition) setting page. The translation window supports only one OCR source. Offline OCR uses Tesseract. It currently supports English and Japanese recognition. Tesseract5_vert can only supports vertical Japanese. If the recognition performance is low, you can train related OCR word library or use Baidu online OCR instead.</sys:String>
     <sys:String x:Key="LocalTransSettingsPage_Introduce">Please select your translation patch</sys:String>
     <sys:String x:Key="LocalTransSettingsPage_Path">select path</sys:String>
     <sys:String x:Key="LocalTransSettingsPage_ChoosePath">select path</sys:String>

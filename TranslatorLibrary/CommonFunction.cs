@@ -21,18 +21,18 @@ namespace TranslatorLibrary
         };
 
         public static Dictionary<string,string> lstTranslator = new Dictionary<string, string>() {
-            { "无翻译" , "NoTranslator"},
-            { "百度翻译" , "BaiduTranslator" },
-            { "腾讯翻译君" , "TencentFYJTranslator" },
-            { "腾讯私人翻译" , "TencentOldTranslator" },
-            { "彩云小译" , "CaiyunTranslator" },
-            { "小牛翻译" , "XiaoniuTranslator"},
-            { "有道翻译(公共接口)" , "YoudaoTranslator" },
-            { "ALAPI免费接口" , "AlapiTranslator"},
-            { "谷歌翻译(公共接口)" , "GoogleCNTranslator"},
-            { "JBeijing" , "JBeijingTranslator" },
-            { "金山快译" , "KingsoftFastAITTranslator" },
-            { "译典通", "Dreye"},
+            //{ "无翻译" , "NoTranslator"},
+            //{ "百度翻译" , "BaiduTranslator" },
+            //{ "腾讯翻译君" , "TencentFYJTranslator" },
+            //{ "腾讯私人翻译" , "TencentOldTranslator" },
+            //{ "彩云小译" , "CaiyunTranslator" },
+            //{ "小牛翻译" , "XiaoniuTranslator"},
+            //{ "有道翻译(公共接口)" , "YoudaoTranslator" },
+            //{ "ALAPI免费接口" , "AlapiTranslator"},
+            //{ "谷歌翻译(公共接口)" , "GoogleCNTranslator"},
+            //{ "JBeijing" , "JBeijingTranslator" },
+            //{ "金山快译" , "KingsoftFastAITTranslator" },
+            //{ "译典通", "Dreye"},
             { "本地人工翻译(见说明)" , "ArtificialTranslator"}
         };
 

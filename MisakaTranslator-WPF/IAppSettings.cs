@@ -322,12 +322,6 @@ namespace MisakaTranslator_WPF
             set;
         }
 
-        [Option(Alias = "ArtificialTrans.patchPath", DefaultValue = "")]
-        string ArtificialPatchPath
-        {
-            get;
-            set;
-        }
 
         [Option(Alias = "ArtificialTrans.ATon", DefaultValue = true)]
         bool ATon

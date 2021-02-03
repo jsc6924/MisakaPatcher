@@ -22,13 +22,21 @@ namespace MisakaTranslator_WPF.SettingsPages
     public partial class ArtificialTransSettingsPage : Page
     {
         string[] strNames;
+        Dictionary<string, string> modeLst = new Dictionary<string, string>()
+        {
+            { "低", "low" },
+            { "中", "medium" },
+            { "高", "high" }
+        };
 
         public ArtificialTransSettingsPage()
         {
             InitializeComponent();
+            modeComboBox.ItemsSource = modeLst.Keys;
+            var lst = modeLst.Values.ToList();
+            modeComboBox.SelectedIndex = lst.IndexOf(Common.appSettings.LocalTransMode);
 
             ATonCheckBox.IsChecked = Common.appSettings.ATon;
-            PathBox.Text = Common.appSettings.ArtificialPatchPath;
 
             if (Directory.Exists(Environment.CurrentDirectory + "\\ArtificialTranslation")) {
                 strNames = Directory.GetFiles(Environment.CurrentDirectory + "\\ArtificialTranslation");
@@ -51,24 +59,6 @@ namespace MisakaTranslator_WPF.SettingsPages
             
         }
 
-        private void ChoosePathBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog()
-            {
-                Filter = "MisakaTranslator人工翻译文件|*.txt;*.msk",
-                InitialDirectory = @"D:\"
-            };
-
-            if (dialog.ShowDialog().GetValueOrDefault())
-            {
-                PathBox.Text = dialog.FileName;
-                Common.appSettings.ArtificialPatchPath = PathBox.Text;
-            }
-            else
-            {
-                HandyControl.Controls.Growl.Error(Application.Current.Resources["FilePath_Null_Hint"].ToString());
-            }
-        }
 
         private void ATonCheckBox_Click(object sender, RoutedEventArgs e)
         {
@@ -103,6 +93,11 @@ namespace MisakaTranslator_WPF.SettingsPages
             }
 
             
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Common.appSettings.LocalTransMode = modeLst[(string)modeComboBox.SelectedValue];
         }
     }
 }

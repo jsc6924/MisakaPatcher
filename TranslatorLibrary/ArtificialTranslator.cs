@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace TranslatorLibrary
 {
-    /*
-     * 来源：https://github.com/jsc723/MisakaPatcher/blob/master/TranslatorLibrary/LocalTranslator.cs
-     */
     public class ArtificialTranslator : ITranslator
     {
         private class CursorPriorityQueue
@@ -65,7 +65,7 @@ namespace TranslatorLibrary
             string DecryptString(string cipherText);
         }
 
-        private class AesDecrypt: IDecrypt
+        private class AesDecrypt : IDecrypt
         {
             static byte[] iv = new byte[] { 6, 3, 2, 4, 4, 7, 2, 9, 0, 1, 0, 3, 6, 6, 8, 2 };
             static string Key = "7y41ca4o)pa2ea233bU^[0q4315a*+16";
@@ -123,7 +123,7 @@ namespace TranslatorLibrary
 
         private void initSettings(string mode)
         {
-            switch(mode)
+            switch (mode)
             {
                 case "low":
                     pTransitionSkip = 0.03;
@@ -146,26 +146,6 @@ namespace TranslatorLibrary
         /// <param name="param2">参数二 不使用</param>
         public void TranslatorInit(string patchPath, string mode)
         {
-            /*
-             * 汉化补丁格式，只支持单个文本文件：
-             * 
-                <j>
-                原句1
-                <c>
-                翻译1
-                <j>    标签后面的内容不会被读取，可以写任何东西，如编号
-                原句2第一行
-                原句2第二行
-                <c>2
-                翻译2第一行
-                翻译2第二行（行数不一定要与原句匹配）
-                <j>3
-                原句3 (原句前后可以空行，不会被读取）
-                <c>3 
-                （句子可以为空，但是原句和翻译句总数必须一致）
-                #如果一行第一个字符是‘#’，则这一行不会被读取
-             */
-            string[] lines = System.IO.File.ReadAllLines(patchPath);
             initSettings(mode);
             bool enc = false;
             IDecrypt decrypt = null;
@@ -185,12 +165,12 @@ namespace TranslatorLibrary
                 }
                 temp = "";
             }
-
-            foreach (string line in lines)
+            string line;
+            while ((line = patch.ReadLine()) != null)
             {
-                if(line.StartsWith("#!"))
+                if (line.StartsWith("#!"))
                 {
-                    Regex r = new Regex(@"#!useEnc=(True|False),enc=(aes|xor)");
+                    Regex r = new Regex(@"#!useEnc=(.*),enc=(.*)", RegexOptions.IgnoreCase);
                     Match m = r.Match(line);
                     if (m.Success)
                     {
@@ -232,7 +212,10 @@ namespace TranslatorLibrary
             }
             add();
             if (jp_text.Count != cn_text.Count)
-                throw new Exception("Total sentence number not match, please check your patch.");
+            {
+                throw new Exception(String.Format("原文与译文行数不一致，原文{0}，译文{1}，请检查补丁",
+                    jp_text.Count, cn_text.Count));
+            }
         }
 
         /// <summary>
@@ -312,7 +295,7 @@ namespace TranslatorLibrary
 
             double pMostLikelyPrevCursor = possibleCursors.Count == 0 ? 1.0 / pTransitionNext : possibleCursors.Max(i => i.Value);
             CursorPriorityQueue nextCursorsPQ = new CursorPriorityQueue(MAX_CURSOR);
-            
+
             var maxPSeq = 0.0;
             var maxPSkip = 0.0;
             if (possibleCursors.Count > 0)

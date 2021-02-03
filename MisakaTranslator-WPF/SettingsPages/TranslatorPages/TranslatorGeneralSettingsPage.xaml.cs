@@ -28,10 +28,10 @@ namespace MisakaTranslator_WPF.SettingsPages
             InitializeComponent();
             TranslatorList = CommonFunction.GetTranslatorList();
             FirstTransCombox.ItemsSource = TranslatorList;
-            SecondTransCombox.ItemsSource = TranslatorList;
+            //SecondTransCombox.ItemsSource = TranslatorList;
 
             FirstTransCombox.SelectedIndex = CommonFunction.GetTranslatorIndex(Common.appSettings.FirstTranslator);
-            SecondTransCombox.SelectedIndex = CommonFunction.GetTranslatorIndex(Common.appSettings.SecondTranslator);
+            //SecondTransCombox.SelectedIndex = CommonFunction.GetTranslatorIndex(Common.appSettings.SecondTranslator);
 
             EachRowTransCheckBox.IsChecked = Convert.ToBoolean(Common.appSettings.EachRowTrans);
 
@@ -43,10 +43,10 @@ namespace MisakaTranslator_WPF.SettingsPages
             Common.appSettings.FirstTranslator = CommonFunction.lstTranslator[(string)FirstTransCombox.SelectedValue];
         }
 
-        private void SecondTransCombox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Common.appSettings.SecondTranslator = CommonFunction.lstTranslator[(string)SecondTransCombox.SelectedValue];
-        }
+        //private void SecondTransCombox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    Common.appSettings.SecondTranslator = CommonFunction.lstTranslator[(string)SecondTransCombox.SelectedValue];
+        //}
 
         private void EachRowTransCheckBox_Click(object sender, RoutedEventArgs e)
         {

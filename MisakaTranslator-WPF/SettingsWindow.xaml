@@ -28,21 +28,13 @@
             </hc:SideMenuItem>
             <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings}" FontSize="15">
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_General}" Selected="Item_TransGeneral_Selected"/>
-                <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_Baidu}" Selected="Item_BaiduTrans_Selected"/>
-                <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_TencentFYJ}" Selected="Item_FYJTrans_Selected"/>
-                <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_TencentOld}" Selected="Item_TXOTrans_Selected"/>
-                <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_Caiyun}" Selected="Item_Caiyun_Selected"/>
-                <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_Xiaoniu}" Selected="Item_Xiaoniu_Selected"/>
-                <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_Jbeijing}" Selected="Item_JBeijing_Selected"/>
-                <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_KingsoftFAIT}" Selected="Item_KingsoftFAIT_Selected"/>
-                <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_Dreye}" Selected="Item_Dreye_Selected"/>
-
+                <hc:SideMenuItem Header="{StaticResource SettingsMenu_ATSettings}" Selected="Item_ATSettings_Selected"/>
             </hc:SideMenuItem>
             <hc:SideMenuItem Header="{StaticResource SettingsMenu_DictSettings}" FontSize="15">
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_DictSettings_xxgrz}" Selected="Item_xxgrz_Selected"/>
             </hc:SideMenuItem>
             <hc:SideMenuItem Header="{StaticResource SettingsMenu_TTSSettings}" FontSize="15" Selected="Item_TTSSettings_Selected"/>
-            <hc:SideMenuItem Header="{StaticResource SettingsMenu_ATSettings}" FontSize="15" Selected="Item_ATSettings_Selected"/>
+            
         </hc:SideMenu>
         <Frame Grid.Column="1" Name="SettingFrame" Source="SettingsPages/AboutPage.xaml" NavigationUIVisibility="Hidden"/>
     </Grid>

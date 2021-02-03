@@ -227,7 +227,7 @@ namespace MisakaTranslator_WPF
                         DreyeTranslator drt = new DreyeTranslator();
                         drt.TranslatorInit(Common.appSettings.DreyePath);
                         return drt;
-                    case "LocalTranslator":
+                    case "ArtificialTranslator":
                         ArtificialTranslator ltr = new ArtificialTranslator();
                         SQLHelper sql = new SQLHelper();
                         var _path = sql.ExecuteReader_OneLine(
@@ -260,7 +260,7 @@ namespace MisakaTranslator_WPF
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Hook_OnMouseActivity(object sender, POINT e)
+        private void Hook_OnMouseActivity(object sender, KeyboardMouseHookLibrary.POINT e)
         {
             if (Common.isAllWindowCap && Process.GetCurrentProcess().Id != FindWindowInfo.GetProcessIDByHWND(FindWindowInfo.GetWindowHWND(e.x, e.y))
                 || Common.OCRWinHwnd == (IntPtr)FindWindowInfo.GetWindowHWND(e.x, e.y))
