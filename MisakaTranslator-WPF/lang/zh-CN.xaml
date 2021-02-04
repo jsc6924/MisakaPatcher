@@ -328,7 +328,7 @@
     <sys:String x:Key="TranslateWin_Menu_ATadd">自定义人工翻译</sys:String>
 
     <sys:String x:Key="ArtificialTransSettingsPage_Introduce">在这里进行人工翻译的相关设置。您可以选择是否开启人工翻译记录，指定人工翻译文本文件位置以及导出您当前所有已保存游戏的文本翻译。</sys:String>
-    <sys:String x:Key="ArtificialTransSettingsPage_ATon_Hint">开启人工翻译记录后，您在游戏的过程中会自动将第一翻译源的翻译文本记录到数据库中。</sys:String>
+    <sys:String x:Key="ArtificialTransSettingsPage_ATon_Hint">开启人工翻译记录后，您在游戏的过程中会自动将第一翻译源的翻译文本记录到数据库中。（注：只对未加密的人工翻译文件有效）</sys:String>
     <sys:String x:Key="ArtificialTransSettingsPage_ATon">开启人工翻译记录</sys:String>
     <sys:String x:Key="ArtificialTransSettingsPage_ChoosePath_Hint">人工翻译文件路径</sys:String>
     <sys:String x:Key="ArtificialTransSettingsPage_GameChoose">选择游戏翻译数据库</sys:String>
