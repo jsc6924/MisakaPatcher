@@ -36,7 +36,7 @@
     <sys:String x:Key="MainWindow_StartError_Hint">Game process not found!</sys:String>
 
     <sys:String x:Key="SettingsMenu_WinName">Preferences</sys:String>
-    <sys:String x:Key="SettingsMenu_About">MisakaTranslator</sys:String>
+    <sys:String x:Key="SettingsMenu_About">MisakaPatcher</sys:String>
     <sys:String x:Key="SettingsMenu_SoftwareSettings">Software Settings</sys:String>
     <sys:String x:Key="SettingsMenu_LESettings">Locale Emulator Settings</sys:String>
     <sys:String x:Key="SettingsMenu_HookSettings">Hook Settings</sys:String>
@@ -146,6 +146,9 @@
 
     <sys:String x:Key="AboutPage_BtnHelp">Guide and Feedback</sys:String>
     <sys:String x:Key="AboutPage_BtnGithub">GitHub Project Page</sys:String>
+    <sys:String x:Key="AboutPage_BtnGithubPatcher">Github Page for Patcher</sys:String>
+   <sys:String x:Key="AboutPage_About">MisakaPatcher is built on top of MisakaTranslator2.7. It removes all the features about machine translation, while adds the support to load a translation patch from the local machine. Please use MisakaTranslator if you want machine translation.</sys:String>
+
 
     <sys:String x:Key="GameGuideWin_WinName">Game Translation Wizard</sys:String>
     <sys:String x:Key="GameGuideWin_AlwaysTop">Always on top</sys:String>

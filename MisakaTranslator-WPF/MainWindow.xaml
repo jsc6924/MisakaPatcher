@@ -6,7 +6,7 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="MisakaTranslator" 
+        Title="MisakaPatcher" 
         WindowStartupLocation="CenterScreen"
         ShowTitle="True"
         Height="540" 

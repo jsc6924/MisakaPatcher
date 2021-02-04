@@ -27,12 +27,17 @@ namespace MisakaTranslator_WPF.SettingsPages
 
         private void BtnHelp_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://misaka.galeden.cn/");
+            System.Windows.MessageBox.Show("请发送反馈至ja235711@gmail.com");
         }
 
         private void BtnGithub_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/hanmin0822/MisakaTranslator");
+        }
+
+        private void BtnGithubEX_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/jsc723/MisakaPatcher");
         }
     }
 }
