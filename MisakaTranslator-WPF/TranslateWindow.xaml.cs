@@ -234,6 +234,7 @@ namespace MisakaTranslator_WPF
                             $"SELECT patchPath FROM game_library WHERE gameid = '{Common.GameID}';", 1);
                         var path = (_path == null || _path.Count < 1) ? Common.appSettings.LocalTransPatch : _path[0];
                         ltr.TranslatorInit(path, Common.appSettings.LocalTransMode);
+                        Common.ATPermission = ltr.getPatchPermission();
                         return ltr;
                     default:
                         return null;
@@ -418,7 +419,7 @@ namespace MisakaTranslator_WPF
                                 _gameTextHistory.Enqueue(source + "\n" + afterString1 + "\n" + afterString2);
 
                                 //9.翻译原句和结果记录到数据库
-                                if (Common.appSettings.ATon) {
+                                if (Common.ATPermission == 1 && Common.appSettings.ATon) {
                                     bool addRes = _artificialTransHelper.AddTrans(source, afterString1);
                                     if (addRes == false)
                                     {
@@ -625,7 +626,7 @@ namespace MisakaTranslator_WPF
                     _gameTextHistory.Enqueue(repairedText + "\n" + afterString1 + "\n" + afterString2);
 
                     //9.翻译原句和结果记录到数据库
-                    if (Common.appSettings.ATon)
+                    if (Common.ATPermission == 1 && Common.appSettings.ATon)
                     {
                         bool addRes = _artificialTransHelper.AddTrans(repairedText, afterString1);
                         if (addRes == false)
@@ -869,6 +870,11 @@ namespace MisakaTranslator_WPF
 
         private void ArtificialTransAdd_Item_Click(object sender, RoutedEventArgs e)
         {
+            if (Common.ATPermission == 0)
+            {
+                HandyControl.Controls.Growl.InfoGlobal(Application.Current.Resources["ArtificialTransWin_Error_Permission"].ToString());
+                return;
+            }
             dtimer.Stop();
             ArtificialTransAddWindow win = new ArtificialTransAddWindow(_currentsrcText,FirstTransText.Text,SecondTransText.Text);
             win.ShowDialog();

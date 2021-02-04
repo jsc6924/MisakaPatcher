@@ -316,6 +316,7 @@
     <sys:String x:Key="ArtificialTransWin_ResetBtn">清空内容</sys:String>
     <sys:String x:Key="ArtificialTransWin_ConfirmBtn">确定修改</sys:String>
     <sys:String x:Key="ArtificialTransWin_Success_Hint">自定义人工翻译结果成功！</sys:String>
+    <sys:String x:Key="ArtificialTransWin_Error_Permission">本翻译补丁内容受到保护，不支持修改</sys:String>
     <sys:String x:Key="ArtificialTransWin_Error_Hint">自定义人工翻译结果失败！</sys:String>
 
     <sys:String x:Key="TranslateWin_Menu_ATadd">自定义人工翻译</sys:String>

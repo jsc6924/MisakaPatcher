@@ -139,6 +139,12 @@ namespace TranslatorLibrary
             pTransitionNext = 1 - pTransitionSkip;
         }
 
+        private int PatchPermission = 0;
+        public int getPatchPermission()
+        {
+            return PatchPermission;
+        }
+
         /// <summary>
         /// 翻译API初始化
         /// </summary>
@@ -175,6 +181,7 @@ namespace TranslatorLibrary
                     if (m.Success)
                     {
                         enc = m.Groups[1].Value == "True";
+                        PatchPermission = enc ? 0 : 1;
                         switch (m.Groups[2].Value)
                         {
                             case "xor":

@@ -28,6 +28,8 @@ namespace MisakaTranslator_WPF
 
         public static int GameID; //全局使用中的游戏ID(数据库)
 
+        public static int ATPermission = 0; //0=不允许导入数据库、更改补丁内容 1=允许
+
         public static TextHookHandle textHooker; //全局使用中的Hook对象
         public static string UsingRepairFunc; //全局使用中的去重方法
 
