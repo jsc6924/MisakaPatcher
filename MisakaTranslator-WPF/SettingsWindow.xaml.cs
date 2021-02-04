@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace MisakaTranslator_WPF
 {
@@ -63,6 +64,11 @@ namespace MisakaTranslator_WPF
         private void Item_BaiduOCR_Selected(object sender, RoutedEventArgs e)
         {
             this.SettingFrame.Navigate(new Uri("SettingsPages/OCRPages/BaiduOCRSettingsPage.xaml", UriKind.Relative));
+        }
+
+        private void Item_Tesseract5OCR_Selected(object sender, RoutedEventArgs e)
+        {
+            this.SettingFrame.Navigate(new Uri("SettingsPages/OCRPages/TesseractOCR5SettingsPage.xaml", UriKind.Relative));
         }
 
         private void Item_OCRGeneral_Selected(object sender, RoutedEventArgs e)

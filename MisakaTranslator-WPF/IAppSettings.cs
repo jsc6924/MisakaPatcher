@@ -45,8 +45,8 @@ namespace MisakaTranslator_WPF
         }
         [Option(Alias = "LocalTrans.mode", DefaultValue = "medium")]
         string LocalTransMode { get; set; }
-        [Option(Alias = "LocalTrans.OCRPatch", DefaultValue = "")]
-        string LocalTransOCRPatch { get; set; }
+        [Option(Alias = "LocalTrans.Patch", DefaultValue = "")]
+        string LocalTransPatch { get; set; }
 
 
         [Option(Alias = "KingsoftFastAIT.KingsoftFastAITPath", DefaultValue = "")]
@@ -177,6 +177,27 @@ namespace MisakaTranslator_WPF
 
         [Option(Alias = "BaiduOCR.SecretKey", DefaultValue = "")]
         string BDOCR_SecretKey
+        {
+            get;
+            set;
+        }
+
+        [Option(Alias = "Tesseract5OCR.Path", DefaultValue = "C:\\Program Files\\Tesseract-OCR\\tesseract")]
+        string Tesseract5OCR_Path
+        {
+            get;
+            set;
+        }
+
+        [Option(Alias = "Tesseract5OCR.Mode", DefaultValue = "jpn")]
+        string Tesseract5OCR_Mode
+        {
+            get;
+            set;
+        }
+
+        [Option(Alias = "Tesseract5OCR.Args", DefaultValue = "")]
+        string Tesseract5OCR_Args
         {
             get;
             set;

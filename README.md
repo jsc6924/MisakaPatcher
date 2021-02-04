@@ -162,3 +162,6 @@ E-Mail/QQ:512240272@qq.com
 ## 其他注意
 
 软件开发过程中使用到部分网络素材，如果侵犯到您的权益，请第一时间联系作者删除，谢谢！
+
+publicKey,author,hash(content),signature=sign[privateKey](hash(content)|author)
+content...

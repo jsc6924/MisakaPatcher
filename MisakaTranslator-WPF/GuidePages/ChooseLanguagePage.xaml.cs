@@ -30,12 +30,12 @@ namespace MisakaTranslator_WPF.GuidePages
             InitializeComponent();
 
             _langList = CommonFunction.lstLanguage.Keys.ToList();
-            if (string.IsNullOrEmpty(Common.appSettings.LocalTransOCRPatch))
+            if (string.IsNullOrEmpty(Common.appSettings.LocalTransPatch))
             {
                 PathBox.Text = "请选择补丁";
             } else
             {
-                PathBox.Text = Common.appSettings.LocalTransOCRPatch;
+                PathBox.Text = Common.appSettings.LocalTransPatch;
                 path = PathBox.Text;
             }
             
@@ -50,7 +50,7 @@ namespace MisakaTranslator_WPF.GuidePages
             }
             if (Common.guideMode == 2)
             {
-                Common.appSettings.LocalTransOCRPatch = path;
+                Common.appSettings.LocalTransPatch = path;
             }
             Common.UsingSrcLang = CommonFunction.lstLanguage["日本語"];
             Common.UsingDstLang = CommonFunction.lstLanguage["中文"];
