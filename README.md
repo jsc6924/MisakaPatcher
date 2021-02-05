@@ -9,14 +9,14 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
 ## 相关功能及特点
 * 智能模糊匹配：在hook/ocr提取到的文本与补丁中的原句不完全一致时，也能快速正确地匹配到对应的文本（`经测试，在提取到的文本仅保留原句约25%的信息时依然可以做到95%以上的正确匹配`）
 * 为了与MisakaTranslator功能区分，本工具去除了所有机翻功能
-* 保留所有OCR功能，并增加了对Tesseract 5的支持
+* 包含了补丁的打包工具MisakaPatchPackager，可以合并文本，检查语法
+* 保留所有OCR功能，并增强了对Tesseract 5的支持
 * 增加了一种图像预处理方法（`提取白色文本，能将空心字转成实心字`）
-* 修复了2.0版本图像预处理没有效果的问题
-* 支持对汉化补丁的简单加密
+* 支持对汉化补丁的简单加密，被加密的补丁将不会被导入数据库，也不能被修改
 
 ## 补丁
 #### 格式
-补丁是一个文本文件（UTF-8无签名，仅支持单个文件，如有多个可以使用下一节介绍的工具合并，或者自行合并），格式如下：
+补丁是一个文本文件（UTF-8无签名，仅支持单个文件，如有多个可以使用下一节介绍的工具MisakaPatchPackager合并，或者自行合并），格式如下：
 ```
 <j>
 原句1
@@ -67,7 +67,7 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
 
 #### Tesseract OCR 5
 
-去[这里](https://github.com/UB-Mannheim/tesseract/wiki)下载32位安装包，安装到`"C:\\Program Files (x86)\\Tesseract-OCR"`，记得选jpn语言包，然后在OCR设置中勾选Tesseract5，就可以使用了。
+去[这里](https://github.com/UB-Mannheim/tesseract/wiki)下载安装包，记得选jpn语言包，然后在OCR设置中勾选Tesseract5，再去Tesseract5设置界面中选择安装路径，就可以使用了。
 
 ## 开发
 `git clone`后，代码可以编译，但是运行会报错，因为运行库不全
