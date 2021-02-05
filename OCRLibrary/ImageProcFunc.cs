@@ -39,7 +39,8 @@ namespace OCRLibrary
 
         public static Dictionary<string, string> lstHandleFun = new Dictionary<string, string>() {
             { "不进行处理" , "ImgFunc_NoDeal" },
-            { "OTSU二值化处理" , "ImgFunc_OTSU" }
+            { "OTSU二值化处理" , "ImgFunc_OTSU" },
+            { "提取纯白色文本" , "ImgFunc_WhiteText" },
         };
 
         public static Dictionary<string, string> lstOCRLang = new Dictionary<string, string>() {
@@ -53,12 +54,14 @@ namespace OCRLibrary
         /// <param name="b"></param>
         /// <param name="func"></param>
         /// <returns></returns>
-        public static Bitmap Auto_Thresholding(Bitmap b, string func) {
+        public static Bitmap Auto_Thresholding(Bitmap b, string func, int p1, int p2) {
             switch (func) {
                 case "ImgFunc_NoDeal":
                     return b;
                 case "ImgFunc_OTSU":
                     return OtsuThreshold(b);
+                case "ImgFunc_WhiteText":
+                    return ImgFuncWhiteText(b, 3 * p1);
             }
             return b;
         }
@@ -238,7 +241,49 @@ namespace OCRLibrary
                 return b;
             }
         }
-        
+
+        /// <summary>
+        /// 按固定颜色进行二值化处理,即三色的和均大于阈值颜色变黑，否则变白
+        /// </summary>
+        /// <param name="b"></param>
+        /// <param name="thresh"></param>
+        /// <returns></returns>
+        public static Bitmap ImgFuncWhiteText(Bitmap b, int thresh)
+        {
+            int width = b.Width;
+            int height = b.Height;
+            BitmapData data = b.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+            unsafe
+            {
+                byte* p = (byte*)data.Scan0;
+                int offset = data.Stride - width * 4;
+                byte R, G, B, gray;
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        R = p[2];
+                        G = p[1];
+                        B = p[0];
+
+                        if ((int)R + (int)G + (int)B >= thresh)
+                        {
+                            p[0] = p[1] = p[2] = 0;
+                        }
+                        else
+                        {
+                            p[0] = p[1] = p[2] = 255;
+                        }
+                        p += 4;
+                    }
+                    p += offset;
+                }
+                b.UnlockBits(data);
+                return b;
+            }
+        }
+
+
         /// <summary>
         /// 将System.Drawing.Image转换成System.Windows.Media.Imaging.BitmapImage
         /// </summary>

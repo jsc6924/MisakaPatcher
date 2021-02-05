@@ -228,6 +228,7 @@
     <sys:String x:Key="ChooseHandleFuncPage_RenewAreaBtn">Refresh preview</sys:String>
     <sys:String x:Key="ChooseHandleFuncPage_OCRBtn">OCR result test</sys:String>
     <sys:String x:Key="ChooseHandleFuncPage_ConfirmBtn">Confirm</sys:String>
+    <sys:String x:Key="ChooseHandleFuncPage_ParamLabel">Threshold</sys:String>
 
     <sys:String x:Key="ChooseHotKeyPage_Introduce">Select a trigger that enables OCR and delay before extracting text.</sys:String>
     <sys:String x:Key="ChooseHotKeyPage_HotKeySourceCBox">Trigger source</sys:String>

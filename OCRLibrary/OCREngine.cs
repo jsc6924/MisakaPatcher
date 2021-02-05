@@ -14,6 +14,8 @@ namespace OCRLibrary
         private Rectangle OCRArea;
         private bool isAllWin;
         private string imgProc;
+        private int imgProcParam1;
+        private int imgProcParam2;
         /// <summary>
         /// OCR处理，将图片上的文字提取得到一句话
         /// </summary>
@@ -30,7 +32,7 @@ namespace OCRLibrary
             if (OCRArea != null)
             {
                 Bitmap img = new Bitmap(ScreenCapture.GetWindowRectCapture(WinHandle, OCRArea, isAllWin));
-                Bitmap processedImg = ImageProcFunc.Auto_Thresholding(img, imgProc);
+                Bitmap processedImg = ImageProcFunc.Auto_Thresholding(img, imgProc, imgProcParam1, imgProcParam2);
                 return OCRProcess(new Bitmap(processedImg));
             }
             else
@@ -72,9 +74,11 @@ namespace OCRLibrary
         /// 设置OCR图像预处理方法
         /// </summary>
         /// <param name="imgProc">指定处理方法 ImgFunc_NoDeal=不处理 ImgFunc_OTSU=OTSU二值化处理</param>
-        public void SetOCRSourceImgProc(string imgProc)
+        public void SetOCRSourceImgProc(string imgProc, int param1, int param2)
         {
             this.imgProc = imgProc;
+            this.imgProcParam1 = param1;
+            this.imgProcParam2 = param2;
         }
 
         /// <summary>

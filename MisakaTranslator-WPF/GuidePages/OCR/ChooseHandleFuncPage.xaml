@@ -36,6 +36,25 @@
                     <Image Name="SrcImg" Stretch="Fill"/>
                 </hc:CompareSlider.SourceContent>
             </hc:CompareSlider>
+            <Slider
+                x:Name="ParamSlider"
+                Grid.Row="1"
+                Width="201"
+                Margin="279,40.6,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Maximum="255"
+                Value="200" ValueChanged="ParamSlider_ValueChanged" />
+            <Label
+                x:Name="ParamLabel"
+                Grid.Row="1"
+                Width="54"
+                Margin="220,32.6,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                BorderThickness="0"
+                Content="{StaticResource ChooseHandleFuncPage_ParamLabel}"
+                RenderTransformOrigin="-0.159,-0.823" />
 
         </Grid>
 
