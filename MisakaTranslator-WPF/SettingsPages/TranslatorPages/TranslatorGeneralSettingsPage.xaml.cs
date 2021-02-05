@@ -23,12 +23,16 @@ namespace MisakaTranslator_WPF.SettingsPages
     {
         private List<string> TranslatorList;
 
+        private List<string> WordSpliterList;
+            
         public TranslatorGeneralSettingsPage()
         {
             InitializeComponent();
             TranslatorList = CommonFunction.GetTranslatorList();
+            WordSpliterList = CommonFunction.GetWordSpliterList();
             FirstTransCombox.ItemsSource = TranslatorList;
             //SecondTransCombox.ItemsSource = TranslatorList;
+            WordSplitorCombox.ItemsSource = WordSpliterList;
 
             FirstTransCombox.SelectedIndex = CommonFunction.GetTranslatorIndex(Common.appSettings.FirstTranslator);
             //SecondTransCombox.SelectedIndex = CommonFunction.GetTranslatorIndex(Common.appSettings.SecondTranslator);
@@ -47,6 +51,10 @@ namespace MisakaTranslator_WPF.SettingsPages
         //{
         //    Common.appSettings.SecondTranslator = CommonFunction.lstTranslator[(string)SecondTransCombox.SelectedValue];
         //}
+        private void WordSpliterCombox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Common.appSettings.WordSpliter = CommonFunction.lstWordSpliter[(string)WordSplitorCombox.SelectedValue];
+        }
 
         private void EachRowTransCheckBox_Click(object sender, RoutedEventArgs e)
         {
