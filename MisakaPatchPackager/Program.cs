@@ -149,7 +149,7 @@ namespace MisakaPatchPackager
                 outputFile.WriteLine("#!useEnc={0},enc={1}", useEnc, enc);
                 foreach (var f in files)
                 {
-                    string[] lines = System.IO.File.ReadAllLines(f);
+                    string[] lines = File.ReadAllLines(f);
                     if (check)
                     {
                         Console.WriteLine("检查语法 {0}...", f);
@@ -160,6 +160,8 @@ namespace MisakaPatchPackager
                         catch (Exception e)
                         {
                             Console.WriteLine(e.Message);
+                            outputFile.Close();
+                            File.Delete(output);
                             return;
                         }
                     }

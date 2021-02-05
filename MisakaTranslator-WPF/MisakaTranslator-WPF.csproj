@@ -57,6 +57,9 @@
   <PropertyGroup>
     <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -497,7 +500,7 @@
   </Target>
   <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>copy $(SolutionDir)MisakaPatchPackager\bin\Release\MisakaPatchPackager.exe $(ProjectDir)\bin\Release\tools\MisakaPatchPackager.exe
+copy $(SolutionDir)MisakaPatchPackager\bin\Release\MisakaPatchPackager.exe $(ProjectDir)\bin\MisakaPatchPackager.exe</PostBuildEvent>
   </PropertyGroup>
 </Project>

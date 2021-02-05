@@ -52,10 +52,12 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
 ./MisakaPatchPackager.exe [option]... output
 例：./MisakaPatchPackager.exe -f="input1.txt" -f="input2.txt" -e=xor -p output.msk
 选项：
--f, --file      指定输入文件（可以指定多个，多个输入文件将被合并成一个文件输出）
--e, --enc       指定加密方法（可选择xor或aes），默认不加密，推荐xor
--p, --preview   预览前十行加密结果（只有在使用加密时才生效）
--h, --help      帮助
+-f, --file [FILE]       指定输入文件（可以使用多个-f指定多个）
+-e, --enc  [xor|aes]    指定加密方法（可选择xor或aes），默认不加密
+-c, --check             检查语法
+-p, --preview           预览前十行加密结果（只有在使用加密时才生效）
+-v, --version           显示版本
+-h, --help              帮助
 ```
 加密过的补丁可以和未加密的补丁一样使用，不需要再进行别的设置。
 
@@ -75,7 +77,9 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
 ## 版本更新
 #### 1.4
 - 基于MisakaTranslator2.7重写
+- 增强Tesseract 5的支持（日语横向、纵向、自定义命令行参数）
 - 如果补丁被加密，则将人工翻译将不能被导入数据库，也不能被修改
+- packager支持语法检查
 
 #### 1.3
 - 支持每个游戏绑定一个补丁
