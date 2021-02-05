@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Ink;
@@ -96,9 +97,21 @@ namespace MisakaTranslator_WPF
             }
         }
 
+        private System.Drawing.Rectangle Scale(double x, double y, double w, double h)
+        {
+            double rx = img.Width / Width;
+            double ry = img.Height / Height;
+            double r = Math.Max(rx, ry);
+            int xx = (int)(x * r);
+            int yy = (int)(y * r);
+            int ww = (int)(w * r);
+            int hh = (int)(h * r);
+            return new System.Drawing.Rectangle(xx, yy, ww, hh);
+        }
+
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            OCRArea = new System.Drawing.Rectangle((int)selectRect.Location.X, (int)selectRect.Location.Y, (int)selectRect.Size.Width, (int)selectRect.Size.Height);
+            OCRArea = Scale(selectRect.Location.X, selectRect.Location.Y, selectRect.Size.Width, selectRect.Size.Height);
 
             if (capMode == 2)
             {
