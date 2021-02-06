@@ -39,18 +39,8 @@ namespace ArtificialTransHelperLibrary
                 //空条目不添加，且返回假
                 return false;
             }
-
             string sql =
-                $"SELECT * FROM artificialtrans WHERE source = '{source}';";
-            
-            List<List<string>> ret = sqlite.ExecuteReader(sql, 4);
-
-            if (ret.Count > 0) {
-                return false;
-            }
-
-            sql =
-                $"INSERT INTO artificialtrans VALUES(NULL,'{source}','{Trans}',NULL);";
+                $"INSERT INTO tr VALUES(NULL,'{source}','{Trans}');";
             if (sqlite.ExecuteSql(sql) > 0)
             {
                 return true;
@@ -69,7 +59,8 @@ namespace ArtificialTransHelperLibrary
         /// <returns></returns>
         public bool UpdateTrans(string source, string Trans) {
             string sql =
-                $"UPDATE artificialtrans SET userTrans = '{Trans}' WHERE source = '{source}';";
+                $"UPDATE tr SET trans = '{Trans}' WHERE id = " +
+                $"(SELECT id from tr WHERE source = '{source}' ORDER BY id DESC LIMIT 1);";
             if (sqlite.ExecuteSql(sql) > 0)
             {
                 return true;
@@ -88,7 +79,7 @@ namespace ArtificialTransHelperLibrary
         {
             SQLHelper.CreateNewDatabase(Environment.CurrentDirectory + "\\ArtificialTranslation\\MisakaAT_" + gameName + ".sqlite");
             sqlite = new SQLHelper(Environment.CurrentDirectory + "\\ArtificialTranslation\\MisakaAT_" + gameName + ".sqlite");
-            sqlite.ExecuteSql("CREATE TABLE artificialtrans(id INTEGER PRIMARY KEY AUTOINCREMENT,source TEXT,machineTrans TEXT,userTrans TEXT);");
+            sqlite.ExecuteSql("CREATE TABLE tr(id INTEGER PRIMARY KEY AUTOINCREMENT,source TEXT,trans TEXT);");
         }
 
         /// <summary>
@@ -99,10 +90,7 @@ namespace ArtificialTransHelperLibrary
             {
                 SQLHelper sqliteDB = new SQLHelper(DBPath);
 
-                //让没有直接被定义的用户翻译等于机器翻译
-                sqliteDB.ExecuteSql("UPDATE artificialtrans SET userTrans = machineTrans WHERE userTrans is NULL;");
-
-                List<List<string>> ret = sqliteDB.ExecuteReader("SELECT * FROM artificialtrans;", 4);
+                List<List<string>> ret = sqliteDB.ExecuteReader("SELECT * FROM tr ORDER BY id;", 3);
 
                 FileStream fs = new FileStream(FilePath, FileMode.Create);
                 StreamWriter sw = new StreamWriter(fs);
@@ -112,7 +100,7 @@ namespace ArtificialTransHelperLibrary
                     sw.WriteLine("<j>");
                     sw.WriteLine(ret[i][1]);
                     sw.WriteLine("<c>");
-                    sw.WriteLine(ret[i][3]);
+                    sw.WriteLine(ret[i][2]);
                 }
 
                 sw.Flush();
