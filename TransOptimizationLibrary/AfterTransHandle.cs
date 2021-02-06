@@ -8,7 +8,6 @@ namespace TransOptimizationLibrary
 {
     public class AfterTransHandle
     {
-        NounTransOptimization nto;
         BeforeTransHandle bth;
 
         public AfterTransHandle(BeforeTransHandle b)

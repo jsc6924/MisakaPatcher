@@ -81,7 +81,7 @@ namespace TextHookLibrary
                     {
                         filepath = ps[i].MainModule.FileName;
                     }
-                    catch (System.ComponentModel.Win32Exception ex)
+                    catch (System.ComponentModel.Win32Exception)
                     {
                         continue;
                         //这个地方直接跳过，是因为32位程序确实会读到64位的系统进程，而系统进程是不能被访问的

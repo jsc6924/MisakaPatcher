@@ -82,7 +82,7 @@ namespace KeyboardMouseHookLibrary
                 Environment.CurrentDirectory = CurrentPath;//打开后即可恢复原目录
                 return res;
             }
-            catch (System.ComponentModel.Win32Exception ex)
+            catch (System.ComponentModel.Win32Exception)
             {
                 Environment.CurrentDirectory = CurrentPath;//恢复原目录
                 return false;

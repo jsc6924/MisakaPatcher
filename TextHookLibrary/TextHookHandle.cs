@@ -148,7 +148,7 @@ namespace TextHookLibrary
             {
                 Environment.CurrentDirectory = Path;//更改当前工作目录保证TextractorCLI正常运行
             }
-            catch (System.IO.DirectoryNotFoundException ex)
+            catch (System.IO.DirectoryNotFoundException)
             {
                 return false;
             }
@@ -168,7 +168,7 @@ namespace TextHookLibrary
                 Environment.CurrentDirectory = CurrentPath;//打开后即可恢复原目录
                 return res;
             }
-            catch (System.ComponentModel.Win32Exception ex)
+            catch (System.ComponentModel.Win32Exception)
             {
                 Environment.CurrentDirectory = CurrentPath;//恢复原目录
                 return false;
