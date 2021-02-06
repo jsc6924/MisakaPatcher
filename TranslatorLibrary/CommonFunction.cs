@@ -38,7 +38,6 @@ namespace TranslatorLibrary
 
         public static Dictionary<string, string> lstWordSpliter = new Dictionary<string, string>() 
         {
-            { "Mecab", "mecab" },
             { "不使用分词", "nop" }
         };
 

@@ -37,7 +37,6 @@ namespace MisakaTranslator_WPF
 
         private ArtificialTransHelper _artificialTransHelper;
 
-        private MecabHelper _mecabHelper;
         private WordSpliter _wordSpliter;
         private BeforeTransHandle _beforeTransHandle;
         private AfterTransHandle _afterTransHandle;
@@ -253,8 +252,6 @@ namespace MisakaTranslator_WPF
         {
             switch(spliter)
             {
-                case "mecab":
-                    return new MecabHelper();
                 case "nop":
                     return new NoWordSplit();
                 default:
@@ -749,9 +746,6 @@ namespace MisakaTranslator_WPF
             _wordSpliter = null;
             //立即清一次，否则重复打开翻译窗口会造成异常：Mecab处理类库异常
             GC.Collect();
-        }
-
-            _mecabHelper.Dispose();
         }
 
 

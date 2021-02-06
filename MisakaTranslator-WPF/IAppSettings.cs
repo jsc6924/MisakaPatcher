@@ -147,7 +147,7 @@ namespace MisakaTranslator_WPF
             set;
         }
 
-        [Option(Alias = "Translate_All.WordSpliter", DefaultValue = "mecab")]
+        [Option(Alias = "Translate_All.WordSpliter", DefaultValue = "nop")]
         string WordSpliter 
         { 
             get; 
