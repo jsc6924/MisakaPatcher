@@ -58,7 +58,7 @@
     <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <RunPostBuildEvent>Always</RunPostBuildEvent>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Lite-Release|AnyCPU'">
     <OutputPath>bin\Lite-Release\</OutputPath>
@@ -519,7 +519,9 @@
   </Target>
   <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(SolutionDir)MisakaPatchPackager\bin\Release\MisakaPatchPackager.exe $(ProjectDir)\bin\Release\tools\MisakaPatchPackager.exe
-copy $(SolutionDir)MisakaPatchPackager\bin\Release\MisakaPatchPackager.exe $(ProjectDir)\bin\MisakaPatchPackager.exe</PostBuildEvent>
+    <PostBuildEvent>if not exist $(TargetDir)tools mkdir $(TargetDir)tools
+copy $(SolutionDir)MisakaPatchPackager\bin\$(ConfigurationName)\MisakaPatchPackager.exe $(TargetDir)tools\MisakaPatchPackager.exe
+copy $(SolutionDir)MisakaPatchPackager\bin\$(ConfigurationName)\MisakaPatchPackager.exe $(ProjectDir)\bin\MisakaPatchPackager.exe
+RMDIR $(TargetDir)dic /S /Q</PostBuildEvent>
   </PropertyGroup>
 </Project>
