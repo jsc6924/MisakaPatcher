@@ -451,7 +451,7 @@ namespace MisakaTranslator_WPF
                         {
                             filepath = process.MainModule.FileName;
                         }
-                        catch (Win32Exception ex)
+                        catch (Win32Exception)
                         {
                             continue;
                         }

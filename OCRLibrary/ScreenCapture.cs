@@ -132,7 +132,7 @@ namespace OCRLibrary
             {
                 return bmpImage.Clone(rec, bmpImage.PixelFormat);
             }
-            catch (OutOfMemoryException ex)
+            catch (OutOfMemoryException)
             {
                 return null;
             }

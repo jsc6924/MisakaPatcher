@@ -182,7 +182,7 @@ namespace KeyboardMouseHookLibrary
                         GetModuleHandle(moduleName),
                         0);
                 }
-                catch (Exception err)
+                catch
                 { return false; }
                 //如果安装鼠标钩子失败
                 if (_hMouseHook == 0)
@@ -203,7 +203,7 @@ namespace KeyboardMouseHookLibrary
                         GetModuleHandle(moduleName),
                         0);
                 }
-                catch (Exception err2)
+                catch (Exception)
                 { return false; }
                 //如果安装键盘钩子失败
                 if (_hKeyboardHook == 0)

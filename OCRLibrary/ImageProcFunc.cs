@@ -216,7 +216,7 @@ namespace OCRLibrary
             {
                 byte* p = (byte*)data.Scan0;
                 int offset = data.Stride - width * 4;
-                byte R, G, B, gray;
+                byte R, G, B;
                 for (int y = 0; y < height; y++)
                 {
                     for (int x = 0; x < width; x++)
@@ -257,7 +257,7 @@ namespace OCRLibrary
             {
                 byte* p = (byte*)data.Scan0;
                 int offset = data.Stride - width * 4;
-                byte R, G, B, gray;
+                byte R, G, B;
                 for (int y = 0; y < height; y++)
                 {
                     for (int x = 0; x < width; x++)

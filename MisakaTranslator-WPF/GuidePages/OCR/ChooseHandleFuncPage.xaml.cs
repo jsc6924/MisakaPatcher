@@ -144,7 +144,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
                 DstImg.Source = ImageProcFunc.ImageToBitmapImage(ImageProcFunc.Auto_Thresholding(new System.Drawing.Bitmap(img), imgProc, int.Parse(Common.appSettings.OCR_PreprocessParam), 0));
                 Common.ocr.SetOCRSourceImgProc(imgProc, int.Parse(Common.appSettings.OCR_PreprocessParam), 0);
             }
-            catch(NullReferenceException ex)
+            catch(NullReferenceException)
             {
                 Growl.Error(Application.Current.Resources["ChooseOCRAreaPage_RenewErrorHint"].ToString());
                 return;
