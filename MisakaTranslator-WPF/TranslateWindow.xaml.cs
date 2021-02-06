@@ -22,6 +22,7 @@ using TranslatorLibrary;
 using TransOptimizationLibrary;
 using TTSHelperLibrary;
 using ArtificialTransHelperLibrary;
+using Castle.Core.Resource;
 
 namespace MisakaTranslator_WPF
 {
@@ -61,6 +62,9 @@ namespace MisakaTranslator_WPF
         private TextSpeechHelper _textSpeechHelper;//TTS朗读对象
 
         private IntPtr winHandle;//窗口句柄，用于设置活动窗口，以达到全屏状态下总在最前的目的
+        private static string REC_ON = Application.Current.Resources["TranslateWin_Menu_AT_Open"].ToString();
+        private static string REC_OFF = Application.Current.Resources["TranslateWin_Menu_AT_Close"].ToString();
+
 
         public TranslateWindow()
         {
@@ -112,7 +116,10 @@ namespace MisakaTranslator_WPF
             {
                 MouseKeyboardHook_Init();
             }
-            
+
+            toggleRec.ToolTip = Common.appSettings.ATon ? REC_OFF: REC_ON;
+            updateToggleRecDisplay(false);
+
 
         }
 
@@ -892,6 +899,35 @@ namespace MisakaTranslator_WPF
             ArtificialTransAddWindow win = new ArtificialTransAddWindow(_currentsrcText,FirstTransText.Text,SecondTransText.Text);
             win.ShowDialog();
             dtimer.Start();
+        }
+
+        private static Brush getBrush(System.Drawing.Color c)
+        {
+            System.Windows.Media.Color mc = Color.FromArgb(c.A, c.R, c.G, c.B);
+           return new SolidColorBrush(mc);
+        }
+
+        private void updateToggleRecDisplay(bool verbose = true)
+        {
+            if (Common.appSettings.ATon)
+            {
+                if (verbose) HandyControl.Controls.Growl.InfoGlobal(Application.Current.Resources["TranslateWin_Menu_AT_Recording"].ToString());
+                toggleRec.Foreground = getBrush(System.Drawing.Color.OrangeRed);
+                toggleRec.ToolTip = REC_OFF;
+            }
+            else
+            {
+                if (verbose) HandyControl.Controls.Growl.InfoGlobal(Application.Current.Resources["TranslateWin_Menu_AT_Stopped"].ToString());
+                toggleRec.Foreground = getBrush(System.Drawing.Color.PapayaWhip);
+                toggleRec.ToolTip = REC_ON;
+            }
+               
+        }
+
+        private void Toggle_AT_Rec_Item_Click(object sender, RoutedEventArgs e)
+        {
+            Common.appSettings.ATon = !Common.appSettings.ATon;
+            updateToggleRecDisplay();
         }
     }
 }

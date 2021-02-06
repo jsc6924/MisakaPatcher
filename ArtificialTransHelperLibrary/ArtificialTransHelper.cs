@@ -40,7 +40,7 @@ namespace ArtificialTransHelperLibrary
                 return false;
             }
             string sql =
-                $"INSERT INTO tr VALUES(NULL,'{source}','{Trans}');";
+                $"INSERT INTO artificialtrans VALUES(NULL,'{source}','{Trans}');";
             if (sqlite.ExecuteSql(sql) > 0)
             {
                 return true;
@@ -58,9 +58,10 @@ namespace ArtificialTransHelperLibrary
         /// <param name="Trans"></param>
         /// <returns></returns>
         public bool UpdateTrans(string source, string Trans) {
+            //如果要更新的语句不是最新的，就更新所有匹配的语句中最晚添加的那个
             string sql =
-                $"UPDATE tr SET trans = '{Trans}' WHERE id = " +
-                $"(SELECT id from tr WHERE source = '{source}' ORDER BY id DESC LIMIT 1);";
+                $"UPDATE artificialtrans SET trans = '{Trans}' WHERE id = " +
+                $"(SELECT id from artificialtrans WHERE source = '{source}' ORDER BY id DESC LIMIT 1);";
             if (sqlite.ExecuteSql(sql) > 0)
             {
                 return true;
@@ -79,7 +80,7 @@ namespace ArtificialTransHelperLibrary
         {
             SQLHelper.CreateNewDatabase(Environment.CurrentDirectory + "\\ArtificialTranslation\\MisakaAT_" + gameName + ".sqlite");
             sqlite = new SQLHelper(Environment.CurrentDirectory + "\\ArtificialTranslation\\MisakaAT_" + gameName + ".sqlite");
-            sqlite.ExecuteSql("CREATE TABLE tr(id INTEGER PRIMARY KEY AUTOINCREMENT,source TEXT,trans TEXT);");
+            sqlite.ExecuteSql("CREATE TABLE artificialtrans(id INTEGER PRIMARY KEY AUTOINCREMENT,source TEXT,trans TEXT);");
         }
 
         /// <summary>
@@ -90,7 +91,7 @@ namespace ArtificialTransHelperLibrary
             {
                 SQLHelper sqliteDB = new SQLHelper(DBPath);
 
-                List<List<string>> ret = sqliteDB.ExecuteReader("SELECT * FROM tr ORDER BY id;", 3);
+                List<List<string>> ret = sqliteDB.ExecuteReader("SELECT * FROM artificialtrans ORDER BY id;", 3);
 
                 FileStream fs = new FileStream(FilePath, FileMode.Create);
                 StreamWriter sw = new StreamWriter(fs);
