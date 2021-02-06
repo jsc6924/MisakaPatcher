@@ -521,7 +521,6 @@
   <PropertyGroup>
     <PostBuildEvent>if not exist $(TargetDir)tools mkdir $(TargetDir)tools
 copy $(SolutionDir)MisakaPatchPackager\bin\$(ConfigurationName)\MisakaPatchPackager.exe $(TargetDir)tools\MisakaPatchPackager.exe
-copy $(SolutionDir)MisakaPatchPackager\bin\$(ConfigurationName)\MisakaPatchPackager.exe $(ProjectDir)\bin\MisakaPatchPackager.exe
-RMDIR $(TargetDir)dic /S /Q</PostBuildEvent>
+copy $(SolutionDir)MisakaPatchPackager\bin\$(ConfigurationName)\MisakaPatchPackager.exe $(ProjectDir)\bin\MisakaPatchPackager.exe</PostBuildEvent>
   </PropertyGroup>
 </Project>

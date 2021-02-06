@@ -150,7 +150,7 @@ namespace SQLHelperLibrary
                 _mDbConnection.Close();
                 return ret;
             }
-            catch (System.Data.SQLite.SQLiteException e)
+            catch (Exception e)
             {
                 _mDbConnection.Close();
                 _errorInfo = e.Message;
