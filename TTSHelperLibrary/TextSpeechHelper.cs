@@ -73,6 +73,8 @@ namespace TTSHelperLibrary
         /// </summary>
         /// <param name="text">要说的字符串</param>
         public void Speak(string text) {
+            if (text == null)
+                return;
             synth.Speak(text);
         }
 
@@ -81,6 +83,8 @@ namespace TTSHelperLibrary
         /// </summary>
         /// <param name="text">要说的字符串</param>
         public void SpeakAsync(string text) {
+            if (text == null)
+                return;
             synth.SpeakAsync(text);
         }
 

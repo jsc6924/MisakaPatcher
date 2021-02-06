@@ -45,6 +45,7 @@
                 <Button fa:Awesome.Content="UserPlus" Background="#00000000" BorderThickness="0" Height="40" Width="40" FontSize="16" Foreground="PapayaWhip" Click="ArtificialTransAdd_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_ATadd}"/>
                 <Button fa:Awesome.Content="Cog" Background="#00000000" BorderThickness="0" Height="40" Width="40" FontSize="16" Foreground="PapayaWhip" Click="Settings_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_Settings}"></Button>
                 <Button fa:Awesome.Content="Microphone" Background="#00000000" BorderThickness="0" Height="40" Width="40" FontSize="16" Foreground="PapayaWhip" Click="TTS_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_TTS}"></Button>
+                <Button fa:Awesome.Content="Clone" Name="toggleRec" Background="#00000000" BorderThickness="0" Height="40" Width="40" FontSize="16" Foreground="PapayaWhip" Click="Toggle_AT_Rec_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_AT_Open}"></Button>
                 <Button fa:Awesome.Content="Lock" Background="#00000000" BorderThickness="0" Height="40" Width="40" FontSize="16" Foreground="PapayaWhip" Name="LockButton" Click="Lock_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_Lock}"></Button>
             </WrapPanel>
             <WrapPanel Grid.Row="0" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right">
