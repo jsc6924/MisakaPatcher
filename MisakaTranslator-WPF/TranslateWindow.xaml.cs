@@ -46,7 +46,7 @@ namespace MisakaTranslator_WPF
 
         private IDict _dict;
 
-        private string _currentsrcText; //当前源文本内容
+        private string _currentsrcText = ""; //当前源文本内容
 
         public string SourceTextFont; //源文本区域字体
         public int SourceTextFontSize; //源文本区域字体大小
