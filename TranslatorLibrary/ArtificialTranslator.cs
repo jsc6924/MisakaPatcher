@@ -126,17 +126,20 @@ namespace TranslatorLibrary
             switch (mode)
             {
                 case "low":
-                    pTransitionSkip = 0.03;
-                    break;
-                case "high":
-                    pTransitionSkip = 0.15;
+                    pTransitionLongJump = 0.05;
+                    pTransitionShortJump = 0.12;
                     break;
                 default:
                 case "medium":
-                    pTransitionSkip = 0.075;
+                    pTransitionLongJump = 0.075;
+                    pTransitionShortJump = 0.15;
+                    break;
+                case "high":
+                    pTransitionLongJump = 0.15;
+                    pTransitionShortJump = 0.25;
                     break;
             }
-            pTransitionNext = 1 - pTransitionSkip;
+            pTransitionNext = 1 - pTransitionLongJump - pTransitionShortJump;
         }
 
         private int PatchPermission = 0;
@@ -243,11 +246,12 @@ namespace TranslatorLibrary
          * Assume there are K possible sentences (states).
          * 
          * We use the following transition model:
-         *     P(transition from state i to j) = （1-pTransitionSkip）* v if j == i + 1
-         *                                     = pTransitionSkip * v otherwise
-         *                                     where （1-pTransitionSkip)*v + (K-1)*pTransitionSkip*v = 1
-         *     (Assume K >= 2)
-         *     So simply use pTransitionSkip and （1-pTransitionSkip） due to normalization
+         *     P(transition from state i to j) = pNext * v       if j == i + 1  // go to next sentence
+         *                                     = pShortJump * v  if j != i + 1 and abs(j - i - 1) < 10 // jump to somewhere nearby
+         *                                     = pLongJump * v   otherwise  // jump to somewhere faraway (e.g. load game data)
+         *          where pNext*v + 20*pShortJump*v + (K-21)*pLongJump*v == 1, v is a normalization factor
+         *     (Assume K >> 20)
+         *     Notice that we can choose any (pNext, pShortJump, pLongJump) due to normalization.
          *     
          *     
          * Initial probabilities P(i) = 1.0 / K
@@ -258,31 +262,28 @@ namespace TranslatorLibrary
          * 
          * A forward step in Viterbi algorithm at time t can be described as 
          * for each state i = {1, 2, ..., K} do
-         *     T[i, t] <- max(k)(T[i, t-1] * P(transition from state k to i) * P(state = i | observation at t)
+         *     T[i, t] <- max(k)(T[i, t-1] * P(transition from state k to i) * P(state = i | observation at t))
          *     
          * This requires O(K^2), but our K > 30000, so it will be too slow for our case.
          * So we need to approximate:
-         *     We only consider the case when two of {T[i, t-1], P(transition from state k to i), P(state = i | observation at t)} are large.
-         *     Let possibleCursors be a list of large T[i, t-1], and sum(possibleCursors) == 0.8
+         *     We only consider the case when at least one of {T[i, t-1], P(transition from state k to i)} are large.
+         *     Let possibleCursors be a list of large T[i, t-1], and sum(possibleCursors) == 0.8,
+         *     which means I'm 80% sure the previous state is one of the state in possibleCursors
          *     For each T[i, t-1] in possibleCursors , we consider 
-         *          T[i, t-1]*P(i to i+1)*P(i+1 | o_t)  [Case 1] //transition to the next line
-         *              and 
-         *          (
-         *              for all k that P(k | o_t) is large: t[i, t-1]*P(i to not i+1)*P(k | o_t) //a jump from possible cursor
-         *              covered in the next case more efficiently, so skiped
-         *          )
-         *     For all k that P(k | o_t) is large: 
-         *          max(T[*, t-1])*P(i to not i+1)*P(i+1 | o_t)  [Case 2] // a jump from somewhere
-         *              and
-         *          (
-         *              t[k-1, t-1]*P(k-1 to k)*P(k | o_t) // transition from previous line
-         *              where t[k-1, t-1] == 0.2 / (K - possibleCursors.Count) if k-1 not in possibleCursors
-         *                                == possibleCursors[k-1] if k-1 in possibleCursors
-         *              However, in this case, if k-1 is not in possibleCursor, t[k-1, t-1] will be extremely small, and if 
-         *              k-1 is in possibleCursor, it is already covered in the previous case. Therefore we can simply skip this case.
-         *           )
+         *       [Case 1]
+         *          T[i, t-1]*P(i to i+1)*P(i+1 | o_t) //transition to the next line
+         *       [Case 2]
+         *          T[i, t-1]*P(i to somewhere u within [i-10, i+10])*P(u | o_t)  [Case 2] //transition to somewhere nearby
+         *     
+         *     At this point, if we've already find a confident solution (indicated by some threshold), we can stop here.
+         *     Notice that the runtime is O(M), where M is the maximum size of possibleCursors and is a constant!
+         *     
+         *     If we don't find a confident solution after case 1 and 2, we have to search for every sentence: 
+         *     For all k that P(k | o_t) is large, consider: 
+         *        [Case 3]
+         *          max(T[*, t-1])*P(i to k)*P(k | o_t) // a long jump from the most likely cursor
          *           
-         * The runtime is now O(MK) where M is the maximum size of possibleCursors and is a constant.
+         *     The runtime is now O(MK). (linear)
          * 
          */
         #endregion
@@ -309,18 +310,29 @@ namespace TranslatorLibrary
             {
                 foreach (int k in possibleCursors.Keys)
                 {
-                    double s = ComputeSimilarity(sourceText, jp_text[k + 1]); //[Case 1]
-                    double pSequantial = possibleCursors[k] * pTransitionNext * s;
-                    maxPSeq = Math.Max(maxPSeq, pSequantial);
-                    nextCursorsPQ.Add(k + 1, pSequantial);
+                    int pivot = k + 1;
+                    for (int u = pivot - shortJumpMaxDistance; u < pivot + shortJumpMaxDistance; u++)
+                    {
+                        if (u >= 0 && u < jp_text.Count)
+                        {
+                            double s = ComputeSimilarity(sourceText, jp_text[u]);
+                            int d = Math.Abs(u - pivot);
+                            // [Case 1] or [Case 2]
+                            double pTransition = u == pivot ? pTransitionNext : pTransitionShortJump;
+                            double pSequantial = possibleCursors[k] * pTransition * s;
+                            maxPSeq = Math.Max(maxPSeq, pSequantial);
+                            nextCursorsPQ.Add(u, pSequantial);
+                        }
+                    }
                 }
             }
-            if (maxPSeq < pFullSearchThresh)
+            // do a full search only if we are not confident after case 1 and 2
+            if (maxPSeq < pFullSearchThresh) 
             {
                 for (int i = 0; i < jp_text.Count; i++)
                 {
                     double s = ComputeSimilarity(sourceText, jp_text[i]);
-                    double pSkip = pMostLikelyPrevCursor * pTransitionSkip * s; //[Case 2]
+                    double pSkip = pMostLikelyPrevCursor * pTransitionLongJump * s; //[Case 3]
                     maxPSkip = Math.Max(maxPSkip, pSkip);
                     nextCursorsPQ.Add(i, pSkip);
                 }
@@ -490,8 +502,10 @@ namespace TranslatorLibrary
         private const int R_MAX_LEN = 64;
         private const int MAX_CURSOR = 8;
         private const double SoftmaxCoeff = 10;
-        private double pTransitionSkip;
+        private double pTransitionLongJump;
+        private double pTransitionShortJump;
         private double pTransitionNext;
+        private const int shortJumpMaxDistance = 10;
         private const double pFullSearchThresh = 0.2;
         private Dictionary<int, double> possibleCursors = new Dictionary<int, double>();
     }
