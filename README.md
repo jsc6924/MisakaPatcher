@@ -90,8 +90,8 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
 - packager支持语法检查
 
 从1.4开始，会发布两个版本
-lite版：轻量级的版本，去除了mecab分词功能和自带的tesseract4 OCR，解压后的大小比完全版要小100Mb
-完全版：即包含mecab分词和tesseract4（英语、日语）的版本
+- lite版：轻量级的版本，去除了mecab分词功能和自带的tesseract4 OCR，解压后的大小比完全版要小100Mb
+- 完全版：即包含mecab分词和tesseract4（英语、日语）的版本
 
 #### 1.3
 - 支持每个游戏绑定一个补丁
