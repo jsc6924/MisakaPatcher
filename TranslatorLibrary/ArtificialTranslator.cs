@@ -301,7 +301,7 @@ namespace TranslatorLibrary
                 sourceText = sourceText.Substring(0, R_MAX_LEN - 1);
             }
 
-            double pMostLikelyPrevCursor = possibleCursors.Count == 0 ? 1.0 / pTransitionNext : possibleCursors.Max(i => i.Value);
+            double pMostLikelyPrevCursor = possibleCursors.Count == 0 ? 1.0 / MAX_CURSOR : possibleCursors.Max(i => i.Value);
             CursorPriorityQueue nextCursorsPQ = new CursorPriorityQueue(MAX_CURSOR);
 
             var maxPSeq = 0.0;
@@ -375,7 +375,7 @@ namespace TranslatorLibrary
                 Console.WriteLine(String.Format("{0}:{1}", k, jp_text[k]));
                 Console.WriteLine(possibleCursors[k]);
             }
-            if (possibleCursors.Count == 0)
+            if (possibleCursors.Count == 0 || Math.Max(maxPSkip, maxPSeq) < minConfidenceThresh)
                 return "无匹配文本";
             Console.WriteLine(String.Format("[{0}:{1}]", maxI, jp_text[maxI]));
             Console.WriteLine("------");
@@ -507,6 +507,7 @@ namespace TranslatorLibrary
         private double pTransitionNext;
         private const int shortJumpMaxDistance = 10;
         private const double pFullSearchThresh = 0.2;
+        private const double minConfidenceThresh = 0.03;
         private Dictionary<int, double> possibleCursors = new Dictionary<int, double>();
     }
 }
