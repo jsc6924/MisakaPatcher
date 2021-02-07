@@ -6,6 +6,8 @@
 
 MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有机器翻译功能，转而添加了对外挂汉化补丁的支持，因此本工具更适合喜欢人工翻译的玩家，也为解包封包遇到困难的汉化人员提供了另一种发布汉化的途径。本文介绍了补丁的格式以及加载的方法。
 
+[Gitee镜像](https://gitee.com/jsc723/MisakaPatcher)
+
 ## 相关功能及特点
 * 智能模糊匹配：在hook/ocr提取到的文本与补丁中的原句不完全一致时，也能快速正确地匹配到对应的文本（`经测试，在提取到的文本仅保留原句约25%的信息时依然可以做到95%以上的正确匹配`）
 * 为了与MisakaTranslator功能区分，本工具去除了所有机翻功能
@@ -82,6 +84,7 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
 #### 1.4
 - 基于MisakaTranslator2.7重写
 - 增强Tesseract 5的支持（日语横向、纵向、自定义命令行参数）
+- 优化匹配算法：概率分布函数变得相对更平滑
 - 增强人工翻译功能：
   - 可以在翻译窗口控制是否自动记录到数据库
   - 记录到数据库的原句可以重复
@@ -89,8 +92,8 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
 - packager支持语法检查
 
 从1.4开始，会发布两个版本
-lite版：轻量级的版本，去除了mecab分词功能和自带的tesseract4 OCR，解压后的大小比完全版要小100Mb
-完全版：即包含mecab分词和tesseract4（英语、日语）的版本
+- lite版：轻量级的版本，去除了mecab分词功能和自带的tesseract4 OCR，解压后的大小比完全版要小100Mb
+- 完全版：即包含mecab分词和tesseract4（英语、日语）的版本
 
 #### 1.3
 - 支持每个游戏绑定一个补丁
