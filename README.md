@@ -82,6 +82,7 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
 #### 1.4
 - 基于MisakaTranslator2.7重写
 - 增强Tesseract 5的支持（日语横向、纵向、自定义命令行参数）
+- 优化匹配算法：概率分布函数变得相对更平滑
 - 增强人工翻译功能：
   - 可以在翻译窗口控制是否自动记录到数据库
   - 记录到数据库的原句可以重复
