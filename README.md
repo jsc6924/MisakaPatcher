@@ -61,6 +61,10 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
 ```
 加密过的补丁可以和未加密的补丁一样使用，不需要再进行别的设置。
 
+#### 有关补丁发布
+- 不加密的补丁可以发布到MisakaTranslator的[公共网盘](http://mskt.ys168.com/)
+- 加密的补丁可以发布到https://gitee.com/jsc723/misaka-patches-headers，目前只支持通过提交pull request进行发布，之后会为Patcher添加联网查询补丁和自动发布功能
+
 ## 使用
 打开软件，右下角设置 -> 翻译相关设置 -> 通用设置 -> 选择本地汉化补丁为翻译源。
 然后就可以开始游戏了，添加游戏向导中会提示选择汉化补丁，Hook只有第一次需要选择。Hook和OCR相关设置请参考[原版说明](/README_ORIGINAL.md)。
