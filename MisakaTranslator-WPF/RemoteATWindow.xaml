@@ -1,0 +1,53 @@
+﻿<Window x:Class="MisakaTranslator_WPF.RemoteATWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        mc:Ignorable="d"
+        Title="ArtificialTransPanel" Height="450" Width="1100" MinWidth="1100"
+        >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="395*"/>
+            <ColumnDefinition Width="598*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="36*"/>
+            <RowDefinition Height="55*"/>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="201*"/>
+            <RowDefinition Height="50*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="在线搜索人工翻译文件" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Height="23" Margin="391,9,365.6,3.2" Width="237" Grid.ColumnSpan="2"/>
+        <hc:TextBox Name="GameTitleTextbox"
+                    Grid.Column="0" Grid.Row="1" hc:InfoElement.TitleAlignment="Left"
+                    hc:InfoElement.Title="  游戏名" ShowClearButton="True" 
+                    TextChanged="GameTitleTextbox_TextChanged" Grid.ColumnSpan="1" 
+                    Margin="29,9.8,20.2,9.8"
+                     Grid.RowSpan="1"
+                    
+                    />
+        <Button Grid.Column="0" Grid.Row="2" Width="150" Name="SelectGameBtn" Content="选择游戏本体exe" Click="SelectGameBtn_Click" Margin="39,10.2,206.2,3.8" BorderThickness="2"></Button>
+        <Button Grid.Column="0" Grid.Row="2" Width="104" Name="ClearGameBtn" Content="清除" Click="ClearGameBtn_Click"  Margin="236,10.2,55.2,3.8" BorderThickness="2"></Button>
+        <Button Grid.Column="0" Grid.Row="3" Width="150" Name="SearchBtn" Content="联网查找" Click="SearchBtn_Click1" Margin="121,7.2,124.2,6.8" BorderThickness="2"></Button>
+        <ListView Name="ResultTable"
+                  BorderThickness="0"
+                  Grid.Row="1" Grid.Column="1" Background="White" SelectionMode="Single" Grid.RowSpan="6" MouseUp="ResultTable_MouseUp" Grid.ColumnSpan="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="300" Header="游戏名" DisplayMemberBinding="{Binding Path=Game}"/>
+                    <GridViewColumn Width="300" Header="MD5" DisplayMemberBinding="{Binding Path=MD5}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBox Name="DetailTextBlock" Grid.Row="1" Grid.Column="1" Background="Transparent" Grid.RowSpan="5" Visibility="Hidden"
+            BorderThickness="0"
+            IsReadOnly="True"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap" Grid.ColumnSpan="2" />
+        <Button Name="ReturnToResultBtn" Content="返回" Grid.Row="5" Grid.Column="1" Click="ReturnToResultBtn_Click" Width="100" HorizontalAlignment="Right" Margin="0,9,19.6,9" Visibility="Hidden"></Button>
+        <Button Name="OpenDownloadLinkBtn" Content="打开下载链接" Grid.Row="5" Grid.Column="1" Click="OpenDownloadLinkBtn_Click"  Width="100" HorizontalAlignment="Right" Margin="0,8,175.6,10" Visibility="Hidden"></Button>
+    </Grid>
+</Window>

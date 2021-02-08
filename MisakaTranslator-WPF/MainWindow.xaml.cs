@@ -10,6 +10,7 @@ using System.Windows.Media;
 using Config.Net;
 using HandyControl.Controls;
 using KeyboardMouseHookLibrary;
+using MisakaTranslator_WPF.ComicTranslator;
 using OCRLibrary;
 using SQLHelperLibrary;
 using TextHookLibrary;
@@ -503,6 +504,11 @@ namespace MisakaTranslator_WPF
         {
             var ctmw = new ComicTranslator.ComicTransMainWindow();
             ctmw.Show();
+        }
+        private void SearchTransBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var atw = new RemoteATWindow();
+            atw.Show();
         }
     }
 }
