@@ -87,6 +87,7 @@
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceProcess" />
@@ -113,6 +114,9 @@
     </Compile>
     <Compile Include="ComicTranslator\ComicTransMainWindow.xaml.cs">
       <DependentUpon>ComicTransMainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RemoteATWindow.xaml.cs">
+      <DependentUpon>RemoteATWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ComicTranslator\ImageProcWindow.xaml.cs">
       <DependentUpon>ImageProcWindow.xaml</DependentUpon>
@@ -231,6 +235,7 @@
     <Compile Include="UserControls\SelectTransLangDialog.xaml.cs">
       <DependentUpon>SelectTransLangDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils.cs" />
     <Page Include="AddOptWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -242,6 +247,10 @@
     <Page Include="ComicTranslator\ComicTransMainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RemoteATWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ComicTranslator\ImageProcWindow.xaml">
       <SubType>Designer</SubType>

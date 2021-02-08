@@ -56,6 +56,12 @@
                 </hc:Poptip.Instance>
             </Button>
 
+            <Button fa:Awesome.Content="Search" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="{DynamicResource MainBtnColor}" FontSize="40" Background="#01FFFFFF"  Height="Auto" Width="Auto"  Effect="{StaticResource EffectShadow5}" Click="SearchTransBtn_Click" Margin="20,0,0,0.5">
+                <hc:Poptip.Instance>
+                    <hc:Poptip FontSize="15" Foreground="Black" FontFamily="微软雅黑" Content="联网查询人工翻译" Placement="Right"/>
+                </hc:Poptip.Instance>
+            </Button>
+
         </StackPanel>
         
         
