@@ -58,7 +58,7 @@
     <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Lite-Release|AnyCPU'">
     <OutputPath>bin\Lite-Release\</OutputPath>
@@ -531,6 +531,14 @@
     <PostBuildEvent>if not exist $(TargetDir)tools mkdir $(TargetDir)tools
 copy $(SolutionDir)MisakaPatchPackager\bin\$(ConfigurationName)\MisakaPatchPackager.exe $(TargetDir)tools\MisakaPatchPackager.exe
 copy $(SolutionDir)MisakaPatchPackager\bin\$(ConfigurationName)\MisakaPatchPackager.exe $(ProjectDir)\bin\MisakaPatchPackager.exe
-RMDIR $(TargetDir)dic /S /Q</PostBuildEvent>
+RMDIR $(TargetDir)dic /S /Q
+if not exist $(TargetDir)textRepairPlugins mkdir $(TargetDir)textRepairPlugins
+xcopy /s /y $(ProjectDir)textRepairPlugins $(TargetDir)textRepairPlugins
+xcopy /s /y $(SolutionDir)TextRepairLibrary\bin\$(ConfigurationName) $(TargetDir)
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
 </Project>
