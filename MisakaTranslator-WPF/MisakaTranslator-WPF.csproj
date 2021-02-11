@@ -537,8 +537,4 @@ xcopy /s /y $(ProjectDir)textRepairPlugins $(TargetDir)textRepairPlugins
 xcopy /s /y $(SolutionDir)TextRepairLibrary\bin\$(ConfigurationName) $(TargetDir)
     </PostBuildEvent>
   </PropertyGroup>
-  <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
-  </PropertyGroup>
 </Project>
