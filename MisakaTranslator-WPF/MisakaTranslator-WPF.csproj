@@ -533,10 +533,7 @@ copy $(SolutionDir)MisakaPatchPackager\bin\$(ConfigurationName)\MisakaPatchPacka
 copy $(SolutionDir)MisakaPatchPackager\bin\$(ConfigurationName)\MisakaPatchPackager.exe $(ProjectDir)\bin\MisakaPatchPackager.exe
 if not exist $(TargetDir)textRepairPlugins mkdir $(TargetDir)textRepairPlugins
 xcopy /s /y $(ProjectDir)textRepairPlugins $(TargetDir)textRepairPlugins
-xcopy /s /y $(SolutionDir)TextRepairLibrary\bin\$(ConfigurationName) $(TargetDir)</PostBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
+xcopy /s /y $(SolutionDir)TextRepairLibrary\bin\$(ConfigurationName) $(TargetDir)
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
