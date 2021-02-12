@@ -65,7 +65,7 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
 
 #### 有关补丁发布
 - 不加密的补丁可以发布到MisakaTranslator的[公共网盘](http://mskt.ys168.com/)
-- 加密的补丁可以发布到https://gitee.com/jsc723/misaka-patches-headers，目前只支持通过提交pull request进行发布，之后会为Patcher添加联网查询补丁和自动发布功能
+- 加密的补丁可以发布到[Gitee仓库](https://gitee.com/jsc723/misaka-patches-headers)，目前只支持通过提交pull request进行发布，之后会为Patcher添加联网查询补丁和自动发布功能
 
 ## 使用
 打开软件，右下角设置 -> 翻译相关设置 -> 通用设置 -> 选择本地汉化补丁为翻译源。
@@ -81,6 +81,12 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
 下载最新版的release，与`MisakaTranslator-WPF\bin\Debug`之下的内容比较，把`Debug`中缺少的文件和文件夹全都复制过去。
 
 ## 版本更新
+#### 1.5 (测试版)
+- 新增功能
+  - 联网搜索人工翻译文件
+  - hook可以使用自定义python脚本去重
+  - packager更名为publisher，可以发布人工翻译文件（正在开发）
+
 #### 1.4
 - 基于MisakaTranslator2.7重写
 - 增强Tesseract 5的支持（日语横向、纵向、自定义命令行参数）
@@ -92,10 +98,6 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
   - 记录到数据库的原句可以重复
   - 只能将非加密的补丁导入数据库（补丁被加密说明作者不希望补丁内容被修改，所以我们就不要去修改它）
 - packager支持语法检查
-
-从1.4开始，会发布两个版本
-- lite版：轻量级的版本，去除了mecab分词功能和自带的tesseract4 OCR，解压后的大小比完全版要小100Mb
-- 完全版：即包含mecab分词和tesseract4（英语、日语）的版本
 
 #### 1.3
 - 支持每个游戏绑定一个补丁
