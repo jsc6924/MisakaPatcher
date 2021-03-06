@@ -9,15 +9,27 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
 [Gitee镜像](https://gitee.com/jsc723/MisakaPatcher)
 
 ## 相关功能及特点
-* 智能模糊匹配：在hook/ocr提取到的文本与补丁中的原句不完全一致时，也能快速正确地匹配到对应的文本（`经测试，在提取到的文本仅保留原句约25%的信息时依然可以做到95%以上的正确匹配`）
+* **智能模糊匹配**：在hook/ocr提取到的文本与补丁中的原句不完全一致时，也能快速正确地匹配到对应的文本（`经测试，在提取到的文本仅保留原句约25%的信息时依然可以做到95%以上的正确匹配`）
+* 联网搜索和发布汉化补丁，**不需要服务器**
 * 为了与MisakaTranslator功能区分，本工具去除了所有机翻功能
 * 包含了补丁的打包工具MisakaPatchPackager，可以合并文本，检查语法
 * 保留所有OCR功能，并增强了对Tesseract 5的支持
-* 增加了一种图像预处理方法（`提取白色文本，能将空心字转成实心字`）
+* 增加了一种图像预处理方法（`提取白色文本`)，能将空心字转成实心字
 * 支持对汉化补丁的简单加密，被加密的补丁将不会被导入数据库，也不能被修改
 
-## 补丁
-#### 格式
+## 使用
+
+打开软件，右下角设置 -> 翻译相关设置 -> 通用设置 -> 选择本地汉化补丁为翻译源。
+然后就可以开始游戏了，添加游戏向导中会提示选择汉化补丁，Hook只有第一次需要选择。Hook和OCR相关设置请参考[原版说明](/README_ORIGINAL.md)。
+
+#### 联网搜索补丁 （v1.5以上)
+
+打开软件，联网查询人工翻译，输入游戏名或者选择游戏本体exe，点击联网查找。
+
+点击搜索结果会显示详细信息，里面可以看到下载地址（或者直接点击右下角”打开下载链接“）即可下载补丁。
+
+#### 补丁格式
+
 补丁是一个文本文件（UTF-8无签名，仅支持单个文件，如有多个可以使用下一节介绍的工具MisakaPatchPackager合并，或者自行合并），格式如下：
 ```
 <j>
@@ -47,9 +59,11 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
 啊啊 （两句同样的原句可以有不同的翻译，程序会根据前一句匹配的位置自动识别）
 ```
 
-#### 打包和加密
+#### 打包和加密 (v1.2以上)
+
 从1.2版开始在`tools/`目录下加入了打包工具`MisakaPatchPackager.exe`，可以对补丁进行打包和简单加密（加密很容易被破解，所以不保证任何安全性）
 使用方法：
+
 ```
 ./MisakaPatchPackager.exe [option]... output
 例：./MisakaPatchPackager.exe -f="input1.txt" -f="input2.txt" -e=xor -p output.msk
@@ -63,29 +77,31 @@ MisakaPatcher去除了原版[MisakaTranslator 2.0](/README_ORIGINAL.md)的所有
 ```
 加密过的补丁可以和未加密的补丁一样使用，不需要再进行别的设置。
 
-#### 有关补丁发布
-- 不加密的补丁可以发布到MisakaTranslator的[公共网盘](http://mskt.ys168.com/)
-- 加密的补丁可以发布到[Gitee仓库](https://gitee.com/jsc723/misaka-patches-headers)，目前只支持通过提交pull request进行发布，之后会为Patcher添加联网查询补丁和自动发布功能
+#### 发布补丁 (v1.5以上)
 
-## 使用
-打开软件，右下角设置 -> 翻译相关设置 -> 通用设置 -> 选择本地汉化补丁为翻译源。
-然后就可以开始游戏了，添加游戏向导中会提示选择汉化补丁，Hook只有第一次需要选择。Hook和OCR相关设置请参考[原版说明](/README_ORIGINAL.md)。
+将补丁文件(.txt或.msk)上传到任意网盘（比如百度网盘）
+
+打开软件，联网查询人工翻译->发布补丁->填写信息（*为必填）->发布补丁
+
+(不加密的补丁也可以发布到MisakaTranslator的[公共网盘)](http://mskt.ys168.com/)
 
 #### Tesseract OCR 5
 
-去[这里](https://github.com/UB-Mannheim/tesseract/wiki)下载安装包，记得选jpn语言包，然后在OCR设置中勾选Tesseract5，再去Tesseract5设置界面中选择安装路径，就可以使用了。
+去[这里](https://github.com/UB-Mannheim/tesseract/wiki)下载安装包，记得选jpn语言包，然后在OCR设置中勾选Tesseract5，再去Tesseract5设置界面中选择安装路径，就可以使用了
+
+
 
 ## 开发
 `git clone`后，代码可以编译，但是运行会报错，因为运行库不全
+
 #### 解决方法
 下载最新版的release，与`MisakaTranslator-WPF\bin\Debug`之下的内容比较，把`Debug`中缺少的文件和文件夹全都复制过去。
 
 ## 版本更新
-#### 1.5 (测试版)
-- 新增功能
-  - 联网搜索人工翻译文件
-  - hook可以使用自定义python脚本去重
-  - packager更名为publisher，可以发布人工翻译文件（正在开发）
+#### 1.5 
+- 联网搜索人工翻译文件
+- 发布人工翻译文件
+- hook可以使用自定义python脚本去重
 
 #### 1.4
 - 基于MisakaTranslator2.7重写
