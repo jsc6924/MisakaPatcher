@@ -32,13 +32,15 @@
         <Button Grid.Column="0" Grid.Row="2" Width="150" Name="SelectGameBtn" Content="选择游戏本体exe" Click="SelectGameBtn_Click" Margin="39,10.2,206.2,3.8" BorderThickness="2"></Button>
         <Button Grid.Column="0" Grid.Row="2" Width="104" Name="ClearGameBtn" Content="清除" Click="ClearGameBtn_Click"  Margin="236,10.2,55.2,3.8" BorderThickness="2"></Button>
         <Button Grid.Column="0" Grid.Row="3" Width="150" Name="SearchBtn" Content="联网查找" Click="SearchBtn_Click1" Margin="121,7.2,124.2,6.8" BorderThickness="2"></Button>
+        <Button Grid.Column="0" Grid.Row="5" Width="150" Name="PublishBtn" Content="发布补丁" Click="PublishBtn_Click1" Margin="121,7.2,124.2,6.8" BorderThickness="2"></Button>
         <ListView Name="ResultTable"
                   BorderThickness="0"
                   Grid.Row="1" Grid.Column="1" Background="White" SelectionMode="Single" Grid.RowSpan="6" MouseUp="ResultTable_MouseUp" Grid.ColumnSpan="2">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="300" Header="游戏名" DisplayMemberBinding="{Binding Path=Game}"/>
-                    <GridViewColumn Width="300" Header="MD5" DisplayMemberBinding="{Binding Path=MD5}"/>
+                    <GridViewColumn Width="100" Header="作者" DisplayMemberBinding="{Binding Path=Author}"/>
+                    <GridViewColumn Width="200" Header="MD5" DisplayMemberBinding="{Binding Path=MD5}"/>
                 </GridView>
             </ListView.View>
         </ListView>

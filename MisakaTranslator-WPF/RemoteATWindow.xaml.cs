@@ -72,17 +72,24 @@ namespace MisakaTranslator_WPF
             UpdateDataSource(fileList);
         }
 
+        private void PublishBtn_Click1(object sender, RoutedEventArgs e)
+        {
+            PublishATWindow pw = new PublishATWindow();
+            pw.Show();
+        }
+
         private void UpdateDataSource(List<GiteeContentInfo> fileList)
         {
             lstData.Clear();
             foreach (var file in fileList)
             {
-                string[] nameAndMd5 = file.name.Split(new string[] { "||" }, StringSplitOptions.None);
-                if (nameAndMd5.Length == 2)
+                string[] attrs = file.name.Split(new string[] { "|" }, StringSplitOptions.None);
+                if (attrs.Length == 3)
                 {
                     DataSourceItem item = new DataSourceItem();
-                    item.Game = nameAndMd5[0];
-                    item.MD5 = nameAndMd5[1];
+                    item.Game = attrs[0];
+                    item.Author = attrs[1];
+                    item.MD5 = attrs[2];
                     item.DownloadUrl = file.download_url;
                     if (gameTitle != "")
                     {
@@ -142,7 +149,7 @@ namespace MisakaTranslator_WPF
         private void ClearGameBtn_Click(object sender, RoutedEventArgs e)
         {
             md5 = "";
-            HandyControl.Controls.Growl.InfoGlobal("已清除选择的选择的游戏");
+            HandyControl.Controls.Growl.InfoGlobal("已清除选择的游戏");
         }
 
         private void OpenDownloadLinkBtn_Click(object sender, RoutedEventArgs e)
@@ -161,6 +168,7 @@ namespace MisakaTranslator_WPF
     class DataSourceItem
     {
         public string Game { get; set; }
+        public string Author { get; set; }
         public string MD5 { get; set; }
         public string DownloadUrl { get; set; }
     }

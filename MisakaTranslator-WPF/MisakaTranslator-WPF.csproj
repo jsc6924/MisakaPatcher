@@ -115,6 +115,9 @@
     <Compile Include="ComicTranslator\ComicTransMainWindow.xaml.cs">
       <DependentUpon>ComicTransMainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PublishATWindow.xaml.cs">
+      <DependentUpon>PublishATWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RemoteATWindow.xaml.cs">
       <DependentUpon>RemoteATWindow.xaml</DependentUpon>
     </Compile>
@@ -247,6 +250,10 @@
     <Page Include="ComicTranslator\ComicTransMainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PublishATWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="RemoteATWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
