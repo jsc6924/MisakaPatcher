@@ -32,18 +32,19 @@ exports.handler = (req, resp, context) => {
           resp.setHeader(key, value);
         }
         try {
+            const strBody = body;
             body = JSON.parse(body);
             console.log(body);
             const owner = "jsc723";
             const repo = "misaka-patches-headers";
-            const fileName = `${body['Game']}|${body['Author']}|${body['MD5']}`
+            const fileName = `${body['game']}|${body['author']}|${body['md5']}`
             const path = `headers/${fileName}`;
-            const content = Buffer.from(body['Content'], 'utf-8').toString('base64');
+            const content = Buffer.from(strBody, 'utf-8').toString('base64');
         
             const result = await axios.post(`https://gitee.com/api/v5/repos/${owner}/${repo}/contents/${path}`, {
                 access_token: api_token,
                 content: content,
-                message: 'create patch for' + body['Game']
+                message: 'create patch for' + body['game']
             });
             console.log(result.data);
             resp.send("success");
